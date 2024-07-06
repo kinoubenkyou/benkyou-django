@@ -1,0 +1,14 @@
+services:
+  app:
+    command: python manage.py runserver 0.0.0.0:8000
+    build: .
+    ports:
+      - 8000:8000
+    secrets:
+      - django_secret_key
+    volumes:
+      - .:/app
+
+secrets:
+  django_secret_key:
+    file: django_secret_key
