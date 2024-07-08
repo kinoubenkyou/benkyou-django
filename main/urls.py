@@ -4,6 +4,6 @@ from main.views import UserCreateView
 from main.views import UserDetailView
 
 urlpatterns = [
-    path('user/<int:pk>/', UserDetailView.as_view(), name='user'),
-    path('user/create/', UserCreateView.as_view(), name='user_create'),
+    path('users/<int:pk>/', UserDetailView.as_view(), name='user'),
+    path('users/create/', UserCreateView.as_view(), name='user_create'),
 ]
