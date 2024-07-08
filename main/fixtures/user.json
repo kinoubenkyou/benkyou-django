@@ -1,0 +1,12 @@
+[
+  {
+    "model": "main.user",
+    "pk": 1,
+    "fields": {
+      "password": "pbkdf2_sha256$720000$PpGn9jxYkxSbvphtjS596I$musMwz8um6OpkB8T4uvU4FUDtV+i3zI6F2ePS/JLG68=",
+      "last_login": null,
+      "email": "email1@email.com",
+      "name": "name1"
+    }
+  }
+]

@@ -20,6 +20,12 @@ docker compose up -d
 docker compose stop
 ```
 
+## test
+
+```shell
+docker compose run --rm app sh -c "python manage.py test"
+```
+
 ## shell
 
 ```shell
