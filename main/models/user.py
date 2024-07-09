@@ -9,4 +9,4 @@ class User(AbstractBaseUser):
     USERNAME_FIELD = 'email'
 
     def get_absolute_url(self):
-        return reverse('user', kwargs={'pk': self.pk})
+        return reverse('user-detail', kwargs={'pk': self.pk})
