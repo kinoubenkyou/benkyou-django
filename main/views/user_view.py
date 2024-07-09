@@ -1,4 +1,4 @@
-from django.views.generic import CreateView, DetailView
+from django.views.generic import CreateView, DetailView, ListView
 
 from main.forms import UserCreateForm
 from main.models import User
@@ -11,4 +11,8 @@ class UserCreateView(CreateView):
 
 
 class UserDetailView(DetailView):
+    model = User
+
+
+class UserListView(ListView):
     model = User

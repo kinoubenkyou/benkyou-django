@@ -46,3 +46,10 @@ class UserTest(LiveServerTestCase):
         self.assertTrue('email1@email.com' in self.web_driver.page_source)
         self.assertTrue('name1' in self.web_driver.page_source)
 
+    def test_read_multiple(self):
+        self.web_driver.get(f"{self.live_server_url}{reverse('user-list')}")
+
+        self.assertTrue('email1@email.com' in self.web_driver.page_source)
+        self.assertTrue('name1' in self.web_driver.page_source)
+        self.assertTrue('email2@email.com' in self.web_driver.page_source)
+        self.assertTrue('name2' in self.web_driver.page_source)
