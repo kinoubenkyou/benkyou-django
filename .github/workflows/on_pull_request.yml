@@ -1,0 +1,11 @@
+on: [pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: tr -dc [:alnum:] < /dev/urandom | head -c 50 > django_secret_key
+      - run: tr -dc [:alnum:] < /dev/urandom | head -c 20 > postgres_password
+      - run: docker compose run --rm app sh -c "python manage.py test"
+      - if: ${{ always() }}
+        run: docker compose down
