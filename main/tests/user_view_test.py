@@ -3,7 +3,7 @@ from django.test import SimpleTestCase
 from main.views import UserDeleteView
 
 
-class UserViewTest(SimpleTestCase):
+class UserDeleteViewTest(SimpleTestCase):
     def test_get_success_url(self):
         object_ = UserDeleteView()
 
