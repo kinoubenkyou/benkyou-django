@@ -40,13 +40,14 @@ class UserFunctionalTest(StaticLiveServerTestCase):
         self.assertTrue(email in self.web_driver.page_source)
         self.assertTrue(name in self.web_driver.page_source)
 
-    # def test_delete(self):
-    #     self.web_driver.get(f"{self.live_server_url}{reverse('user-delete', kwargs={'pk': 1})}")
-    #     self.web_driver.find_element(By.CSS_SELECTOR, '[type="submit"]').click()
-    #
-    #     self.assertEqual(self.web_driver.current_url, f"{self.live_server_url}{reverse('user-list')}")
-    #     self.assertFalse('email1@email.com' in self.web_driver.page_source)
-    #     self.assertFalse('name1' in self.web_driver.page_source)
+    def test_delete(self):
+        self.web_driver.get(f"{self.live_server_url}{reverse('user-detail', kwargs={'pk': 1})}")
+        self.web_driver.find_element(By.XPATH, '//button[normalize-space(text())="Delete"]').click()
+        self.web_driver.find_element(By.CSS_SELECTOR, '[type="submit"]').click()
+
+        self.assertEqual(self.web_driver.current_url, f"{self.live_server_url}{reverse('user-list')}")
+        self.assertFalse('email1@email.com' in self.web_driver.page_source)
+        self.assertFalse('name1' in self.web_driver.page_source)
 
     def test_read(self):
         self.web_driver.get(f"{self.live_server_url}{reverse('user-detail', kwargs={'pk': 1})}")
