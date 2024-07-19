@@ -1,4 +1,39 @@
-<b>Email:</b>
-<p>{{ object.email }}</p>
-<b>Name:</b>
-<p>{{ object.name }}</p>
+{% extends 'application_shell.html' %}
+
+{% block header_title %}
+    User
+{% endblock %}
+
+{% block header_buttons %}
+    <div class="mt-4 flex md:ml-4 md:mt-0">
+        <div x-data="{ open: false }">
+            <button class="inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                    @click="open = true">
+                Delete
+            </button>
+            {% url 'user-delete' object.id as delete_url %}
+            {% include 'main/user_confirm_delete.html' with delete_url=delete_url %}
+        </div>
+        <a class="ml-3 inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+           href="{% url 'user-update' object.id %}">
+            Update
+        </a>
+    </div>
+{% endblock %}
+
+{% block main %}
+    <main class="mx-auto max-w-7xl py-12 sm:px-6 lg:px-8">
+        <div class="mx-auto max-w-4xl">
+            <dl class="divide-y divide-gray-200">
+                <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                    <dt class="text-sm font-medium leading-6 text-gray-900">Email</dt>
+                    <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{{ object.email }}</dd>
+                </div>
+                <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                    <dt class="text-sm font-medium leading-6 text-gray-900">Name</dt>
+                    <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{{ object.name }}</dd>
+                </div>
+            </dl>
+        </div>
+    </main>
+{% endblock %}

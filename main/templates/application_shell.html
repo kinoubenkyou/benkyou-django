@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    {% load static %}
+    <link rel="icon" type="image/png" sizes="32x32"
+          href="{% static 'main/favicon-32x32.jpg' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp,container-queries"></script>
+    <script defer
+            src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <title>Benkyou Django</title>
+</head>
+
+<body>
+<div class="min-h-full">
+
+    {% include 'nav.html' %}
+
+    <header class="bg-white shadow">
+        <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+            <div class="lg:flex lg:items-center lg:justify-between">
+
+                <div class="min-w-0 flex-1">
+                    <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
+                        {% block header_title %}{% endblock %}
+                    </h2>
+                </div>
+
+                {% block header_buttons %}{% endblock %}
+
+            </div>
+        </div>
+    </header>
+
+    {% block main %}{% endblock %}
+
+</div>
+</body>
+
+</html>
