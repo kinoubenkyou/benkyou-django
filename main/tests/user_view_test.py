@@ -9,4 +9,4 @@ class UserDeleteViewTest(SimpleTestCase):
 
         actual = object_.get_success_url()
 
-        self.assertEqual(actual, '/users/')
+        self.assertEqual(actual, "/users/")
