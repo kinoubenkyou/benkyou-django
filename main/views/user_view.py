@@ -1,3 +1,4 @@
+from django.http import Http404
 from django.urls import reverse
 from django.views.generic import (
     CreateView,
@@ -19,6 +20,9 @@ class UserCreateView(CreateView):
 
 class UserDeleteView(DeleteView):
     model = User
+
+    def get(self, request, *args, **kwargs):
+        raise Http404
 
     def get_success_url(self):
         return reverse("user-list")
