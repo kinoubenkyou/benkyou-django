@@ -35,6 +35,28 @@ class UserDetailView(DetailView):
 class UserListView(ListView):
     model = User
 
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context_data = super().get_context_data(object_list=object_list, **kwargs)
+        lookups = ("email__icontains", "name__icontains")
+        for lookup in lookups:
+            if lookup in self.request.GET:
+                context_data[lookup] = self.request.GET[lookup]
+        return context_data
+
+    def get_ordering(self):
+        return self.request.GET.get("ordering") or super().get_ordering()
+
+    def get_paginate_by(self, queryset):
+        return self.request.GET.get("paginate_by") or super().get_paginate_by(queryset)
+
+    def get_queryset(self):
+        lookups = ("email__icontains", "name__icontains")
+        filter_ = {}
+        for lookup in lookups:
+            if lookup in self.request.GET:
+                filter_[lookup] = self.request.GET[lookup]
+        return super().get_queryset().filter(**filter_)
+
 
 class UserUpdateView(UpdateView):
     form_class = UserUpdateForm
