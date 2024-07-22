@@ -43,12 +43,6 @@ class UserListView(ListView):
                 context_data[lookup] = self.request.GET[lookup]
         return context_data
 
-    def get_ordering(self):
-        return self.request.GET.get("ordering") or super().get_ordering()
-
-    def get_paginate_by(self, queryset):
-        return self.request.GET.get("paginate_by") or super().get_paginate_by(queryset)
-
     def get_queryset(self):
         lookups = ("email__icontains", "name__icontains")
         filter_ = {}
