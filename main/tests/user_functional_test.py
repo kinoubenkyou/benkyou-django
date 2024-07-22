@@ -1,5 +1,6 @@
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from django.urls import reverse
+from django.utils.http import urlencode
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.common.by import By
@@ -77,6 +78,16 @@ class UserFunctionalTest(StaticLiveServerTestCase):
         self.assertTrue("name1" in self.web_driver.page_source)
         self.assertTrue("email2@email.com" in self.web_driver.page_source)
         self.assertTrue("name2" in self.web_driver.page_source)
+
+    def test_read_multiple__filter(self):
+        self.web_driver.get(
+            f"{self.live_server_url}{reverse('user-list')}?{urlencode({"email__icontains": "1", "name__icontains": "1"})}"
+        )
+
+        self.assertTrue("email1@email.com" in self.web_driver.page_source)
+        self.assertTrue("name1" in self.web_driver.page_source)
+        self.assertFalse("email2@email.com" in self.web_driver.page_source)
+        self.assertFalse("name2" in self.web_driver.page_source)
 
     def test_update(self):
         name = "name"
