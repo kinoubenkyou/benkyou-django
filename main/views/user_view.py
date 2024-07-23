@@ -38,10 +38,10 @@ class UserListView(ListView):
 
     def get_context_data(self, **kwargs):
         context_data = super().get_context_data(**kwargs)
-        lookups = ("email__icontains", "name__icontains", "ordering")
-        for lookup in lookups:
-            if lookup in self.request.GET:
-                context_data[lookup] = self.request.GET[lookup]
+        query_params = ("email__icontains", "name__icontains", "ordering")
+        for query_param in query_params:
+            if query_param in self.request.GET:
+                context_data[query_param] = self.request.GET[query_param]
         query_dict = {
             filter_: self.request.GET[filter_]
             for filter_ in ("email__icontains", "name__icontains")
@@ -54,12 +54,12 @@ class UserListView(ListView):
         return self.request.GET.get("ordering") or super().get_ordering()
 
     def get_queryset(self):
-        lookups = ("email__icontains", "name__icontains")
-        filter_ = {}
-        for lookup in lookups:
-            if lookup in self.request.GET:
-                filter_[lookup] = self.request.GET[lookup]
-        return super().get_queryset().filter(**filter_)
+        filters = ("email__icontains", "name__icontains")
+        filter_dict = {}
+        for filter_ in filters:
+            if filter_ in self.request.GET:
+                filter_dict[filter_] = self.request.GET[filter_]
+        return super().get_queryset().filter(**filter_dict)
 
 
 class UserUpdateView(UpdateView):
