@@ -1,9 +1,7 @@
 <div class="sm:col-span-4">
 
     <label class="block text-sm font-medium leading-6 text-gray-900"
-           for="{{ field.id_for_label }}">
-        {{ field.label }}
-    </label>
+           for="{{ field.id_for_label }}">{{ field.label }}</label>
 
     <div class="mt-2{% if field.errors %} relative rounded-md shadow-sm{% endif %}">
 
@@ -26,7 +24,7 @@
 
     </div>
 
-    {% if not help_text_hidden %}
+    {% if field.help_text and not help_text_hidden %}
         <p class="mt-2 text-sm text-gray-500">{{ field.help_text }}</p>
     {% endif %}
 

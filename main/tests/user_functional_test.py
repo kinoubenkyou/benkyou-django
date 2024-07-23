@@ -1,5 +1,6 @@
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from django.urls import reverse
+from django.utils.http import urlencode
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.common.by import By
@@ -44,8 +45,8 @@ class UserFunctionalTest(StaticLiveServerTestCase):
             self.web_driver.current_url,
             f"{self.live_server_url}{reverse('user-detail', kwargs={'pk': User.objects.get(email=email, name=name).pk})}",
         )
-        self.assertTrue(email in self.web_driver.page_source)
-        self.assertTrue(name in self.web_driver.page_source)
+        self.assertIn(email, self.web_driver.page_source)
+        self.assertIn(name, self.web_driver.page_source)
 
     def test_delete(self):
         self.web_driver.get(
@@ -59,24 +60,34 @@ class UserFunctionalTest(StaticLiveServerTestCase):
         self.assertEqual(
             self.web_driver.current_url, f"{self.live_server_url}{reverse('user-list')}"
         )
-        self.assertFalse("email1@email.com" in self.web_driver.page_source)
-        self.assertFalse("name1" in self.web_driver.page_source)
+        self.assertNotIn("email1@email.com", self.web_driver.page_source)
+        self.assertNotIn("name1", self.web_driver.page_source)
 
     def test_read(self):
         self.web_driver.get(
             f"{self.live_server_url}{reverse('user-detail', kwargs={'pk': 1})}"
         )
 
-        self.assertTrue("email1@email.com" in self.web_driver.page_source)
-        self.assertTrue("name1" in self.web_driver.page_source)
+        self.assertIn("email1@email.com", self.web_driver.page_source)
+        self.assertIn("name1", self.web_driver.page_source)
 
     def test_read_multiple(self):
         self.web_driver.get(f"{self.live_server_url}{reverse('user-list')}")
 
-        self.assertTrue("email1@email.com" in self.web_driver.page_source)
-        self.assertTrue("name1" in self.web_driver.page_source)
-        self.assertTrue("email2@email.com" in self.web_driver.page_source)
-        self.assertTrue("name2" in self.web_driver.page_source)
+        self.assertIn("email1@email.com", self.web_driver.page_source)
+        self.assertIn("name1", self.web_driver.page_source)
+        self.assertIn("email2@email.com", self.web_driver.page_source)
+        self.assertIn("name2", self.web_driver.page_source)
+
+    def test_read_multiple__filter(self):
+        self.web_driver.get(
+            f"{self.live_server_url}{reverse('user-list')}?{urlencode({"email__icontains": "1", "name__icontains": "1"})}"
+        )
+
+        self.assertIn("email1@email.com", self.web_driver.page_source)
+        self.assertIn("name1", self.web_driver.page_source)
+        self.assertNotIn("email2@email.com", self.web_driver.page_source)
+        self.assertNotIn("name2", self.web_driver.page_source)
 
     def test_update(self):
         name = "name"
@@ -91,4 +102,4 @@ class UserFunctionalTest(StaticLiveServerTestCase):
             self.web_driver.current_url,
             f"{self.live_server_url}{reverse('user-detail', kwargs={'pk': 1})}",
         )
-        self.assertTrue(name in self.web_driver.page_source)
+        self.assertIn(name, self.web_driver.page_source)
