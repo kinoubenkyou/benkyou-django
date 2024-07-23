@@ -1,5 +1,6 @@
 from django.http import Http404
 from django.urls import reverse
+from django.utils.http import urlencode
 from django.views.generic import (
     CreateView,
     DetailView,
@@ -37,11 +38,20 @@ class UserListView(ListView):
 
     def get_context_data(self, **kwargs):
         context_data = super().get_context_data(**kwargs)
-        lookups = ("email__icontains", "name__icontains")
+        lookups = ("email__icontains", "name__icontains", "ordering")
         for lookup in lookups:
             if lookup in self.request.GET:
                 context_data[lookup] = self.request.GET[lookup]
+        query_dict = {
+            filter_: self.request.GET[filter_]
+            for filter_ in ("email__icontains", "name__icontains")
+            if filter_ in self.request.GET
+        }
+        context_data["query_string"] = urlencode(query_dict)
         return context_data
+
+    def get_ordering(self):
+        return self.request.GET.get("ordering") or super().get_ordering()
 
     def get_queryset(self):
         lookups = ("email__icontains", "name__icontains")
