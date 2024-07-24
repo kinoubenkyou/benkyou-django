@@ -23,7 +23,9 @@ class UserListViewTest(SimpleTestCase):
     def test_get_context_data(self):
         object_ = UserListView()
         object_.setup(
-            RequestFactory().get("/users?email__icontains=email&name__icontains=name")
+            RequestFactory().get(
+                "/users?email__icontains=email&name__icontains=name&ordering=email"
+            )
         )
         object_.object_list = []
 
@@ -33,6 +35,16 @@ class UserListViewTest(SimpleTestCase):
         self.assertEqual(actual["email__icontains"], "email")
         self.assertIn("name__icontains", actual)
         self.assertEqual(actual["name__icontains"], "name")
+        self.assertIn("ordering", actual)
+        self.assertEqual(actual["ordering"], "email")
+
+    def test_get_ordering(self):
+        object_ = UserListView()
+        object_.setup(RequestFactory().get("/users?ordering=email"))
+
+        actual = object_.get_ordering()
+
+        self.assertEqual(actual, "email")
 
     def test_get_queryset(self):
         object_ = UserListView()

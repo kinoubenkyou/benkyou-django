@@ -89,6 +89,18 @@ class UserFunctionalTest(StaticLiveServerTestCase):
         self.assertNotIn("email2@email.com", self.web_driver.page_source)
         self.assertNotIn("name2", self.web_driver.page_source)
 
+    def test_read_multiple__sort(self):
+        self.web_driver.get(
+            f"{self.live_server_url}{reverse('user-list')}?{urlencode({"ordering": "-email"})}"
+        )
+
+        self.assertTrue(
+            self.web_driver.find_elements(
+                By.XPATH,
+                '//*[contains(text(), "email2@email.com")]/following::*[contains(text(), "email1@email.com")]',
+            )
+        )
+
     def test_update(self):
         name = "name"
 
