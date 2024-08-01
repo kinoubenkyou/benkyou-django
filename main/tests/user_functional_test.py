@@ -1,6 +1,5 @@
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from django.urls import reverse
-from django.utils.http import urlencode
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.common.by import By
@@ -45,8 +44,16 @@ class UserFunctionalTest(StaticLiveServerTestCase):
             self.web_driver.current_url,
             f"{self.live_server_url}{reverse('user-detail', kwargs={'pk': User.objects.get(email=email, name=name).pk})}",
         )
-        self.assertIn(email, self.web_driver.page_source)
-        self.assertIn(name, self.web_driver.page_source)
+        self.assertTrue(
+            self.web_driver.find_elements(
+                By.XPATH, f'//*[normalize-space(text())="{email}"]'
+            )
+        )
+        self.assertTrue(
+            self.web_driver.find_elements(
+                By.XPATH, f'//*[normalize-space(text())="{name}"]'
+            )
+        )
 
     def test_delete(self):
         self.web_driver.get(
@@ -55,49 +62,158 @@ class UserFunctionalTest(StaticLiveServerTestCase):
         self.web_driver.find_element(
             By.XPATH, '//button[normalize-space(text())="Delete"]'
         ).click()
-        self.web_driver.find_element(By.CSS_SELECTOR, '[type="submit"]').click()
+        self.web_driver.find_element(By.CSS_SELECTOR, '.z-10 [type="submit"]').click()
 
         self.assertEqual(
             self.web_driver.current_url, f"{self.live_server_url}{reverse('user-list')}"
         )
-        self.assertNotIn("email1@email.com", self.web_driver.page_source)
-        self.assertNotIn("name1", self.web_driver.page_source)
+        self.assertFalse(
+            self.web_driver.find_elements(
+                By.XPATH, '//*[normalize-space(text())="email1@email.com"]'
+            )
+        )
+        self.assertFalse(
+            self.web_driver.find_elements(
+                By.XPATH, '//*[normalize-space(text())="name1"]'
+            )
+        )
 
     def test_read(self):
         self.web_driver.get(
             f"{self.live_server_url}{reverse('user-detail', kwargs={'pk': 1})}"
         )
 
-        self.assertIn("email1@email.com", self.web_driver.page_source)
-        self.assertIn("name1", self.web_driver.page_source)
+        self.assertTrue(
+            self.web_driver.find_elements(
+                By.XPATH, '//*[normalize-space(text())="email1@email.com"]'
+            )
+        )
+        self.assertTrue(
+            self.web_driver.find_elements(
+                By.XPATH, '//*[normalize-space(text())="name1"]'
+            )
+        )
 
     def test_read_multiple(self):
         self.web_driver.get(f"{self.live_server_url}{reverse('user-list')}")
 
-        self.assertIn("email1@email.com", self.web_driver.page_source)
-        self.assertIn("name1", self.web_driver.page_source)
-        self.assertIn("email2@email.com", self.web_driver.page_source)
-        self.assertIn("name2", self.web_driver.page_source)
+        self.assertTrue(
+            self.web_driver.find_elements(
+                By.XPATH, '//*[normalize-space(text())="email1@email.com"]'
+            )
+        )
+        self.assertTrue(
+            self.web_driver.find_elements(
+                By.XPATH, '//*[normalize-space(text())="name1"]'
+            )
+        )
+        self.assertTrue(
+            self.web_driver.find_elements(
+                By.XPATH, '//*[normalize-space(text())="email2@email.com"]'
+            )
+        )
+        self.assertTrue(
+            self.web_driver.find_elements(
+                By.XPATH, '//*[normalize-space(text())="name2"]'
+            )
+        )
 
     def test_read_multiple__filter(self):
-        self.web_driver.get(
-            f"{self.live_server_url}{reverse('user-list')}?{urlencode({"email__icontains": "1", "name__icontains": "1"})}"
-        )
+        self.web_driver.get(f"{self.live_server_url}{reverse('user-list')}")
+        self.web_driver.find_element(
+            By.CSS_SELECTOR, '[name="email__icontains"]'
+        ).send_keys("1")
+        self.web_driver.find_element(
+            By.CSS_SELECTOR, '[name="name__icontains"]'
+        ).send_keys("1")
+        self.web_driver.find_element(By.CSS_SELECTOR, '[type="submit"]').click()
 
-        self.assertIn("email1@email.com", self.web_driver.page_source)
-        self.assertIn("name1", self.web_driver.page_source)
-        self.assertNotIn("email2@email.com", self.web_driver.page_source)
-        self.assertNotIn("name2", self.web_driver.page_source)
+        self.assertTrue(
+            self.web_driver.find_elements(
+                By.XPATH, '//*[normalize-space(text())="email1@email.com"]'
+            )
+        )
+        self.assertTrue(
+            self.web_driver.find_elements(
+                By.XPATH, '//*[normalize-space(text())="name1"]'
+            )
+        )
+        self.assertFalse(
+            self.web_driver.find_elements(
+                By.XPATH, '//*[normalize-space(text())="email2@email.com"]'
+            )
+        )
+        self.assertFalse(
+            self.web_driver.find_elements(
+                By.XPATH, '//*[normalize-space(text())="name2"]'
+            )
+        )
 
     def test_read_multiple__sort(self):
-        self.web_driver.get(
-            f"{self.live_server_url}{reverse('user-list')}?{urlencode({"ordering": "-email"})}"
-        )
+        self.web_driver.get(f"{self.live_server_url}{reverse('user-list')}")
+        self.web_driver.find_element(
+            By.XPATH, '//th//a[normalize-space(text())="Email"]'
+        ).click()
+        self.web_driver.find_element(
+            By.XPATH, '//th//a[normalize-space(text())="Email"]'
+        ).click()
 
         self.assertTrue(
             self.web_driver.find_elements(
                 By.XPATH,
-                '//*[contains(text(), "email2@email.com")]/following::*[contains(text(), "email1@email.com")]',
+                '//*[normalize-space(text())="email9@email.com"]/following::*[normalize-space(text())="email8@email.com"]',
+            )
+        )
+
+    def test_read_multiple__paginate(self):
+        self.web_driver.get(f"{self.live_server_url}{reverse('user-list')}")
+        self.web_driver.find_element(
+            By.XPATH, '//a[*[normalize-space(text())="Next"]]'
+        ).click()
+
+        self.assertTrue(
+            self.web_driver.find_elements(
+                By.XPATH, '//*[normalize-space(text())="email11@email.com"]'
+            )
+        )
+        self.assertTrue(
+            self.web_driver.find_elements(
+                By.XPATH, '//*[normalize-space(text())="name11"]'
+            )
+        )
+        self.assertFalse(
+            self.web_driver.find_elements(
+                By.XPATH, '//*[normalize-space(text())="email1@email.com"]'
+            )
+        )
+        self.assertFalse(
+            self.web_driver.find_elements(
+                By.XPATH, '//*[normalize-space(text())="name1"]'
+            )
+        )
+
+        self.web_driver.find_element(
+            By.XPATH, '//a[*[normalize-space(text())="Previous"]]'
+        ).click()
+
+        self.assertTrue(
+            self.web_driver.find_elements(
+                By.XPATH, '//*[normalize-space(text())="email1@email.com"]'
+            )
+        )
+        self.assertTrue(
+            self.web_driver.find_elements(
+                By.XPATH, '//*[normalize-space(text())="name1"]'
+            )
+        )
+        self.assertFalse(
+            self.web_driver.find_elements(
+                By.XPATH, '//*[normalize-space(text())="email11@email.com"]'
+            )
+        )
+        self.assertFalse(
+            self.web_driver.find_elements(
+                By.XPATH, '//*[normalize-space(text())="name11"]'
             )
         )
 
@@ -107,6 +223,7 @@ class UserFunctionalTest(StaticLiveServerTestCase):
         self.web_driver.get(
             f"{self.live_server_url}{reverse('user-update', kwargs={'pk': 1})}"
         )
+        self.web_driver.find_element(By.CSS_SELECTOR, '[name="name"]').clear()
         self.web_driver.find_element(By.CSS_SELECTOR, '[name="name"]').send_keys(name)
         self.web_driver.find_element(By.CSS_SELECTOR, '[type="submit"]').click()
 
@@ -114,4 +231,8 @@ class UserFunctionalTest(StaticLiveServerTestCase):
             self.web_driver.current_url,
             f"{self.live_server_url}{reverse('user-detail', kwargs={'pk': 1})}",
         )
-        self.assertIn(name, self.web_driver.page_source)
+        self.assertTrue(
+            self.web_driver.find_elements(
+                By.XPATH, f'//*[normalize-space(text())="{name}"]'
+            )
+        )

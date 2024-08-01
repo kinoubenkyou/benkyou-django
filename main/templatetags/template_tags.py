@@ -6,9 +6,9 @@ register = template.Library()
 
 
 @register.simple_tag(takes_context=True)
-def elided_page_range(context, on_each_side=0, on_ends=1):
+def elided_page_range(context):
     return context["page_obj"].paginator.get_elided_page_range(
-        number=context["page_obj"].number, on_each_side=on_each_side, on_ends=on_ends
+        number=context["page_obj"].number, on_each_side=0, on_ends=1
     )
 
 
