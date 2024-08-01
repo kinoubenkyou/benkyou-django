@@ -43,7 +43,6 @@ class UserListView(ListView):
             "email__icontains",
             "name__icontains",
             "ordering",
-            "paginate_by",
         )
         for query_param in query_params:
             if query_param in self.request.GET:
@@ -58,14 +57,6 @@ class UserListView(ListView):
 
     def get_ordering(self):
         return self.request.GET.get("ordering") or super().get_ordering()
-
-    def get_paginate_by(self, queryset):
-        if (
-            "paginate_by" in self.request.GET
-            and int(self.request.GET["paginate_by"]) <= 1000
-        ):
-            return self.request.GET["paginate_by"]
-        return super().get_paginate_by(queryset)
 
     def get_queryset(self):
         filters = ("email__icontains", "name__icontains")

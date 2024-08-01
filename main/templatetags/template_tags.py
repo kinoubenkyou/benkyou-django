@@ -16,7 +16,7 @@ def elided_page_range(context, on_each_side=0, on_ends=1):
 def url_by_ordering(context, ordering, view_name):
     query_dict = {
         query_key: context[query_key]
-        for query_key in ("email__icontains", "name__icontains", "paginate_by")
+        for query_key in ("email__icontains", "name__icontains")
         if query_key in context
     }
     query_dict["ordering"] = (
@@ -33,7 +33,6 @@ def url_by_page(context, page_number, view_name):
             "email__icontains",
             "name__icontains",
             "ordering",
-            "paginate_by",
         )
         if query_key in context
     }
