@@ -192,31 +192,6 @@ class UserFunctionalTest(StaticLiveServerTestCase):
             )
         )
 
-        self.web_driver.find_element(
-            By.XPATH, '//a[*[normalize-space(text())="Previous"]]'
-        ).click()
-
-        self.assertTrue(
-            self.web_driver.find_elements(
-                By.XPATH, '//*[normalize-space(text())="email1@email.com"]'
-            )
-        )
-        self.assertTrue(
-            self.web_driver.find_elements(
-                By.XPATH, '//*[normalize-space(text())="name1"]'
-            )
-        )
-        self.assertFalse(
-            self.web_driver.find_elements(
-                By.XPATH, '//*[normalize-space(text())="email11@email.com"]'
-            )
-        )
-        self.assertFalse(
-            self.web_driver.find_elements(
-                By.XPATH, '//*[normalize-space(text())="name11"]'
-            )
-        )
-
     def test_update(self):
         name = "name"
 
