@@ -35,10 +35,15 @@ class UserDetailView(DetailView):
 
 class UserListView(ListView):
     model = User
+    paginate_by = 10
 
     def get_context_data(self, **kwargs):
         context_data = super().get_context_data(**kwargs)
-        query_params = ("email__icontains", "name__icontains", "ordering")
+        query_params = (
+            "email__icontains",
+            "name__icontains",
+            "ordering",
+        )
         for query_param in query_params:
             if query_param in self.request.GET:
                 context_data[query_param] = self.request.GET[query_param]

@@ -1,5 +1,7 @@
 {% extends 'application_shell.html' %}
 
+{% load template_tags %}
+
 {% block header_title %}
     Users
 {% endblock %}
@@ -64,26 +66,30 @@
                 <thead>
                     <tr>
 
-                        <th class="py-3 pl-4 pr-3 text-left text-xs font-medium uppercase tracking-wide text-gray-500 sm:pl-0" scope="col">
-                            <a class="group inline-flex" href="{% url 'user-list' %}?ordering={% if ordering == "email" %}-{% endif %}email&{{ query_string }}">
+                        <th class="py-3 pl-4 pr-3 text-left text-xs font-medium uppercase tracking-wide text-gray-500 sm:pl-0"
+                            scope="col">
+                            <a class="group inline-flex"
+                               href="{% url_by_ordering "email" "user-list" %}">
                                 Email
                                 <span class="ml-2 flex-none rounded bg-gray-100 text-gray-900 group-hover:bg-gray-200{% if ordering == "email" or ordering == "-email" %} group-hover:bg-gray-200{% else %} invisible group-hover:visible group-focus:visible{% endif %}">
-                                    {% if ordering == "email" %}{% include "svgs/ordering_down.html" %}{% else %}{% include "svgs/ordering_up.html" %}{% endif %}
-                                </span>
+                                        {% if ordering == "email" %}
+                                            {% include "svgs/ordering_down.html" %}{% else %}
+                                            {% include "svgs/ordering_up.html" %}{% endif %}
+                                    </span>
                             </a>
                         </th>
 
-                        <th class="hidden px-3 py-3 text-left text-xs font-medium uppercase tracking-wide text-gray-500 sm:table-cell" scope="col">
-                            <a class="group inline-flex" href="{% url 'user-list' %}?ordering={% if ordering == "name" %}-{% endif %}name&{{ query_string }}">
+                        <th class="hidden px-3 py-3 text-left text-xs font-medium uppercase tracking-wide text-gray-500 sm:table-cell"
+                            scope="col">
+                            <a class="group inline-flex"
+                               href="{% url_by_ordering "name" "user-list" %}">
                                 Name
                                 <span class="ml-2 flex-none rounded bg-gray-100 text-gray-900 group-hover:bg-gray-200{% if ordering == "name" or ordering == "-name" %} group-hover:bg-gray-200{% else %} invisible group-hover:visible group-focus:visible{% endif %}">
-                                    {% if ordering == "name" %}{% include "svgs/ordering_down.html" %}{% else %}{% include "svgs/ordering_up.html" %}{% endif %}
-                                </span>
+                                        {% if ordering == "name" %}
+                                            {% include "svgs/ordering_down.html" %}{% else %}
+                                            {% include "svgs/ordering_up.html" %}{% endif %}
+                                    </span>
                             </a>
-                        </th>
-
-                        <th class="hidden relative px-3 py-3 lg:table-cell" scope="col">
-                            <span class="sr-only">Detail</span>
                         </th>
 
                         <th class="hidden relative px-3 py-3 lg:table-cell" scope="col">
@@ -91,7 +97,7 @@
                         </th>
 
                         <th class="relative py-3 pl-3 pr-4 sm:pr-0" scope="col">
-                            <span class="sr-only">Delete</span>
+                            <span class="sr-only">Detail</span>
                         </th>
 
                     </tr>
@@ -106,32 +112,24 @@
                             <td class="hidden whitespace-nowrap px-3 py-4 text-sm text-gray-500 sm:table-cell">{{ object.name }}</td>
 
                             <td class="hidden whitespace-nowrap px-3 py-4 text-right text-sm font-medium lg:table-cell">
-                                <a href="{% url 'user-delete' object.id %}" class="text-indigo-600 hover:text-indigo-900">
-                                    Delete
-                                    <span class="sr-only">
-                                        ,
-                                        {{ object.email }}
-                                    </span>
-                                </a>
-                            </td>
-
-                            <td class="hidden whitespace-nowrap px-3 py-4 text-right text-sm font-medium lg:table-cell">
-                                <a href="{% url 'user-update' object.id %}" class="text-indigo-600 hover:text-indigo-900">
+                                <a href="{% url 'user-update' object.id %}"
+                                   class="text-indigo-600 hover:text-indigo-900">
                                     Update
                                     <span class="sr-only">
-                                        ,
-                                        {{ object.email }}
-                                    </span>
+                                            ,
+                                            {{ object.email }}
+                                        </span>
                                 </a>
                             </td>
 
                             <td class="whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
-                                <a href="{% url 'user-detail' object.id %}" class="text-indigo-600 hover:text-indigo-900">
+                                <a href="{% url 'user-detail' object.id %}"
+                                   class="text-indigo-600 hover:text-indigo-900">
                                     Detail
                                     <span class="sr-only">
-                                        ,
-                                        {{ object.email }}
-                                    </span>
+                                            ,
+                                            {{ object.email }}
+                                        </span>
                                 </a>
                             </td>
 
@@ -141,5 +139,8 @@
 
             </table>
         </div>
+
+        {% include "pagination.html" with page_obj=page_obj %}
+
     </div>
 {% endblock %}
