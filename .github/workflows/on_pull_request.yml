@@ -6,7 +6,8 @@ jobs:
       - uses: actions/checkout@v4
       - run: tr -dc [:alnum:] < /dev/urandom | head -c 50 > django_secret_key
       - run: tr -dc [:alnum:] < /dev/urandom | head -c 20 > postgres_password
-      - run: ./hooks/pre-commit
+      - run: docker compose run --rm -T app sh -c "ruff check --diff"
+      - run: docker compose run --rm -T app sh -c "ruff format"
       - run: docker compose run --rm app sh -c "python manage.py test"
       - if: ${{ always() }}
         run: docker compose down

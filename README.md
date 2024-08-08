@@ -27,13 +27,6 @@ docker compose stop
 docker compose run --rm app sh -c "python manage.py test"
 ```
 
-## fix code style
-
-```shell
-docker compose run --rm app sh -c "ruff check --fix"
-docker compose run --rm app sh -c "ruff format"
-```
-
 ## shell
 
 ```shell
