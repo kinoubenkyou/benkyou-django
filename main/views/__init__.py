@@ -1,3 +1,4 @@
+from .login_view import LoginView
 from .user_view import (
     UserCreateView,
     UserDetailView,
@@ -7,6 +8,7 @@ from .user_view import (
 )
 
 __all__ = [
+    "LoginView",
     "UserCreateView",
     "UserDetailView",
     "UserListView",
