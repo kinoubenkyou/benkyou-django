@@ -2,13 +2,32 @@ services:
   app:
     build: .
     command: python manage.py runserver 0.0.0.0:8000
+    depends_on:
+      postgres:
+        condition: service_healthy
     ports:
       - 8000:8000
     secrets:
       - django_secret_key
+      - postgres_password
     volumes:
       - .:/app
+
+  postgres:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD_FILE: /run/secrets/postgres_password
+    healthcheck:
+      start_interval: 1s
+      start_period: 5s
+      test: pg_isready -U postgres -d postgres
+    ports:
+      - 5432:5432
+    secrets:
+      - postgres_password
 
 secrets:
   django_secret_key:
     file: django_secret_key
+  postgres_password:
+    file: postgres_password

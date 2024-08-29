@@ -1,3 +1,4 @@
 .idea
 __pycache__/
 django_secret_key
+postgres_password
