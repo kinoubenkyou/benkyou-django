@@ -5,6 +5,9 @@
 ```shell
 touch django_secret_key
 docker compose run --no-deps --rm --volume .:/app app sh -c "tr -dc [:alnum:] < /dev/urandom | head -c 50 > django_secret_key"
+touch postgres_password
+docker compose run --no-deps --rm --volume .:/app app sh -c "tr -dc [:alnum:] < /dev/urandom | head -c 20 > postgres_password"
+docker compose run --rm app sh -c "python manage.py migrate"
 ```
 
 ## start

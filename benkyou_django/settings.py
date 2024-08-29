@@ -76,10 +76,15 @@ WSGI_APPLICATION = 'benkyou_django.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        "ENGINE": "django.db.backends.postgresql",
+        "HOST": "postgres",
+        "NAME": "postgres",
+        "USER": "postgres",
     }
 }
+
+with open("/run/secrets/postgres_password") as file:
+    DATABASES["default"]["PASSWORD"] = file.read()
 
 
 # Password validation
