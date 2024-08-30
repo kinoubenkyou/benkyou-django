@@ -1,4 +1,4 @@
-__all__ = ["UserCreateTestCase", "UserSignInTestCase", "TestCase"]
+__all__ = ["TestCase", "UserCreateTestCase", "UserSignInTestCase"]
 
 from main.tests.test_case import TestCase
 from main.tests.user_test_cases.user_create_test_case import UserCreateTestCase
