@@ -136,4 +136,8 @@ CACHES = {
     }
 }
 
-TEST_RUNNER = "main.tests.runner.Runner"
+TEST_RUNNER = "main.runner.Runner"
+
+AUTH_USER_MODEL = "main.User"
+
+LOGIN_REDIRECT_URL = "/user/sign_in/done/"
