@@ -3,6 +3,7 @@
 ## config
 
 ```shell
+git config core.hooksPath hooks
 touch django_secret_key
 touch postgres_password
 docker compose run --no-deps --rm app sh -c "tr -dc [:alnum:] < /dev/urandom | head -c 50 > django_secret_key"
