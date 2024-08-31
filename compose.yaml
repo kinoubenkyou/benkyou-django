@@ -37,6 +37,20 @@ services:
     ports:
       - 6379:6379
 
+  celery:
+    command: celery -A benkyou_django worker
+    build: .
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    secrets:
+      - django_secret_key
+      - postgres_password
+    volumes:
+      - .:/app
+
 secrets:
   django_secret_key:
     file: django_secret_key
