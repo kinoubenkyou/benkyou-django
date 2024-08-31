@@ -6,4 +6,5 @@ class Runner(DiscoverRunner):
     def setup_test_environment(self, **kwargs):
         result = super().setup_test_environment(**kwargs)
         settings.CACHES["default"]["LOCATION"] = "redis://redis:6379/1"
+        settings.CELERY_BROKER_URL = "redis://redis:6379/3"
         return result

@@ -145,3 +145,5 @@ LOGIN_REDIRECT_URL = "/user/sign_in/done/"
 LOGIN_URL = "/user/sign_in/"
 
 SESSION_ENGINE = "django.contrib.sessions.backends.cache"
+
+CELERY_BROKER_URL = "redis://redis:6379/2"
