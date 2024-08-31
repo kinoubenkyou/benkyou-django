@@ -1,3 +1,3 @@
 __all__ = ["app"]
 
-from celery import app
+from benkyou_django.celery import app

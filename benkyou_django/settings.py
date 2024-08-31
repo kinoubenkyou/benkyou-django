@@ -147,3 +147,5 @@ LOGIN_URL = "/user/sign_in/"
 SESSION_ENGINE = "django.contrib.sessions.backends.cache"
 
 CELERY_BROKER_URL = "redis://redis:6379/2"
+
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
