@@ -6,6 +6,7 @@ from main.views.user_views import (
     UserReadView,
     UserSignInDoneView,
     UserSignInView,
+    UserVerifyEmailView,
 )
 
 urlpatterns = [
@@ -14,4 +15,5 @@ urlpatterns = [
     path("user/", UserReadView.as_view()),
     path("user/sign_in/", UserSignInView.as_view()),
     path("user/sign_in/done/", UserSignInDoneView.as_view()),
+    path("user/verify_email/", UserVerifyEmailView.as_view()),
 ]

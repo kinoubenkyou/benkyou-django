@@ -8,4 +8,5 @@ class UserReadTestCase(LoginMixin, TestCase):
         self.login()
 
         self.assertEqual(len(self.find_elements("Email: email@email.com")), 1)
+        self.assertEqual(len(self.find_elements("Email verified: False")), 1)
         self.assertEqual(len(self.find_elements("Name: name")), 1)
