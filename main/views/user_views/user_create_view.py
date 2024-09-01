@@ -12,8 +12,8 @@ class UserCreateView(CreateView):
     template_name = "main/user/create.html"
 
     def form_valid(self, form):
-        result = super().form_valid(form)
+        return_ = super().form_valid(form)
         start_verify_email.delay(
             f"{self.request.scheme}://{self.request.get_host()}", self.object.id
         )
-        return result
+        return return_
