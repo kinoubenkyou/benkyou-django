@@ -1,7 +1,6 @@
 from secrets import token_urlsafe
 
 from django.core.cache import cache
-from django.test import override_settings
 from selenium.webdriver.common.by import By
 
 from main.tests import TestCase
@@ -9,7 +8,6 @@ from main.tests.login_mixin import LoginMixin
 
 
 class UserVerifyEmailTestCase(LoginMixin, TestCase):
-    @override_settings(DEBUG=True)
     def test_success(self):
         token = token_urlsafe()
         cache.set("verify_email.1", token)

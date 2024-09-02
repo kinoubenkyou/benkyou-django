@@ -2,8 +2,8 @@ __all__ = [
     "UserCreateDoneView",
     "UserCreateView",
     "UserReadView",
-    "UserSignInView",
     "UserSignInDoneView",
+    "UserSignInView",
     "UserVerifyEmailView",
 ]
 
