@@ -1,10 +1,10 @@
-from main.tests.login_mixin import LoginMixin
+from main.tests.login_mixin import SigninMixin
 from main.tests.test_case import TestCase
 
 
-class UserSignInTestCase(LoginMixin, TestCase):
+class UserSignInTestCase(SigninMixin, TestCase):
     def test_success(self):
         self.web_driver.get(f"{self.live_server_url}/user/sign_in/")
-        self.login()
+        self.sign_in()
 
         self.assertEqual(len(self.find_elements("Signed in.")), 1)

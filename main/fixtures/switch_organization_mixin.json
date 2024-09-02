@@ -1,0 +1,19 @@
+[
+  {
+    "model": "main.organization",
+    "pk": 1,
+    "fields": {
+      "code": "code1",
+      "name": "name1"
+    }
+  },
+  {
+    "model": "main.staff",
+    "pk": 1,
+    "fields": {
+      "organization": 1,
+      "user": 1,
+      "status": "accepted"
+    }
+  }
+]

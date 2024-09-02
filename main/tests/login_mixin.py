@@ -1,10 +1,10 @@
 from selenium.webdriver.common.by import By
 
 
-class LoginMixin:
-    fixtures = ["login_mixin"]
+class SigninMixin:
+    fixtures = ["sign_in_mixin"]
 
-    def login(self):
+    def sign_in(self):
         self.web_driver.find_element(By.XPATH, '//input[@name="username"]').send_keys(
             "email@email.com"
         )
