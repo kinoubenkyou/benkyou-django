@@ -1,5 +1,6 @@
 from django.urls import path
 
+from main.views.organization_views import OrganizationReadView
 from main.views.user_views import (
     UserCreateDoneView,
     UserCreateView,
@@ -12,6 +13,7 @@ from main.views.user_views import (
 )
 
 urlpatterns = [
+    path("organization/", OrganizationReadView.as_view()),
     path("user/create/", UserCreateView.as_view()),
     path("user/create_done/", UserCreateDoneView.as_view()),
     path("user/", UserReadView.as_view()),

@@ -31,7 +31,7 @@ class UserCreateTestCase(TestCase):
         self.assertTrue(check_password(password, user.password))
         token = cache.get(f"verify_email.{user.id}")
         self.assertIn(
-            f"{self.live_server_url}/user/verify_email/?token={token}",
+            f"{self.live_server_url}/user/verify_email?token={token}",
             mail.outbox[0].body,
         )
         self.assertEqual(mail.outbox[0].subject, "Verify Email")
