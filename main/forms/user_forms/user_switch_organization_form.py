@@ -1,8 +1,8 @@
-from django.forms import Form, ModelMultipleChoiceField
+from django.forms import Form, ModelChoiceField
 
 
 class UserSwitchOrganizationForm(Form):
-    organization = ModelMultipleChoiceField(queryset=None, required=True)
+    organization = ModelChoiceField(empty_label=None, queryset=None, required=True)
 
     def __init__(self, *args, **kwargs):
         user = kwargs.pop("user")

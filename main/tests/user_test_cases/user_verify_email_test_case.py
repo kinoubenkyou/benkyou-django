@@ -4,7 +4,7 @@ from django.core.cache import cache
 from selenium.webdriver.common.by import By
 
 from main.tests import TestCase
-from main.tests.login_mixin import SigninMixin
+from main.tests.sign_in_mixin import SigninMixin
 
 
 class UserVerifyEmailTestCase(SigninMixin, TestCase):

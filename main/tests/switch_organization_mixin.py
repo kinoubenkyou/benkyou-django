@@ -1,6 +1,6 @@
 from selenium.webdriver.common.by import By
 
-from main.tests.login_mixin import SigninMixin
+from main.tests.sign_in_mixin import SigninMixin
 
 
 class SwitchOrganizationMixin(SigninMixin):
