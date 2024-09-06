@@ -1,4 +1,4 @@
-from main.tests.login_mixin import SigninMixin
+from main.tests.sign_in_mixin import SigninMixin
 from main.tests.test_case import TestCase
 
 

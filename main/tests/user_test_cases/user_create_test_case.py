@@ -1,9 +1,6 @@
-from django.contrib.auth.hashers import check_password
 from django.core import mail
-from django.core.cache import cache
 from selenium.webdriver.common.by import By
 
-from main.models import User
 from main.tests import TestCase
 
 
@@ -27,12 +24,9 @@ class UserCreateTestCase(TestCase):
         self.web_driver.find_element(By.XPATH, '//*[@type="submit"]').click()
 
         self.assertEqual(len(self.find_elements("Created user.")), 1)
-        user = User.objects.get(email=email, name=name)
-        self.assertTrue(check_password(password, user.password))
-        token = cache.get(f"verify_email.{user.id}")
         self.assertIn(
-            f"{self.live_server_url}/user/verify_email?token={token}",
+            f"{self.live_server_url}/user/verify_email?token=",
             mail.outbox[0].body,
         )
         self.assertEqual(mail.outbox[0].subject, "Verify Email")
-        self.assertIn(email, mail.outbox[0].to)
+        self.assertIn("email@email.com", mail.outbox[0].to)

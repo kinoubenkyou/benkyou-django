@@ -15,7 +15,5 @@ class UserSwitchOrganizationView(RedirectURLMixin, LoginRequiredMixin, FormView)
 
     def form_valid(self, form):
         return_ = super().form_valid(form)
-        self.request.session["organization_id"] = form.cleaned_data["organization"][
-            0
-        ].id
+        self.request.session["organization_id"] = form.cleaned_data["organization"].id
         return return_

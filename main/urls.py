@@ -10,6 +10,8 @@ from main.views.user_views import (
     UserVerifyEmailView,
     UserSwitchOrganizationView,
     UserSwitchOrganizationDoneView,
+    UserStartVerifyEmailView,
+    UserStartVerifyEmailDoneView,
 )
 
 urlpatterns = [
@@ -19,6 +21,8 @@ urlpatterns = [
     path("user/", UserReadView.as_view()),
     path("user/sign_in/", UserSignInView.as_view()),
     path("user/sign_in/done/", UserSignInDoneView.as_view()),
+    path("user/start_verify_email/", UserStartVerifyEmailView.as_view()),
+    path("user/start_verify_email/done/", UserStartVerifyEmailDoneView.as_view()),
     path("user/switch_organization/", UserSwitchOrganizationView.as_view()),
     path("user/switch_organization/done/", UserSwitchOrganizationDoneView.as_view()),
     path("user/verify_email/", UserVerifyEmailView.as_view()),
