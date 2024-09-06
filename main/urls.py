@@ -1,7 +1,7 @@
 from django.urls import path
 
-from main.views.organization_views import OrganizationReadView
-from main.views.user_views import (
+from main.views.organization import OrganizationReadView
+from main.views.user import (
     UserCreateDoneView,
     UserCreateView,
     UserReadView,

@@ -1,7 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import FormView
 
-from main.forms.user_forms import UserStartVerifyEmailForm
+from main.forms.user import UserStartVerifyEmailForm
 from main.tasks import start_verify_email
 
 

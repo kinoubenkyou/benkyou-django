@@ -2,10 +2,10 @@ from django.core import mail
 from selenium.webdriver.common.by import By
 
 from main.tests import TestCase
-from main.tests.sign_in_mixin import SigninMixin
+from main.tests.mixin import SignInMixin
 
 
-class UserStartVerifyEmailTestCase(SigninMixin, TestCase):
+class UserStartVerifyEmailTestCase(SignInMixin, TestCase):
     def test_success(self):
         self.web_driver.get(f"{self.live_server_url}/user/start_verify_email/")
         self.sign_in()

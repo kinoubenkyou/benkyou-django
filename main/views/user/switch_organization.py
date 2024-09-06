@@ -2,7 +2,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import RedirectURLMixin
 from django.views.generic import FormView
 
-from main.forms.user_forms import UserSwitchOrganizationForm
+from main.forms.user import UserSwitchOrganizationForm
 
 
 class UserSwitchOrganizationView(RedirectURLMixin, LoginRequiredMixin, FormView):

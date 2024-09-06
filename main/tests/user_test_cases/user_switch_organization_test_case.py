@@ -1,5 +1,5 @@
 from main.tests import TestCase
-from main.tests.switch_organization_mixin import SwitchOrganizationMixin
+from main.tests.mixin import SwitchOrganizationMixin
 
 
 class UserSwitchOrganizationTestCase(SwitchOrganizationMixin, TestCase):

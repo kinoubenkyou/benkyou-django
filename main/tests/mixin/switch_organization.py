@@ -1,10 +1,10 @@
 from selenium.webdriver.common.by import By
 
-from main.tests.sign_in_mixin import SigninMixin
+from main.tests.mixin import SignInMixin
 
 
-class SwitchOrganizationMixin(SigninMixin):
-    fixtures = [*SigninMixin.fixtures, "switch_organization_mixin"]
+class SwitchOrganizationMixin(SignInMixin):
+    fixtures = [*SignInMixin.fixtures, "switch_organization_mixin"]
 
     def switch_organization(self):
         self.web_driver.find_element(By.XPATH, '//option[@value="1"]').click()

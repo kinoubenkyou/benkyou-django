@@ -4,10 +4,10 @@ from django.core.cache import cache
 from selenium.webdriver.common.by import By
 
 from main.tests import TestCase
-from main.tests.sign_in_mixin import SigninMixin
+from main.tests.mixin import SignInMixin
 
 
-class UserVerifyEmailTestCase(SigninMixin, TestCase):
+class UserVerifyEmailTestCase(SignInMixin, TestCase):
     def test_success(self):
         token = token_urlsafe()
         cache.set("verify_email.1", token)

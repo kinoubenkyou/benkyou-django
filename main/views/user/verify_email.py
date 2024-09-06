@@ -3,7 +3,7 @@ from django.core.cache import cache
 from django.core.exceptions import BadRequest
 from django.views.generic import FormView
 
-from main.forms.user_forms import UserVerifyEmailForm
+from main.forms.user import UserVerifyEmailForm
 
 
 class TokenNotDeletedError(Exception):

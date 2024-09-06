@@ -1,7 +1,7 @@
 from selenium.webdriver.common.by import By
 
 
-class SigninMixin:
+class SignInMixin:
     fixtures = ["sign_in_mixin"]
 
     def sign_in(self):
