@@ -14,6 +14,8 @@ class UserCreateView(CreateView):
     def form_valid(self, form):
         return_ = super().form_valid(form)
         start_verify_email.delay(
-            self.request.get_host(), self.request.scheme, self.object.id
+            self.request.get_host(),
+            self.request.scheme,
+            self.object.id,
         )
         return return_

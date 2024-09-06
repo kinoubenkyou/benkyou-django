@@ -13,6 +13,8 @@ class UserStartVerifyEmailView(LoginRequiredMixin, FormView):
     def form_valid(self, form):
         return_ = super().form_valid(form)
         start_verify_email.delay(
-            self.request.get_host(), self.request.scheme, self.request.user.id
+            self.request.get_host(),
+            self.request.scheme,
+            self.request.user.id,
         )
         return return_

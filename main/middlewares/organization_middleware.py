@@ -7,6 +7,6 @@ class OrganizationMiddleware:
 
     def __call__(self, request):
         request.organization = Organization.objects.filter(
-            id=request.session.get("organization_id")
+            id=request.session.get("organization_id"),
         ).first()
         return self.get_response(request)

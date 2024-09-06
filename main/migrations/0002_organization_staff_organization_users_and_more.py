@@ -70,7 +70,8 @@ class Migration(migrations.Migration):
             model_name="organization",
             name="users",
             field=models.ManyToManyField(
-                through="main.Staff", to=settings.AUTH_USER_MODEL
+                through="main.Staff",
+                to=settings.AUTH_USER_MODEL,
             ),
         ),
         migrations.AddField(

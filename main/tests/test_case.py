@@ -10,7 +10,8 @@ class TestCase(LiveServerTestCase):
         return [
             element
             for element in self.web_driver.find_elements(
-                By.XPATH, f'//*[normalize-space(text())="{text}"]'
+                By.XPATH,
+                f'//*[normalize-space(text())="{text}"]',
             )
             if element.is_displayed()
         ]

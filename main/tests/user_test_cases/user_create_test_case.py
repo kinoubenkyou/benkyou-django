@@ -1,3 +1,5 @@
+from secrets import token_hex
+
 from django.core import mail
 from selenium.webdriver.common.by import By
 
@@ -8,18 +10,18 @@ class UserCreateTestCase(TestCase):
     def test_success(self):
         email = "email@email.com"
         name = "name"
-        password = "dr0wss@p"
+        password = token_hex()
 
         self.web_driver.get(f"{self.live_server_url}/user/create/")
         self.web_driver.find_element(By.XPATH, '//input[@name="email"]').send_keys(
-            email
+            email,
         )
         self.web_driver.find_element(By.XPATH, '//input[@name="name"]').send_keys(name)
         self.web_driver.find_element(By.XPATH, '//input[@name="password1"]').send_keys(
-            password
+            password,
         )
         self.web_driver.find_element(By.XPATH, '//input[@name="password2"]').send_keys(
-            password
+            password,
         )
         self.web_driver.find_element(By.XPATH, '//*[@type="submit"]').click()
 

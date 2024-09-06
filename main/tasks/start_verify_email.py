@@ -23,7 +23,7 @@ def start_verify_email(netloc, scheme, user_id):
                 None,
                 urlencode({"token": token}),
                 None,
-            ]
+            ],
         ),
         None,
         [User.objects.get(id=user_id).email],

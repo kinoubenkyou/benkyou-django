@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-with open("/run/secrets/django_secret_key") as file:
+with Path("/run/secrets/django_secret_key").open() as file:
     SECRET_KEY = file.read()
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -82,10 +82,10 @@ DATABASES = {
         "HOST": "postgres",
         "NAME": "postgres",
         "USER": "postgres",
-    }
+    },
 }
 
-with open("/run/secrets/postgres_password") as file:
+with Path("/run/secrets/postgres_password").open() as file:
     DATABASES["default"]["PASSWORD"] = file.read()
 
 
@@ -94,7 +94,9 @@ with open("/run/secrets/postgres_password") as file:
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
+        "NAME": (
+            "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"
+        ),
     },
     {
         "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
@@ -134,7 +136,7 @@ CACHES = {
     "default": {
         "BACKEND": "django.core.cache.backends.redis.RedisCache",
         "LOCATION": "redis://redis:6379",
-    }
+    },
 }
 
 TEST_RUNNER = "main.runner.Runner"

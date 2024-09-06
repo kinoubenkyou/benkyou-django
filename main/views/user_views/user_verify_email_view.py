@@ -6,6 +6,10 @@ from django.views.generic import FormView
 from main.forms.user_forms import UserVerifyEmailForm
 
 
+class TokenNotDeletedError(Exception):
+    pass
+
+
 class UserVerifyEmailView(LoginRequiredMixin, FormView):
     form_class = UserVerifyEmailForm
     success_url = "/user/"
@@ -15,12 +19,13 @@ class UserVerifyEmailView(LoginRequiredMixin, FormView):
         cache_key = f"verify_email.{self.request.user.id}"
         token = cache.get(cache_key, object())
         if token != form.cleaned_data["token"]:
-            raise BadRequest("Token doesn't match.")
+            msg = "Token doesn't match."
+            raise BadRequest(msg)
         user = self.request.user
         user.email_verified = True
         user.save()
         if not cache.delete(cache_key):
-            raise Exception("Couldn't delete token.")
+            raise TokenNotDeletedError
         return super().form_valid(form)
 
     def get_initial(self):
