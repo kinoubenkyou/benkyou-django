@@ -150,3 +150,5 @@ SESSION_ENGINE = "django.contrib.sessions.backends.cache"
 CELERY_BROKER_URL = "redis://redis:6379/2"
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
+LOGOUT_REDIRECT_URL = "/user/sign_out/done/"
