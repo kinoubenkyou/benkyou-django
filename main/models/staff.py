@@ -1,4 +1,4 @@
-from django.db.models import Model, ForeignKey, CASCADE, CharField
+from django.db.models import CASCADE, CharField, ForeignKey, Model
 
 
 class Staff(Model):

@@ -30,7 +30,7 @@ docker compose run --no-deps --rm app sh
 ## lint and format
 
 ```shell
-docker compose run --no-deps --rm app sh -c "ruff check --fix && ruff format"
+docker compose run --no-deps --rm app sh -c "ruff check --select A --fix && ruff format"
 ```
 
 ## add package

@@ -1,4 +1,4 @@
-from django.forms import Form, CharField, HiddenInput
+from django.forms import CharField, Form, HiddenInput
 
 
 class UserVerifyEmailForm(Form):
