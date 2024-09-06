@@ -1,6 +1,6 @@
 #!/bin/sh
 
-if ! docker compose run --no-deps --rm app sh -c "ruff check --select A --diff"; then
+if ! docker compose run --no-deps --rm app sh -c "ruff check --diff"; then
   exit 1
 fi
 
