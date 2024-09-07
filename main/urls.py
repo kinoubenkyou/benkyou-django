@@ -1,26 +1,30 @@
 from django.urls import path
 
-from main.views.organization_views import OrganizationReadView
-from main.views.user_views import (
+from main.views.organization import OrganizationReadView
+from main.views.user import (
     UserCreateDoneView,
     UserCreateView,
     UserReadView,
     UserSignInDoneView,
     UserSignInView,
-    UserVerifyEmailView,
-    UserSwitchOrganizationView,
-    UserSwitchOrganizationDoneView,
-    UserStartVerifyEmailView,
+    UserSignOutDoneView,
+    UserSignOutView,
     UserStartVerifyEmailDoneView,
+    UserStartVerifyEmailView,
+    UserSwitchOrganizationDoneView,
+    UserSwitchOrganizationView,
+    UserVerifyEmailView,
 )
 
 urlpatterns = [
     path("organization/", OrganizationReadView.as_view()),
+    path("user/", UserReadView.as_view()),
     path("user/create/", UserCreateView.as_view()),
     path("user/create_done/", UserCreateDoneView.as_view()),
-    path("user/", UserReadView.as_view()),
     path("user/sign_in/", UserSignInView.as_view()),
     path("user/sign_in/done/", UserSignInDoneView.as_view()),
+    path("user/sign_out/", UserSignOutView.as_view()),
+    path("user/sign_out/done/", UserSignOutDoneView.as_view()),
     path("user/start_verify_email/", UserStartVerifyEmailView.as_view()),
     path("user/start_verify_email/done/", UserStartVerifyEmailDoneView.as_view()),
     path("user/switch_organization/", UserSwitchOrganizationView.as_view()),

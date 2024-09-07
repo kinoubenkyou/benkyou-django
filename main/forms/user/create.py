@@ -8,6 +8,6 @@ class UserCreateForm(BaseUserCreationForm):
         model = User
         fields = ("email", "name")
 
-    def save(self, commit=True):
+    def save(self, *, commit=True):
         self.instance.email_verified = False
         return super().save(commit)

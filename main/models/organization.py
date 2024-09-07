@@ -1,4 +1,4 @@
-from django.db.models import Model, CharField, ManyToManyField
+from django.db.models import CharField, ManyToManyField, Model
 
 
 class Organization(Model):
