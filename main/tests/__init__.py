@@ -1,5 +1,6 @@
 __all__ = [
     "OrganizationReadTestCase",
+    "OrganizationUpdateTestCase",
     "TestCase",
     "UserReadTestCase",
     "UserCreateTestCase",
@@ -11,6 +12,9 @@ __all__ = [
 
 from main.tests.organization_test_cases.organization_read_test_case import (
     OrganizationReadTestCase,
+)
+from main.tests.organization_test_cases.organization_update_test_case import (
+    OrganizationUpdateTestCase,
 )
 from main.tests.test_case import TestCase
 from main.tests.user_test_cases.user_create_test_case import UserCreateTestCase
