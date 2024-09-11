@@ -9,6 +9,8 @@ services:
         condition: service_healthy
       celery:
         condition: service_healthy
+      mongo:
+        condition: service_healthy
     ports:
       - 8000:8000
     secrets:
@@ -47,6 +49,8 @@ services:
         condition: service_healthy
       redis:
         condition: service_healthy
+      mongo:
+        condition: service_healthy
     healthcheck:
       start_interval: 1s
       start_period: 5s
@@ -56,6 +60,15 @@ services:
       - postgres_password
     volumes:
       - .:/app
+
+  mongo:
+    healthcheck:
+      start_interval: 1s
+      start_period: 5s
+      test: "mongosh --eval 'quit(db.runCommand({ ping: 1 }).ok === 1 ? 0 : 1)' mongo"
+    image: mongo
+    ports:
+      - 27017:27017
 
 secrets:
   django_secret_key:

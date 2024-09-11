@@ -1,0 +1,22 @@
+<table>
+    <thead>
+        <tr>
+            <th>Action</th>
+            <th>Timestamp</th>
+            <th>User</th>
+            <th>Code</th>
+            <th>Name</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for activity in activities %}
+      <tr>
+          <td>{{ activity.action }}</td>
+          <td>{{ activity.timestamp }}</td>
+          <td>{{ activity.user_email }}</td>
+          <td>{{ activity.data.code }}</td>
+          <td>{{ activity.data.name }}</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+</table>
