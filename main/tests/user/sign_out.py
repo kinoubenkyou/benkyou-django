@@ -8,4 +8,4 @@ class UserSignOutTestCase(TestCase):
         self.web_driver.get(f"{self.live_server_url}/user/sign_out/")
         self.web_driver.find_element(By.XPATH, '//*[@type="submit"]').click()
 
-        self.assertEqual(len(self.find_elements("Signed out.")), 1)
+        self.assertEqual(len(self.find_elements_with_text("Signed out.")), 1)

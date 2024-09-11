@@ -8,5 +8,5 @@ class OrganizationReadTestCase(SwitchOrganizationMixin, TestCase):
         self.sign_in()
         self.switch_organization()
 
-        self.assertEqual(len(self.find_elements("Code: code")), 1)
-        self.assertEqual(len(self.find_elements("Name: name")), 1)
+        self.assertEqual(len(self.find_elements_with_text("Code: code1")), 1)
+        self.assertEqual(len(self.find_elements_with_text("Name: name1")), 1)

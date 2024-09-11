@@ -8,19 +8,19 @@ from selenium.webdriver.common.by import By
 
 
 class TestCase(LiveServerTestCase):
-    def find_elements(self, text):
+    def find_elements_with_text(self, text):
         return [
             element
             for element in self.web_driver.find_elements(
                 By.XPATH,
-                f'//*[normalize-space(text())="{text}"]',
+                f"//*[normalize-space(text())='{text}']",
             )
             if element.is_displayed()
         ]
 
-    def find_elements_with_texts(self, *texts):
+    def find_rows_with_texts(self, *texts):
         predicate = " and ".join(
-            [f'descendant::*[normalize-space(text())="{text}"]' for text in texts],
+            [f"descendant::*[normalize-space(text())='{text}']" for text in texts],
         )
         return [
             element

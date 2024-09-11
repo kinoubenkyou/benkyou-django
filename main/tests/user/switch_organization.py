@@ -8,4 +8,4 @@ class UserSwitchOrganizationTestCase(SwitchOrganizationMixin, TestCase):
         self.sign_in()
         self.switch_organization()
 
-        self.assertEqual(len(self.find_elements("Switched organization.")), 1)
+        self.assertEqual(len(self.find_elements_with_text("Switched organization.")), 1)

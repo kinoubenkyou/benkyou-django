@@ -3,8 +3,8 @@
     "model": "main.organization",
     "pk": 1,
     "fields": {
-      "code": "code",
-      "name": "name"
+      "code": "code1",
+      "name": "name1"
     }
   },
   {

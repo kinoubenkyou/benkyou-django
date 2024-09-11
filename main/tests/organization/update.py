@@ -17,5 +17,5 @@ class OrganizationUpdateTestCase(SwitchOrganizationMixin, TestCase):
         name_input.send_keys("name_")
         self.web_driver.find_element(By.XPATH, '//*[@type="submit"]').click()
 
-        self.assertEqual(len(self.find_elements("Code: code_")), 1)
-        self.assertEqual(len(self.find_elements("Name: name_")), 1)
+        self.assertEqual(len(self.find_elements_with_text("Code: code_")), 1)
+        self.assertEqual(len(self.find_elements_with_text("Name: name_")), 1)
