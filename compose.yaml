@@ -19,28 +19,6 @@ services:
     volumes:
       - .:/app
 
-  postgres:
-    image: postgres
-    environment:
-      POSTGRES_PASSWORD_FILE: /run/secrets/postgres_password
-    healthcheck:
-      start_interval: 1s
-      start_period: 5s
-      test: pg_isready -U postgres -d postgres
-    ports:
-      - 5432:5432
-    secrets:
-      - postgres_password
-
-  redis:
-    image: redis
-    healthcheck:
-      start_interval: 1s
-      start_period: 5s
-      test: redis-cli ping
-    ports:
-      - 6379:6379
-
   celery:
     command: celery -A benkyou_django worker
     build: .
@@ -69,6 +47,28 @@ services:
     image: mongo
     ports:
       - 27017:27017
+
+  postgres:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD_FILE: /run/secrets/postgres_password
+    healthcheck:
+      start_interval: 1s
+      start_period: 5s
+      test: pg_isready -U postgres -d postgres
+    ports:
+      - 5432:5432
+    secrets:
+      - postgres_password
+
+  redis:
+    image: redis
+    healthcheck:
+      start_interval: 1s
+      start_period: 5s
+      test: redis-cli ping
+    ports:
+      - 6379:6379
 
 secrets:
   django_secret_key:

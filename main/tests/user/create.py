@@ -25,7 +25,7 @@ class UserCreateTestCase(TestCase):
         )
         self.web_driver.find_element(By.XPATH, '//*[@type="submit"]').click()
 
-        self.assertEqual(len(self.find_elements("Created user.")), 1)
+        self.assertEqual(len(self.find_elements_with_text("Created user.")), 1)
         self.assertIn(
             f"{self.live_server_url}/user/verify_email?token=",
             mail.outbox[0].body,

@@ -12,10 +12,10 @@ class UserStartVerifyEmailTestCase(SignInMixin, TestCase):
 
         self.web_driver.find_element(By.XPATH, '//*[@type="submit"]').click()
 
-        self.assertEqual(len(self.find_elements("Sent verify email.")), 1)
+        self.assertEqual(len(self.find_elements_with_text("Sent verify email.")), 1)
         self.assertIn(
             f"{self.live_server_url}/user/verify_email?token=",
             mail.outbox[0].body,
         )
         self.assertEqual(mail.outbox[0].subject, "Verify Email")
-        self.assertIn("email@email.com", mail.outbox[0].to)
+        self.assertIn("email1@email.com", mail.outbox[0].to)

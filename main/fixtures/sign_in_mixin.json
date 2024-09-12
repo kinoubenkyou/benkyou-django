@@ -5,9 +5,9 @@
     "fields": {
       "password": "pbkdf2_sha256$870000$Xsrp7xKtSlMYOuGEX7sqf3$ohjFXt5gU8dHem7CYQcOi7j3y7AYGXg0WRNDnoQbFTc=",
       "last_login": null,
-      "email": "email@email.com",
+      "email": "email1@email.com",
       "email_verified": false,
-      "name": "name"
+      "name": "name1"
     }
   }
 ]

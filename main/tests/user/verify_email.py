@@ -16,4 +16,4 @@ class UserVerifyEmailTestCase(SignInMixin, TestCase):
         self.sign_in()
         self.web_driver.find_element(By.XPATH, '//*[@type="submit"]').click()
 
-        self.assertEqual(len(self.find_elements("Email verified: True")), 1)
+        self.assertEqual(len(self.find_elements_with_text("Email verified: True")), 1)
