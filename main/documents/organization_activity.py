@@ -6,6 +6,7 @@ from mongoengine import (
 )
 
 from main.documents.activity import Activity
+from main.models import User
 
 
 class OrganizationActivityData(DynamicEmbeddedDocument):
@@ -19,3 +20,6 @@ class OrganizationActivity(Activity, Document):
 
     action = StringField(choices=ACTIONS, required=True)
     data = EmbeddedDocumentField(OrganizationActivityData)
+
+    def user(self):
+        return User.objects.get(pk=self.user_id)

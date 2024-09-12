@@ -9,6 +9,6 @@ class SignInMixin:
             "email1@email.com",
         )
         self.web_driver.find_element(By.XPATH, '//input[@name="password"]').send_keys(
-            "dr0wss@p",
+            "dr0wss@p1",
         )
         self.web_driver.find_element(By.XPATH, '//*[@type="submit"]').click()
