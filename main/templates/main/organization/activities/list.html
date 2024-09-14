@@ -9,13 +9,13 @@
         </tr>
     </thead>
     <tbody>
-    {% for activity in activities %}
+    {% for object in object_list %}
       <tr>
-          <td>{{ activity.action }}</td>
-          <td>{{ activity.timestamp }}</td>
-          <td>{{ activity.user_email }}</td>
-          <td>{{ activity.data.code }}</td>
-          <td>{{ activity.data.name }}</td>
+          <td>{{ object.action }}</td>
+          <td>{{ object.timestamp }}</td>
+          <td>{{ object.user.email }}</td>
+          <td>{{ object.data.code }}</td>
+          <td>{{ object.data.name }}</td>
       </tr>
     {% endfor %}
     </tbody>

@@ -1,27 +1,29 @@
-from django.views.generic import TemplateView
+from django.views.generic import ListView
 
 from main.documents.organization_activity import OrganizationActivity
 from main.models import User
 from main.views.mixin import OrganizationRequiredMixin
 
 
-class OrganizationActivitiesListView(OrganizationRequiredMixin, TemplateView):
+class OrganizationActivitiesListView(OrganizationRequiredMixin, ListView):
+    ordering = ["object_id", "-timestamp"]
+    paginate_by = 10
     template_name = "main/organization/activities/list.html"
 
-    def get_context_data(self, **kwargs):
-        return_ = super().get_context_data(**kwargs)
-        activities = list(
-            OrganizationActivity.objects.filter(
-                object_id=self.request.organization.id,
-            ),
+    def get_queryset(self):
+        return OrganizationActivity.objects.filter(
+            object_id=self.request.organization.id,
         )
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        return_ = super().get_context_data(object_list=object_list, **kwargs)
+        return_["object_list"] = list(return_["object_list"])
         users = {
             user.id: user
             for user in User.objects.filter(
-                id__in=[activity.user_id for activity in activities],
+                id__in=[object_.user_id for object_ in return_["object_list"]],
             )
         }
-        for activity in activities:
-            activity.user_email = users[activity.user_id]
-        return_.update(activities=activities)
+        for object_ in return_["object_list"]:
+            object_.user = users.get(object_.user_id)
         return return_
