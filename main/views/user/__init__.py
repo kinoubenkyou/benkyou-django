@@ -8,8 +8,6 @@ __all__ = [
     "UserSignOutView",
     "UserStartVerifyEmailDoneView",
     "UserStartVerifyEmailView",
-    "UserSwitchOrganizationDoneView",
-    "UserSwitchOrganizationView",
     "UserVerifyEmailView",
 ]
 
@@ -22,6 +20,4 @@ from main.views.user.sign_out import UserSignOutView
 from main.views.user.sign_out_done import UserSignOutDoneView
 from main.views.user.start_verify_email import UserStartVerifyEmailView
 from main.views.user.start_verify_email_done import UserStartVerifyEmailDoneView
-from main.views.user.switch_organization import UserSwitchOrganizationView
-from main.views.user.switch_organization_done import UserSwitchOrganizationDoneView
 from main.views.user.verify_email import UserVerifyEmailView

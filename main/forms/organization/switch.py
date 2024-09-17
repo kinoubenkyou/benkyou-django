@@ -1,7 +1,7 @@
 from django.forms import Form, ModelChoiceField
 
 
-class UserSwitchOrganizationForm(Form):
+class OrganizationSwitchForm(Form):
     organization = ModelChoiceField(empty_label=None, queryset=None, required=True)
 
     def __init__(self, *args, **kwargs):
