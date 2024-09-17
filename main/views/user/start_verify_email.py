@@ -7,7 +7,7 @@ from main.tasks import start_verify_email
 
 class UserStartVerifyEmailView(LoginRequiredMixin, FormView):
     form_class = UserStartVerifyEmailForm
-    success_url = "/user/start_verify_email/done/"
+    success_url = "/user/"
     template_name = "main/user/start_verify_email.html"
 
     def form_valid(self, form):

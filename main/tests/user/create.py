@@ -3,7 +3,7 @@ from secrets import token_hex
 from django.core import mail
 from selenium.webdriver.common.by import By
 
-from main.tests import TestCase
+from main.tests.test_case import TestCase
 
 
 class UserCreateTestCase(TestCase):
@@ -25,7 +25,7 @@ class UserCreateTestCase(TestCase):
         )
         self.web_driver.find_element(By.XPATH, '//*[@type="submit"]').click()
 
-        self.assertEqual(len(self.find_elements_with_text("Created user.")), 1)
+        self.assertEqual(self.web_driver.current_url, f"{self.live_server_url}/user/")
         self.assertIn(
             f"{self.live_server_url}/user/verify_email?token=",
             mail.outbox[0].body,

@@ -7,4 +7,4 @@ class UserSignInTestCase(SignInMixin, TestCase):
         self.web_driver.get(f"{self.live_server_url}/user/sign_in/")
         self.sign_in()
 
-        self.assertEqual(len(self.find_elements_with_text("Signed in.")), 1)
+        self.assertEqual(self.web_driver.current_url, f"{self.live_server_url}/user/")
