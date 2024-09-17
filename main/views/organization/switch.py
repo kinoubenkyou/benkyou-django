@@ -2,13 +2,13 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import RedirectURLMixin
 from django.views.generic import FormView
 
-from main.forms.user import UserSwitchOrganizationForm
+from main.forms.organization import OrganizationSwitchForm
 
 
-class UserSwitchOrganizationView(RedirectURLMixin, LoginRequiredMixin, FormView):
-    form_class = UserSwitchOrganizationForm
-    next_page = "/user/switch_organization/done/"
-    template_name = "main/user/switch_organization.html"
+class OrganizationSwitchView(RedirectURLMixin, LoginRequiredMixin, FormView):
+    form_class = OrganizationSwitchForm
+    next_page = "/organization/"
+    template_name = "main/organization/switch.html"
 
     def get_form_kwargs(self):
         return super().get_form_kwargs() | {"user": self.request.user}

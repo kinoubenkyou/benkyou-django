@@ -6,7 +6,7 @@ from django.http import HttpResponseRedirect, QueryDict
 class OrganizationRequiredMixin:
     def dispatch(self, request, *args, **kwargs):
         if not request.organization:
-            url_parts = list(urlparse("/user/switch_organization/"))
+            url_parts = list(urlparse("/organization/switch/"))
             querystring = QueryDict(url_parts[4], mutable=True)
             querystring["next"] = self.request.get_full_path()
             url_parts[4] = querystring.urlencode(safe="/")
