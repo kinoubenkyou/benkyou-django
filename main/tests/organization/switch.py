@@ -8,5 +8,7 @@ class OrganizationSwitchTestCase(SwitchOrganizationMixin, TestCase):
         self.sign_in()
         self.switch_organization()
 
-        self.assertEqual(len(self.find_elements_with_text("Code: code1")), 1)
-        self.assertEqual(len(self.find_elements_with_text("Name: name1")), 1)
+        self.assertEqual(
+            self.web_driver.current_url,
+            f"{self.live_server_url}/organization/",
+        )

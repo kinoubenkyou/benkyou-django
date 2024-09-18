@@ -3,8 +3,8 @@ from secrets import token_urlsafe
 from django.core.cache import cache
 from selenium.webdriver.common.by import By
 
-from main.tests import TestCase
 from main.tests.mixin import SignInMixin
+from main.tests.test_case import TestCase
 
 
 class UserVerifyEmailTestCase(SignInMixin, TestCase):

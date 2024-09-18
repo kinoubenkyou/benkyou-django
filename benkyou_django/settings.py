@@ -143,7 +143,7 @@ TEST_RUNNER = "main.runner.Runner"
 
 AUTH_USER_MODEL = "main.User"
 
-LOGIN_REDIRECT_URL = "/user/sign_in/done/"
+LOGIN_REDIRECT_URL = "/user/"
 
 LOGIN_URL = "/user/sign_in/"
 
@@ -153,7 +153,7 @@ CELERY_BROKER_URL = "redis://redis:6379/2"
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
-LOGOUT_REDIRECT_URL = "/user/sign_out/done/"
+LOGOUT_REDIRECT_URL = "/user/sign_in/"
 
 MONGO = {
     "db": "mongo",
