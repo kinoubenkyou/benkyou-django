@@ -10,6 +10,7 @@ __all__ = [
     "UserSignInTestCase",
     "UserSignOutTestCase",
     "UserStartVerifyEmailTestCase",
+    "UserUpdateTestCase",
     "UserVerifyEmailTestCase",
 ]
 
@@ -27,5 +28,6 @@ from main.tests.user import (
     UserSignInTestCase,
     UserSignOutTestCase,
     UserStartVerifyEmailTestCase,
+    UserUpdateTestCase,
     UserVerifyEmailTestCase,
 )

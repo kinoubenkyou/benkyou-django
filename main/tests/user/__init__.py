@@ -5,6 +5,7 @@ __all__ = [
     "UserSignInTestCase",
     "UserSignOutTestCase",
     "UserStartVerifyEmailTestCase",
+    "UserUpdateTestCase",
     "UserVerifyEmailTestCase",
 ]
 
@@ -16,6 +17,7 @@ from main.tests.user.sign_out import UserSignOutTestCase
 from main.tests.user.start_verify_email import (
     UserStartVerifyEmailTestCase,
 )
+from main.tests.user.update import UserUpdateTestCase
 from main.tests.user.verify_email import (
     UserVerifyEmailTestCase,
 )
