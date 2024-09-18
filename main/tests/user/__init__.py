@@ -1,5 +1,6 @@
 __all__ = [
     "UserCreateTestCase",
+    "UserChangePasswordTestCase",
     "UserReadTestCase",
     "UserSignInTestCase",
     "UserSignOutTestCase",
@@ -7,6 +8,7 @@ __all__ = [
     "UserVerifyEmailTestCase",
 ]
 
+from main.tests.user.change_password import UserChangePasswordTestCase
 from main.tests.user.create import UserCreateTestCase
 from main.tests.user.read import UserReadTestCase
 from main.tests.user.sign_in import UserSignInTestCase

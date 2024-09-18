@@ -7,6 +7,7 @@ from main.views.organization import (
 )
 from main.views.organization.activities import OrganizationActivitiesListView
 from main.views.user import (
+    UserChangePasswordView,
     UserCreateView,
     UserReadView,
     UserSignInView,
@@ -22,6 +23,7 @@ urlpatterns = [
     path("organization/switch/", OrganizationSwitchView.as_view()),
     path("organization/update/", OrganizationUpdateView.as_view()),
     path("user/", UserReadView.as_view()),
+    path("user/change_password/", UserChangePasswordView.as_view()),
     path("user/create/", UserCreateView.as_view()),
     path("user/sign_in/", UserSignInView.as_view()),
     path("user/sign_out/", UserSignOutView.as_view()),
