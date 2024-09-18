@@ -4,6 +4,7 @@ __all__ = [
     "OrganizationSwitchTestCase",
     "OrganizationUpdateTestCase",
     "TestCase",
+    "UserChangePasswordTestCase",
     "UserCreateTestCase",
     "UserReadTestCase",
     "UserSignInTestCase",
@@ -20,6 +21,7 @@ from main.tests.organization import (
 from main.tests.organization.activities import OrganizationActivitiesListTestCase
 from main.tests.test_case import TestCase
 from main.tests.user import (
+    UserChangePasswordTestCase,
     UserCreateTestCase,
     UserReadTestCase,
     UserSignInTestCase,
