@@ -11,6 +11,7 @@ services:
         condition: service_healthy
       mongo:
         condition: service_healthy
+    image: kinoubenkyou/benkyou-django
     ports:
       - 8000:8000
     secrets:
@@ -20,8 +21,8 @@ services:
       - .:/app
 
   celery:
-    command: celery -A benkyou_django worker
     build: .
+    command: celery -A benkyou_django worker
     depends_on:
       postgres:
         condition: service_healthy
@@ -33,6 +34,7 @@ services:
       start_interval: 1s
       start_period: 5s
       test: celery -A benkyou_django inspect ping
+    image: kinoubenkyou/benkyou-django
     secrets:
       - django_secret_key
       - postgres_password
@@ -49,24 +51,24 @@ services:
       - 27017:27017
 
   postgres:
-    image: postgres
     environment:
       POSTGRES_PASSWORD_FILE: /run/secrets/postgres_password
     healthcheck:
       start_interval: 1s
       start_period: 5s
       test: pg_isready -U postgres -d postgres
+    image: postgres
     ports:
       - 5432:5432
     secrets:
       - postgres_password
 
   redis:
-    image: redis
     healthcheck:
       start_interval: 1s
       start_period: 5s
       test: redis-cli ping
+    image: redis
     ports:
       - 6379:6379
 
