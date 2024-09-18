@@ -12,6 +12,7 @@ from main.views.user import (
     UserSignInView,
     UserSignOutView,
     UserStartVerifyEmailView,
+    UserUpdateView,
     UserVerifyEmailView,
 )
 
@@ -25,5 +26,6 @@ urlpatterns = [
     path("user/sign_in/", UserSignInView.as_view()),
     path("user/sign_out/", UserSignOutView.as_view()),
     path("user/start_verify_email/", UserStartVerifyEmailView.as_view()),
+    path("user/update/", UserUpdateView.as_view()),
     path("user/verify_email/", UserVerifyEmailView.as_view()),
 ]
