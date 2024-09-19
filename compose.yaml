@@ -14,7 +14,6 @@ services:
     image: kinoubenkyou/benkyou-django
     ports:
       - 8000:8000
-    pull_policy: always
     secrets:
       - django_secret_key
       - postgres_password
@@ -36,7 +35,6 @@ services:
       start_period: 5s
       test: celery -A benkyou_django inspect ping
     image: kinoubenkyou/benkyou-django
-    pull_policy: always
     secrets:
       - django_secret_key
       - postgres_password
