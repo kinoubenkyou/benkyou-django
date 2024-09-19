@@ -3,12 +3,12 @@ jobs:
   job:
     runs-on: ubuntu-latest
     steps:
-      - uses: docker/login-action
+      - uses: docker/login-action@c3
         with:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - uses: docker/build-push-action
+      - uses: docker/build-push-action@v6
         with:
           push: true
           tags: ghcr.io/kinoubenkyou/benkyou-django
