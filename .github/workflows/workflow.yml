@@ -18,7 +18,7 @@ jobs:
           cache-from: type=registry,ref=ghcr.io/kinoubenkyou/benkyou-django:build-cache
           cache-to: type=registry,ref=ghcr.io/kinoubenkyou/benkyou-django:build-cache
 #      - uses: actions/checkout@v4
-      - run: LC_CTYPE=C tr -dc [:alnum:] < /dev/urandom | head -c 50 > django_secret_key
+#      - run: LC_CTYPE=C tr -dc [:alnum:] < /dev/urandom | head -c 50 > django_secret_key
 #      - run: LC_CTYPE=C tr -dc [:alnum:] < /dev/urandom | head -c 20 > postgres_password
 #      - run: docker compose run --no-deps --rm app sh -c "ruff check --diff"
 #      - run: docker compose run --no-deps --rm app sh -c "ruff format --diff"
