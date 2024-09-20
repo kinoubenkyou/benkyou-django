@@ -10,6 +10,7 @@ jobs:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/checkout@v4
       - run: docker compose pull
       - run: docker compose build
       - run: docker compose push
