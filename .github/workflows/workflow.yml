@@ -15,6 +15,7 @@ jobs:
       - uses: docker/build-push-action@v6
         with:
           load: true
+#          push: true
           tags: ghcr.io/kinoubenkyou/benkyou-django
           cache-from: type=registry,ref=ghcr.io/kinoubenkyou/benkyou-django:build-cache
 #          cache-to: type=registry,ref=ghcr.io/kinoubenkyou/benkyou-django:build-cache
