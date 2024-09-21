@@ -12,12 +12,12 @@ jobs:
           registry: ghcr.io
           password: ${{ secrets.GITHUB_TOKEN }}
           username: ${{ github.repository_owner }}
-      - uses: docker/metadata-action@v5
-        with:
-          images: ghcr.io/kinoubenkyou/benkyou-django
+#      - uses: docker/metadata-action@v5
+#        with:
+#          images: ghcr.io/kinoubenkyou/benkyou-django
       - uses: docker/build-push-action@v6
         with:
-          push: true
+#          pull: true
           tags: ghcr.io/kinoubenkyou/benkyou-django
           cache-from: type=registry,ref=ghcr.io/kinoubenkyou/benkyou-django:build-cache
           cache-to: type=registry,ref=ghcr.io/kinoubenkyou/benkyou-django:build-cache
