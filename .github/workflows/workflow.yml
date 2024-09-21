@@ -14,16 +14,16 @@ jobs:
           username: ${{ github.repository_owner }}
       - uses: docker/build-push-action@v6
         with:
-#          push: true
+          push: true
           tags: ghcr.io/kinoubenkyou/benkyou-django
           cache-from: type=registry,ref=ghcr.io/kinoubenkyou/benkyou-django:build-cache
           cache-to: type=registry,ref=ghcr.io/kinoubenkyou/benkyou-django:build-cache
-      - uses: actions/delete-package-versions@v5
-        with:
-          owner: kinoubenkyou
-          package-name: benkyou-django
-          package-type: container
-          delete-only-untagged-versions: true
+#      - uses: actions/delete-package-versions@v5
+#        with:
+#          owner: kinoubenkyou
+#          package-name: benkyou-django
+#          package-type: container
+#          delete-only-untagged-versions: true
 
 #  test:
 #    runs-on: ubuntu-latest
