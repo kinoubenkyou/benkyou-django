@@ -2,8 +2,8 @@ on: [push]
 jobs:
 
   build:
-    permissions:
-      packages: write
+#    permissions:
+#      packages: write
     runs-on: ubuntu-latest
     steps:
       - uses: docker/setup-buildx-action@v3
@@ -12,12 +12,9 @@ jobs:
           registry: ghcr.io
           password: ${{ secrets.GITHUB_TOKEN }}
           username: ${{ github.repository_owner }}
-#      - uses: docker/metadata-action@v5
-#        with:
-#          images: ghcr.io/kinoubenkyou/benkyou-django
       - uses: docker/build-push-action@v6
         with:
-#          pull: true
+#          push: true
           tags: ghcr.io/kinoubenkyou/benkyou-django
           cache-from: type=registry,ref=ghcr.io/kinoubenkyou/benkyou-django:build-cache
           cache-to: type=registry,ref=ghcr.io/kinoubenkyou/benkyou-django:build-cache
