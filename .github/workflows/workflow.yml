@@ -33,7 +33,7 @@ jobs:
         env:
           IMAGE_ID: ${{ steps.set-image-id.outputs.IMAGE_ID }}
       - uses: docker/build-push-action@v6
-        if: ${{ steps.check-image-id.outputs.IMAGE_REBUILTT == 'true' }}
+        if: ${{ steps.check-image-id.outputs.IMAGE_REBUILT == 'true' }}
         with:
           tags: ghcr.io/kinoubenkyou/benkyou-django
           push: true
