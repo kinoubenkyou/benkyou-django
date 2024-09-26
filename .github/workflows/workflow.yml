@@ -7,39 +7,37 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: docker/setup-buildx-action@v3
-        id: setup-builder
       - uses: docker/login-action@v3
         with:
           registry: ghcr.io
           password: ${{ secrets.GITHUB_TOKEN }}
           username: ${{ github.repository_owner }}
-#      - run: docker image pull ghcr.io/kinoubenkyou/benkyou-django
-#      - run: |
-#          image_id=$(docker image ls -q -f=reference=ghcr.io/kinoubenkyou/benkyou-django)
-#          echo "IMAGE_ID=$image_id" >> "$GITHUB_OUTPUT"
-#        id: set-image-id
+      - run: docker image pull ghcr.io/kinoubenkyou/benkyou-django
+      - name: Set image id
+        id: set-image-id
+        run: |
+          image_id=$(docker image ls -q -f=reference=ghcr.io/kinoubenkyou/benkyou-django)
+          echo "IMAGE_ID=$image_id" >> "$GITHUB_OUTPUT"
       - uses: docker/build-push-action@v6
         with:
           tags: ghcr.io/kinoubenkyou/benkyou-django
           cache-from: type=registry,ref=ghcr.io/kinoubenkyou/benkyou-django:build-cache
-        id: build
-#      - run: |
-#          image_id=$(docker image ls -q -f=reference=ghcr.io/kinoubenkyou/benkyou-django)
-#          if [ "$image_id" != "$IMAGE_ID" ]
-#          then
-#          fi
-#        env:
-#          IMAGE_ID: ${{ steps.set-image-id.outputs.IMAGE_ID }}
-#          BUILDER_NAME: ${{ steps.setup-builder.outputs.name }}
-      - run: echo $BUILD_OUTPUT_METADATA
+      - name: Check image id
+        id: check-image-id
+        run: |
+          image_id=$(docker image ls -q -f=reference=ghcr.io/kinoubenkyou/benkyou-django)
+          if [ "$image_id" != "$IMAGE_ID" ]
+          then
+            echo "IMAGE_REBUILT=true" >> "$GITHUB_OUTPUT"
+          fi
         env:
-          BUILD_OUTPUT_METADATA: ${{ steps.build.outputs.metadata }}
-#      - uses: docker/build-push-action@v6
-#        with:
-#          tags: ghcr.io/kinoubenkyou/benkyou-django
-#          push: true
-#          cache-to: type=registry,ref=ghcr.io/kinoubenkyou/benkyou-django:build-cache
-#        if: ${{ steps.check-image-id.outputs.should_push ==  }}
+          IMAGE_ID: ${{ steps.set-image-id.outputs.IMAGE_ID }}
+      - uses: docker/build-push-action@v6
+        if: ${{ steps.check-image-id.outputs.IMAGE_REBUILTT == 'true' }}
+        with:
+          tags: ghcr.io/kinoubenkyou/benkyou-django
+          push: true
+          cache-to: type=registry,ref=ghcr.io/kinoubenkyou/benkyou-django:build-cache
 
 #  test:
 #    runs-on: ubuntu-latest
