@@ -14,7 +14,7 @@ jobs:
           username: ${{ github.repository_owner }}
       - run: docker image pull ghcr.io/kinoubenkyou/benkyou-django
       - run: |
-          image_id = docker image ls -q -f=reference=ghcr.io/kinoubenkyou/benkyou-django
+          image_id=$(docker image ls -q -f=reference=ghcr.io/kinoubenkyou/benkyou-django)
           echo "IMAGE_ID=$image_id" >> "$GITHUB_OUTPUT"
         id: set-image-id
       - uses: docker/build-push-action@v6
@@ -24,7 +24,7 @@ jobs:
           cache-from: type=registry,ref=ghcr.io/kinoubenkyou/benkyou-django:build-cache
 #          cache-to: type=registry,ref=ghcr.io/kinoubenkyou/benkyou-django:build-cache
       - run: |
-          image_id = docker image ls -q -f=reference=ghcr.io/kinoubenkyou/benkyou-django
+          image_id=$(docker image ls -q -f=reference=ghcr.io/kinoubenkyou/benkyou-django)
           if [ $image_id == $IMAGE_ID ]
           then
             echo true
