@@ -13,14 +13,26 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
           username: ${{ github.repository_owner }}
       - run: docker image pull ghcr.io/kinoubenkyou/benkyou-django
-      - run: docker image ls -q -f=reference=ghcr.io/kinoubenkyou/benkyou-django
+      - run: |
+          image_id = docker image ls -q -f=reference=ghcr.io/kinoubenkyou/benkyou-django
+          echo "IMAGE_ID=$image_id" >> "$GITHUB_OUTPUT"
+        id: set-image-id
       - uses: docker/build-push-action@v6
         with:
           load: true
           tags: ghcr.io/kinoubenkyou/benkyou-django
           cache-from: type=registry,ref=ghcr.io/kinoubenkyou/benkyou-django:build-cache
 #          cache-to: type=registry,ref=ghcr.io/kinoubenkyou/benkyou-django:build-cache
-      - run: docker image ls -q -f=reference=ghcr.io/kinoubenkyou/benkyou-django
+      - run: |
+          image_id = docker image ls -q -f=reference=ghcr.io/kinoubenkyou/benkyou-django
+          if [ $image_id == $IMAGE_ID ]
+          then
+            echo true
+          else
+            echo false
+          fi
+        env:
+          IMAGE_ID: ${{ steps.set-image-id.outputs.IMAGE_ID }}
 #      - uses: actions/delete-package-versions@v5
 #        with:
 #          owner: kinoubenkyou
