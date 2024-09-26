@@ -34,9 +34,6 @@ jobs:
           then
             echo "IMAGE_REBUILT=true" >> "$GITHUB_OUTPUT"
           fi
-      - run: echo $IMAGE_REBUILT
-        env:
-          IMAGE_REBUILT: ${{ steps.check-image-id.outputs.IMAGE_REBUILT }}
       - name: Push
         uses: docker/build-push-action@v6
         if: ${{ steps.check-image-id.outputs.IMAGE_REBUILT == 'true' }}
@@ -44,6 +41,12 @@ jobs:
           tags: ghcr.io/kinoubenkyou/benkyou-django
           push: true
           cache-to: type=registry,ref=ghcr.io/kinoubenkyou/benkyou-django:build-cache
+      - uses: actions/delete-package-versions@v5
+        with:
+          owner: kinoubenkyou
+          package-name: benkyou-django
+          package-type: container
+          delete-only-untagged-versions: true
 
 #  test:
 #    runs-on: ubuntu-latest
