@@ -7,39 +7,40 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: docker/setup-buildx-action@v3
+        id: setup-builder
       - uses: docker/login-action@v3
         with:
           registry: ghcr.io
           password: ${{ secrets.GITHUB_TOKEN }}
           username: ${{ github.repository_owner }}
-      - run: docker image pull ghcr.io/kinoubenkyou/benkyou-django
-      - run: |
-          image_id=$(docker image ls -q -f=reference=ghcr.io/kinoubenkyou/benkyou-django)
-          echo "IMAGE_ID=$image_id" >> "$GITHUB_OUTPUT"
-        id: set-image-id
+#      - run: docker image pull ghcr.io/kinoubenkyou/benkyou-django
+#      - run: |
+#          image_id=$(docker image ls -q -f=reference=ghcr.io/kinoubenkyou/benkyou-django)
+#          echo "IMAGE_ID=$image_id" >> "$GITHUB_OUTPUT"
+#        id: set-image-id
       - uses: docker/build-push-action@v6
         with:
-          load: true
           tags: ghcr.io/kinoubenkyou/benkyou-django
           cache-from: type=registry,ref=ghcr.io/kinoubenkyou/benkyou-django:build-cache
-#          cache-to: type=registry,ref=ghcr.io/kinoubenkyou/benkyou-django:build-cache
+        id: build
+#      - run: |
+#          image_id=$(docker image ls -q -f=reference=ghcr.io/kinoubenkyou/benkyou-django)
+#          if [ "$image_id" != "$IMAGE_ID" ]
+#          then
+#          fi
+#        env:
+#          IMAGE_ID: ${{ steps.set-image-id.outputs.IMAGE_ID }}
+#          BUILDER_NAME: ${{ steps.setup-builder.outputs.name }}
       - run: |
-          image_id=$(docker image ls -q -f=reference=ghcr.io/kinoubenkyou/benkyou-django)
-          if [ "$image_id" != "$IMAGE_ID" ]
-          then
-            echo pushing...
-            docker push ghcr.io/kinoubenkyou/benkyou-django
-          else
-            echo skip...
-          fi
+          echo $BUILD_OUTPUTS
         env:
-          IMAGE_ID: ${{ steps.set-image-id.outputs.IMAGE_ID }}
-#      - uses: actions/delete-package-versions@v5
+          BUILD_OUTPUTS: ${{ steps.build.outputs }}
+#      - uses: docker/build-push-action@v6
 #        with:
-#          owner: kinoubenkyou
-#          package-name: benkyou-django
-#          package-type: container
-#          delete-only-untagged-versions: true
+#          tags: ghcr.io/kinoubenkyou/benkyou-django
+#          push: true
+#          cache-to: type=registry,ref=ghcr.io/kinoubenkyou/benkyou-django:build-cache
+#        if: ${{ steps.check-image-id.outputs.should_push ==  }}
 
 #  test:
 #    runs-on: ubuntu-latest
@@ -50,9 +51,6 @@ jobs:
 #          registry: ghcr.io
 #          password: ${{ secrets.GITHUB_TOKEN }}
 #          username: ${{ github.repository_owner }}
-#      - uses: docker/metadata-action@v5
-#        with:
-#          images: ghcr.io/kinoubenkyou/benkyou-django
 #      - uses: actions/checkout@v4
 #      - run: LC_CTYPE=C tr -dc [:alnum:] < /dev/urandom | head -c 50 > django_secret_key
 #      - run: LC_CTYPE=C tr -dc [:alnum:] < /dev/urandom | head -c 20 > postgres_password
