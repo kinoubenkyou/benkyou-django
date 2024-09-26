@@ -31,10 +31,9 @@ jobs:
 #        env:
 #          IMAGE_ID: ${{ steps.set-image-id.outputs.IMAGE_ID }}
 #          BUILDER_NAME: ${{ steps.setup-builder.outputs.name }}
-      - run: |
-          echo $BUILD_OUTPUTS
+      - run: echo $BUILD_OUTPUT_METADATA
         env:
-          BUILD_OUTPUTS: ${{ steps.build.outputs }}
+          BUILD_OUTPUT_METADATA: ${{ steps.build.outputs.metadata }}
 #      - uses: docker/build-push-action@v6
 #        with:
 #          tags: ghcr.io/kinoubenkyou/benkyou-django
