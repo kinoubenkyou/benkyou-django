@@ -27,7 +27,10 @@ jobs:
           image_id=$(docker image ls -q -f=reference=ghcr.io/kinoubenkyou/benkyou-django)
           if [ "$image_id" != "$IMAGE_ID" ]
           then
+            echo pushing...
             docker push ghcr.io/kinoubenkyou/benkyou-django
+          else
+            echo skip...
           fi
         env:
           IMAGE_ID: ${{ steps.set-image-id.outputs.IMAGE_ID }}
