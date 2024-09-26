@@ -28,9 +28,7 @@ jobs:
           image_id=$(docker image ls -q -f=reference=ghcr.io/kinoubenkyou/benkyou-django)
           if [ $image_id == $IMAGE_ID ]
           then
-            echo true
-          else
-            echo false
+            docker push ghcr.io/kinoubenkyou/benkyou-django
           fi
         env:
           IMAGE_ID: ${{ steps.set-image-id.outputs.IMAGE_ID }}
