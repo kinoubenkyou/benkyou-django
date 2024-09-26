@@ -22,6 +22,7 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           tags: ghcr.io/kinoubenkyou/benkyou-django
+          load: true
           cache-from: type=registry,ref=ghcr.io/kinoubenkyou/benkyou-django:build-cache
       - name: Check image id
         id: check-image-id
@@ -31,7 +32,6 @@ jobs:
           image_id=$(docker image ls -q -f=reference=ghcr.io/kinoubenkyou/benkyou-django)
           if [ "$image_id" != "$IMAGE_ID" ]
           then
-            echo DEBUG
             echo "IMAGE_REBUILT=$image_rebuilt" >> "$GITHUB_OUTPUT"
           fi
       - run: echo $IMAGE_REBUILT
