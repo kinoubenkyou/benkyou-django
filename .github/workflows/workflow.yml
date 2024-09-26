@@ -12,32 +12,37 @@ jobs:
           registry: ghcr.io
           password: ${{ secrets.GITHUB_TOKEN }}
           username: ${{ github.repository_owner }}
-      - run: docker image pull ghcr.io/kinoubenkyou/benkyou-django
       - name: Set image id
         id: set-image-id
         run: |
+          docker image pull ghcr.io/kinoubenkyou/benkyou-django
           image_id=$(docker image ls -q -f=reference=ghcr.io/kinoubenkyou/benkyou-django)
           echo "IMAGE_ID=$image_id" >> "$GITHUB_OUTPUT"
-      - uses: docker/build-push-action@v6
+      - name: Build
+        uses: docker/build-push-action@v6
         with:
           tags: ghcr.io/kinoubenkyou/benkyou-django
           cache-from: type=registry,ref=ghcr.io/kinoubenkyou/benkyou-django:build-cache
       - name: Check image id
         id: check-image-id
+        env:
+          IMAGE_ID: ${{ steps.set-image-id.outputs.IMAGE_ID }}
         run: |
           image_id=$(docker image ls -q -f=reference=ghcr.io/kinoubenkyou/benkyou-django)
           if [ "$image_id" != "$IMAGE_ID" ]
           then
             echo "IMAGE_REBUILT=true" >> "$GITHUB_OUTPUT"
           fi
+      - run: echo $IMAGE_REBUILT
         env:
-          IMAGE_ID: ${{ steps.set-image-id.outputs.IMAGE_ID }}
-      - uses: docker/build-push-action@v6
-        if: ${{ steps.check-image-id.outputs.IMAGE_REBUILT == 'true' }}
-        with:
-          tags: ghcr.io/kinoubenkyou/benkyou-django
-          push: true
-          cache-to: type=registry,ref=ghcr.io/kinoubenkyou/benkyou-django:build-cache
+          IMAGE_REBUILT: ${{ steps.check-image-id.outputs.IMAGE_REBUILT }}
+#      - name: Push
+#        uses: docker/build-push-action@v6
+#        if: ${{ steps.check-image-id.outputs.IMAGE_REBUILT == 'true' }}
+#        with:
+#          tags: ghcr.io/kinoubenkyou/benkyou-django
+#          push: true
+#          cache-to: type=registry,ref=ghcr.io/kinoubenkyou/benkyou-django:build-cache
 
 #  test:
 #    runs-on: ubuntu-latest
