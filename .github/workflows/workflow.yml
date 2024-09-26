@@ -23,10 +23,9 @@ jobs:
           tags: ghcr.io/kinoubenkyou/benkyou-django
           cache-from: type=registry,ref=ghcr.io/kinoubenkyou/benkyou-django:build-cache
 #          cache-to: type=registry,ref=ghcr.io/kinoubenkyou/benkyou-django:build-cache
-      - run: docker buildx ls
       - run: |
           image_id=$(docker image ls -q -f=reference=ghcr.io/kinoubenkyou/benkyou-django)
-          if [ $image_id == $IMAGE_ID ]
+          if [ "$image_id" = "$IMAGE_ID" ]
           then
             docker push ghcr.io/kinoubenkyou/benkyou-django
           fi
