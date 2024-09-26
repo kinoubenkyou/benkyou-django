@@ -29,7 +29,11 @@ jobs:
           IMAGE_ID: ${{ steps.set-image-id.outputs.IMAGE_ID }}
         run: |
           image_id=$(docker image ls -q -f=reference=ghcr.io/kinoubenkyou/benkyou-django)
-          echo "IMAGE_REBUILT=[ "$image_id" != "$IMAGE_ID" ]" >> "$GITHUB_OUTPUT"
+          if [ "$image_id" != "$IMAGE_ID" ]
+          then
+            echo DEBUG
+            echo "IMAGE_REBUILT=$image_rebuilt" >> "$GITHUB_OUTPUT"
+          fi
       - run: echo $IMAGE_REBUILT
         env:
           IMAGE_REBUILT: ${{ steps.check-image-id.outputs.IMAGE_REBUILT }}
