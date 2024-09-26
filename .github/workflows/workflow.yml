@@ -14,7 +14,7 @@ jobs:
           username: ${{ github.repository_owner }}
       - id: set-image-id
         run: |
-          docker image pull ghcr.io/kinoubenkyou/benkyou-django
+          docker pull ghcr.io/kinoubenkyou/benkyou-django
           image_id=$(docker image ls -q -f=reference=ghcr.io/kinoubenkyou/benkyou-django)
           echo "IMAGE_ID=$image_id" >> "$GITHUB_OUTPUT"
       - uses: docker/build-push-action@v6
