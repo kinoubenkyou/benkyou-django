@@ -65,6 +65,7 @@ jobs:
       - run: LC_CTYPE=C tr -dc [:alnum:] < /dev/urandom | head -c 50 > django_secret_key
       - run: LC_CTYPE=C tr -dc [:alnum:] < /dev/urandom | head -c 20 > postgres_password
       - run: docker compose pull app
+
 #      - run: docker compose run --no-deps --rm app sh -c "ruff check --diff"
 #      - run: docker compose run --no-deps --rm app sh -c "ruff format --diff"
 #      - run: docker compose run --rm app sh -c "python manage.py test --failfast"
