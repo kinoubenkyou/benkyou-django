@@ -45,7 +45,7 @@ jobs:
           tags: ghcr.io/kinoubenkyou/benkyou-django
           push: true
           cache-to: type=registry,ref=ghcr.io/kinoubenkyou/benkyou-django:cache
-
+#
 #      - uses: actions/delete-package-versions@v5
 #        with:
 #          package-name: benkyou-django
