@@ -25,9 +25,9 @@ jobs:
 
       - uses: docker/build-push-action@v6
         with:
-          tags: ghcr.io/kinoubenkyou/benkyou-django:latest
+          tags: ghcr.io/kinoubenkyou/benkyou-django
           load: true
-          cache-from: type=registry,ref=ghcr.io/kinoubenkyou/benkyou-django:build-cache
+          cache-from: type=registry,ref=ghcr.io/kinoubenkyou/benkyou-django
 
       - id: check-image-id
         env:
@@ -42,15 +42,15 @@ jobs:
       - uses: docker/build-push-action@v6
         if: ${{ steps.check-image-id.outputs.IMAGE_REBUILT == 'true' }}
         with:
-          tags: ghcr.io/kinoubenkyou/benkyou-django:latest
+          tags: ghcr.io/kinoubenkyou/benkyou-django
           push: true
-          cache-to: type=registry,ref=ghcr.io/kinoubenkyou/benkyou-django:build-cache
+          cache-to: type=registry,ref=ghcr.io/kinoubenkyou/benkyou-django
 
-      - uses: actions/delete-package-versions@v5
-        with:
-          package-name: benkyou-django
-          package-type: container
-          delete-only-untagged-versions: true
+#      - uses: actions/delete-package-versions@v5
+#        with:
+#          package-name: benkyou-django
+#          package-type: container
+#          delete-only-untagged-versions: true
 
   test:
     runs-on: ubuntu-latest
