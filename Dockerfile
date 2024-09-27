@@ -4,4 +4,3 @@ RUN apt update -y
 RUN apt install -y chromium chromium-driver
 COPY requirements.txt .
 RUN pip install -r requirements.txt
-RUN echo DEBUG

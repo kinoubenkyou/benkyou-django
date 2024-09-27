@@ -46,6 +46,12 @@ jobs:
           push: true
           cache-to: type=registry,ref=ghcr.io/kinoubenkyou/benkyou-django:build-cache
 
+#      - uses: actions/delete-package-versions@v5
+#        with:
+#          package-name: benkyou-django
+#          package-type: container
+#          delete-only-untagged-versions: true
+
   test:
     runs-on: ubuntu-latest
     needs: build
