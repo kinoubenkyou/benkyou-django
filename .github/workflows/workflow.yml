@@ -17,7 +17,7 @@ jobs:
 
       - id: set-image-id
         run: |
-          if docker pull ghcr.io/kinoubenkyou/benkyou-django:latest
+          if docker image pull ghcr.io/kinoubenkyou/benkyou-django
           then
             image_id=$(docker image ls -q -f=reference=ghcr.io/kinoubenkyou/benkyou-django)
             echo "IMAGE_ID=$image_id" >> "$GITHUB_OUTPUT"
