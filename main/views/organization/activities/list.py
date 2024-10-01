@@ -8,6 +8,8 @@ from main.views.mixin import OrganizationRequiredMixin
 
 class OrganizationActivitiesListView(OrganizationRequiredMixin, ListView):
     form = None
+    ordering = ("-timestamp",)
+    paginate_by = 10
     queryset = OrganizationActivity.objects.all()
     template_name = "main/organization/activities/list.html"
 
@@ -17,7 +19,12 @@ class OrganizationActivitiesListView(OrganizationRequiredMixin, ListView):
         return super().get(request, *args, **kwargs)
 
     def get_ordering(self):
-        return self.form.cleaned_data["sort_by"] or self.ordering
+        return self.form.cleaned_data.get("sort_by") or super().get_ordering()
+
+    def get_paginate_by(self, queryset):
+        return self.form.cleaned_data.get("per_page") or super().get_paginate_by(
+            queryset,
+        )
 
     def get_queryset(self):
         return (
