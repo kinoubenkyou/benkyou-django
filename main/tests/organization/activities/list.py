@@ -1,3 +1,5 @@
+from datetime import timedelta
+
 from main.documents import OrganizationActivity
 from main.tests.mixin import SwitchOrganizationMixin
 from main.tests.test_case import TestCase
@@ -8,27 +10,31 @@ class OrganizationActivitiesListTestCase(SwitchOrganizationMixin, TestCase):
         OrganizationActivity.objects.insert(
             [
                 OrganizationActivity(
-                    action="update",
-                    data={"code": f"code{index_}", "name": f"name{index_}"},
+                    action=f"action{index}",
+                    data={"code": f"code{index}", "name": f"name{index}"},
                     object_id=1,
+                    timestamp=self.now + timedelta(days=index),
                     user_id=1,
                 )
-                for index_ in range(1, 22)
+                for index in range(1, 3)
             ],
         )
 
-        self.web_driver.get(f"{self.live_server_url}/organization/activities?page=2")
+        self.web_driver.get(f"{self.live_server_url}/organization/activities")
         self.sign_in()
         self.switch_organization()
 
-        for index_ in range(11, 21):
+        for index in range(1, 3):
             self.assertEqual(
                 len(
                     self.find_rows_with_texts(
-                        "update",
+                        f"action{index}",
                         "email1@email.com",
-                        f"code{index_}",
-                        f"name{index_}",
+                        (self.now + timedelta(days=index)).strftime(
+                            "%Y-%m-%d %H:%M:%S",
+                        ),
+                        f"code{index}",
+                        f"name{index}",
                     ),
                 ),
                 1,
