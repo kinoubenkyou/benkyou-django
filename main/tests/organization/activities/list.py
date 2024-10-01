@@ -1,8 +1,17 @@
-from datetime import timedelta
+from datetime import UTC, datetime
 
 from main.documents import OrganizationActivity
 from main.tests.mixin import SwitchOrganizationMixin
 from main.tests.test_case import TestCase
+
+
+def format_datetime(datetime_):
+    return (
+        f"{datetime_.day}"
+        f" {datetime_.strftime("%b")}"
+        f" {datetime_.year:04}"
+        f" {datetime_.strftime("%I:%M:%S %p %z")}"
+    )
 
 
 class OrganizationActivitiesListTestCase(SwitchOrganizationMixin, TestCase):
@@ -13,7 +22,7 @@ class OrganizationActivitiesListTestCase(SwitchOrganizationMixin, TestCase):
                     action=f"action{index}",
                     data={"code": f"code{index}", "name": f"name{index}"},
                     object_id=1,
-                    timestamp=self.now + timedelta(days=index),
+                    timestamp=datetime(1, 1, index, tzinfo=UTC),
                     user_id=1,
                 )
                 for index in range(1, 3)
@@ -29,10 +38,8 @@ class OrganizationActivitiesListTestCase(SwitchOrganizationMixin, TestCase):
                 len(
                     self.find_rows_with_texts(
                         f"action{index}",
+                        format_datetime(datetime(1, 1, index, tzinfo=UTC)),
                         "email1@email.com",
-                        (self.now + timedelta(days=index)).strftime(
-                            "%Y-%m-%d %H:%M:%S",
-                        ),
                         f"code{index}",
                         f"name{index}",
                     ),

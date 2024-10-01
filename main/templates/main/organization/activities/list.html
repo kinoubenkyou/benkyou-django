@@ -16,7 +16,7 @@
     {% for object in object_list %}
       <tr>
           <td>{{ object.action }}</td>
-          <td>{{ object.timestamp|date:"Y-m-d H:i:s" }}</td>
+          <td>{{ object.timestamp|date:"j M Y h:i:s A O" }}</td>
           <td>{{ object.user.email }}</td>
           <td>{{ object.data.code }}</td>
           <td>{{ object.data.name }}</td>

@@ -1,7 +1,6 @@
 from django.conf import settings
 from django.core.cache import cache
 from django.test import LiveServerTestCase
-from django.utils import timezone
 from mongoengine import get_connection
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.webdriver import WebDriver
@@ -9,8 +8,6 @@ from selenium.webdriver.common.by import By
 
 
 class TestCase(LiveServerTestCase):
-    now = timezone.now()
-
     def find_elements_with_text(self, text):
         return [
             element

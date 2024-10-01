@@ -20,13 +20,11 @@ class OrganizationActivitiesListView(OrganizationRequiredMixin, ListView):
         return self.form.cleaned_data["sort_by"] or self.ordering
 
     def get_queryset(self):
-        if self.form.is_valid():
-            return_ = (
-                super().get_queryset().filter(object_id=self.request.organization.id)
-            )
-        else:
-            return_ = self.queryset.none()
-        return return_
+        return (
+            super().get_queryset().filter(object_id=self.request.organization.id)
+            if self.form.is_valid()
+            else self.queryset.none()
+        )
 
     def get_context_data(self, **kwargs):
         return_ = super().get_context_data(form=self.form, **kwargs)
