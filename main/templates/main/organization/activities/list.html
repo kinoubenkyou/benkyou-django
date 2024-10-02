@@ -1,26 +1,35 @@
 <form>
     {{ form }}
-    <input type="submit" value="Filter">
+    <input type="submit" value="Submit">
 </form>
 <table>
     <thead>
-        <tr>
-            <th>Action</th>
-            <th>Timestamp</th>
-            <th>User</th>
-            <th>Code</th>
-            <th>Name</th>
-        </tr>
+    <tr>
+        <th>Action</th>
+        <th>Timestamp</th>
+        <th>User</th>
+        <th>Code</th>
+        <th>Name</th>
+    </tr>
     </thead>
     <tbody>
     {% for object in object_list %}
-      <tr>
-          <td>{{ object.action }}</td>
-          <td>{{ object.timestamp|date:"j M Y h:i:s A O" }}</td>
-          <td>{{ object.user.email }}</td>
-          <td>{{ object.data.code }}</td>
-          <td>{{ object.data.name }}</td>
-      </tr>
+    <tr>
+        <td>{{ object.action }}</td>
+        <td>{{ object.timestamp|date:"j M Y h:i:s A O" }}</td>
+        <td>{{ object.user.email }}</td>
+        <td>{{ object.data.code }}</td>
+        <td>{{ object.data.name }}</td>
+    </tr>
     {% endfor %}
     </tbody>
 </table>
+{% if page_obj.has_previous %}
+<a href={% querystring page=1 %}>First</a>
+<a href={% querystring page=page_obj.previous_page_number %}>Previous</a>
+{% endif %}
+<span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+{% if page_obj.has_next %}
+<a href={% querystring page=page_obj.next_page_number %}>Next</a>
+<a href={% querystring page=page_obj.paginator.num_pages %}>Last</a>
+{% endif %}

@@ -1,4 +1,4 @@
-from django.forms import ChoiceField, Form
+from django.forms import ChoiceField, Form, IntegerField
 
 
 class OrganizationActivityListForm(Form):
@@ -8,4 +8,5 @@ class OrganizationActivityListForm(Form):
         ("timestamp", "timestamp asc"),
     )
 
+    per_page = IntegerField(min_value=1, required=False)
     sort_by = ChoiceField(choices=SORT_CHOICES, required=False)
