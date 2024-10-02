@@ -1,3 +1,3 @@
-__all__ = ["OrganizationActivityListForm"]
+__all__ = ["OrganizationActivitiesListForm"]
 
-from main.forms.organization.activities.list import OrganizationActivityListForm
+from main.forms.organization.activities.list import OrganizationActivitiesListForm

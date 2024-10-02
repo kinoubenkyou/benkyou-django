@@ -1,12 +1,10 @@
-from django.forms import ChoiceField, Form, IntegerField
+from django.forms import ChoiceField
+
+from main.documents import OrganizationActivity
+from main.forms import ActivitiesListForm
 
 
-class OrganizationActivityListForm(Form):
-    SORT_CHOICES = (
-        ("", ""),
-        ("-timestamp", "timestamp desc"),
-        ("timestamp", "timestamp asc"),
-    )
+class OrganizationActivitiesListForm(ActivitiesListForm):
+    ACTION_CHOICES = (("", ""), *OrganizationActivity.ACTION_CHOICES)
 
-    per_page = IntegerField(min_value=1, required=False)
-    sort_by = ChoiceField(choices=SORT_CHOICES, required=False)
+    action = ChoiceField(choices=ACTION_CHOICES, required=False)
