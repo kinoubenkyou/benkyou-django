@@ -1,20 +1,23 @@
 from django.views.generic import ListView
 
 from main.documents.organization_activity import OrganizationActivity
-from main.forms.organization.activities import OrganizationActivityListForm
-from main.models import User
+from main.forms.organization.activities import OrganizationActivitiesListForm
 from main.views.mixin import OrganizationRequiredMixin
 
 
 class OrganizationActivitiesListView(OrganizationRequiredMixin, ListView):
-    form = None
+    form_class = OrganizationActivitiesListForm
     ordering = ("-timestamp",)
     paginate_by = 10
     queryset = OrganizationActivity.objects.all()
     template_name = "main/organization/activities/list.html"
 
+    def __init__(self, *args, **kwargs):
+        self.form = None
+        super().__init__(*args, **kwargs)
+
     def get(self, request, *args, **kwargs):
-        self.form = OrganizationActivityListForm(data=self.request.GET)
+        self.form = self.form_class(data=self.request.GET)
         self.form.is_valid()
         return super().get(request, *args, **kwargs)
 
@@ -27,21 +30,19 @@ class OrganizationActivitiesListView(OrganizationRequiredMixin, ListView):
         )
 
     def get_queryset(self):
+        if not self.form.is_valid():
+            return self.queryset.none()
+        filter_ = {
+            key: value
+            for key, value in self.form.cleaned_data.items()
+            if value and key not in ("per_page", "sort_by")
+        }
         return (
-            super().get_queryset().filter(object_id=self.request.organization.id)
-            if self.form.is_valid()
-            else self.queryset.none()
+            super()
+            .get_queryset()
+            .select_models("user")
+            .filter(object_id=self.request.organization.id, **filter_)
         )
 
     def get_context_data(self, **kwargs):
-        return_ = super().get_context_data(form=self.form, **kwargs)
-        return_["object_list"] = list(return_["object_list"])
-        users = {
-            user.id: user
-            for user in User.objects.filter(
-                id__in=[object_.user_id for object_ in return_["object_list"]],
-            )
-        }
-        for object_ in return_["object_list"]:
-            object_.user = users.get(object_.user_id)
-        return return_
+        return super().get_context_data(form=self.form, **kwargs)

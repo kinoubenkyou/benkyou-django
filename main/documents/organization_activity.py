@@ -15,7 +15,7 @@ class OrganizationActivityData(DynamicEmbeddedDocument):
 
 class OrganizationActivity(Activity, Document):
     UPDATE_ACTION = "update"
-    ACTIONS = (UPDATE_ACTION,)
+    ACTION_CHOICES = ((UPDATE_ACTION, "Update"),)
 
-    action = StringField(choices=ACTIONS, required=True)
+    action = StringField(choices=ACTION_CHOICES, required=True)
     data = EmbeddedDocumentField(OrganizationActivityData)
