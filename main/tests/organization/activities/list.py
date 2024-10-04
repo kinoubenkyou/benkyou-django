@@ -10,15 +10,13 @@ from main.tests.test_case import TestCase
 
 
 class OrganizationActivitiesListTestCase(SwitchOrganizationMixin, TestCase):
-    def count_row(self, index):
-        return len(
-            self.find_rows_with_texts(
-                f"action{index}",
-                format_datetime(datetime(1, 1, index, tzinfo=UTC)),
-                "email1@email.com",
-                f"code{index}",
-                f"name{index}",
-            ),
+    def find_rows_with_index(self, index):
+        return self.find_rows_with_texts(
+            f"action{index}",
+            format_datetime(datetime(1, 1, index, tzinfo=UTC)),
+            "email1@email.com",
+            f"code{index}",
+            f"name{index}",
         )
 
     def test(self):
@@ -44,7 +42,7 @@ class OrganizationActivitiesListTestCase(SwitchOrganizationMixin, TestCase):
             10,
         )
         for index in range(2, 12):
-            self.assertEqual(self.count_row(index), 1)
+            self.assertEqual(len(self.find_rows_with_index(index)), 1)
 
     def test_paginate(self):
         OrganizationActivity.objects.insert(
@@ -71,13 +69,19 @@ class OrganizationActivitiesListTestCase(SwitchOrganizationMixin, TestCase):
             '//select[@name="sort_by"]//option[@value="timestamp"]',
         ).click()
         self.web_driver.find_element(By.XPATH, '//*[@type="submit"]').click()
+
+        self.assertEqual(
+            len(self.web_driver.find_elements(By.XPATH, "//tbody//tr")),
+            2,
+        )
+
         self.web_driver.find_element(
             By.XPATH,
             '//a[normalize-space(text())="Next"]',
         ).click()
 
         for index in range(3, 5):
-            self.assertEqual(self.count_row(index), 1)
+            self.assertEqual(len(self.find_rows_with_index(index)), 1)
 
         self.web_driver.find_element(
             By.XPATH,
@@ -85,7 +89,7 @@ class OrganizationActivitiesListTestCase(SwitchOrganizationMixin, TestCase):
         ).click()
 
         for index in range(5, 6):
-            self.assertEqual(self.count_row(index), 1)
+            self.assertEqual(len(self.find_rows_with_index(index)), 1)
 
         self.web_driver.find_element(
             By.XPATH,
@@ -93,7 +97,7 @@ class OrganizationActivitiesListTestCase(SwitchOrganizationMixin, TestCase):
         ).click()
 
         for index in range(3, 5):
-            self.assertEqual(self.count_row(index), 1)
+            self.assertEqual(len(self.find_rows_with_index(index)), 1)
 
         self.web_driver.find_element(
             By.XPATH,
@@ -101,7 +105,7 @@ class OrganizationActivitiesListTestCase(SwitchOrganizationMixin, TestCase):
         ).click()
 
         for index in range(1, 3):
-            self.assertEqual(self.count_row(index), 1)
+            self.assertEqual(len(self.find_rows_with_index(index)), 1)
 
     def test_filter__timestamp(self):
         OrganizationActivity.objects.insert(
@@ -131,9 +135,9 @@ class OrganizationActivitiesListTestCase(SwitchOrganizationMixin, TestCase):
         self.web_driver.find_element(By.XPATH, '//*[@type="submit"]').click()
 
         for index in range(2, 4):
-            self.assertEqual(self.count_row(index), 1)
+            self.assertEqual(len(self.find_rows_with_index(index)), 1)
 
-    def test_filter__user_id(self):
+    def test_filter__user(self):
         User.objects.bulk_create(
             [
                 User(
@@ -162,12 +166,12 @@ class OrganizationActivitiesListTestCase(SwitchOrganizationMixin, TestCase):
         self.switch_organization()
         self.web_driver.find_element(
             By.XPATH,
-            '//input[@name="user_id"]',
-        ).send_keys("email1@email.com")
+            '//select[@name="user"]//option[@value="1"]',
+        ).click()
         self.web_driver.find_element(By.XPATH, '//*[@type="submit"]').click()
 
         for index in range(1, 2):
-            self.assertEqual(self.count_row(index), 1)
+            self.assertEqual(len(self.find_rows_with_index(index)), 1)
 
     def test_filter__action(self):
         OrganizationActivity.objects.insert(
