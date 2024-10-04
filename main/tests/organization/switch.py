@@ -3,7 +3,7 @@ from main.tests.test_case import TestCase
 
 
 class OrganizationSwitchTestCase(SwitchOrganizationMixin, TestCase):
-    def test_success(self):
+    def test(self):
         self.web_driver.get(f"{self.live_server_url}/organization/switch/")
         self.sign_in()
         self.switch_organization()

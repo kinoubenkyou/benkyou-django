@@ -7,7 +7,7 @@ from main.tests.test_case import TestCase
 
 
 class UserChangePasswordTestCase(SignInMixin, TestCase):
-    def test_success(self):
+    def test(self):
         password = token_hex()
 
         self.web_driver.get(f"{self.live_server_url}/user/change_password/")

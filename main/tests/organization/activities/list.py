@@ -1,6 +1,5 @@
 from datetime import UTC, datetime
 
-from django.test import override_settings
 from selenium.webdriver.common.by import By
 
 from main.documents import OrganizationActivity
@@ -22,7 +21,6 @@ class OrganizationActivitiesListTestCase(SwitchOrganizationMixin, TestCase):
             ),
         )
 
-    @override_settings(DEBUG=True)
     def test(self):
         OrganizationActivity.objects.insert(
             [

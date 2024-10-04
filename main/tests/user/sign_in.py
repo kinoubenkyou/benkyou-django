@@ -3,7 +3,7 @@ from main.tests.test_case import TestCase
 
 
 class UserSignInTestCase(SignInMixin, TestCase):
-    def test_success(self):
+    def test(self):
         self.web_driver.get(f"{self.live_server_url}/user/sign_in/")
         self.sign_in()
 
