@@ -21,7 +21,6 @@ services:
       - .:/app
 
   celery:
-    build: .
     command: celery -A benkyou_django worker
     depends_on:
       postgres:

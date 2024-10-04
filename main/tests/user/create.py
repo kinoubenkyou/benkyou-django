@@ -7,7 +7,7 @@ from main.tests.test_case import TestCase
 
 
 class UserCreateTestCase(TestCase):
-    def test_success(self):
+    def test(self):
         email = "email@email.com"
         name = "name"
         password = token_hex()
