@@ -1,7 +1,7 @@
 from django.forms import ChoiceField
 
 from main.documents import OrganizationActivity
-from main.forms import ActivitiesListForm
+from main.forms.activities_list import ActivitiesListForm
 
 
 class OrganizationActivitiesListForm(ActivitiesListForm):

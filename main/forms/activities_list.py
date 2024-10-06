@@ -1,7 +1,14 @@
-from django.forms import ChoiceField, DateTimeField, Form, IntegerField
+from django.forms import (
+    ChoiceField,
+    DateTimeField,
+    Form,
+    IntegerField,
+    ModelChoiceField,
+)
 
-from main.forms.fields import PlusOneDayDateTimeField, UserEmailField
+from main.forms.fields import PlusOneDayDateTimeField
 from main.forms.inputs import DateInput
+from main.models import User
 
 
 class ActivitiesListForm(Form):
@@ -19,4 +26,10 @@ class ActivitiesListForm(Form):
         required=False,
         widget=DateInput,
     )
-    user_id = UserEmailField(label="User email", required=False)
+    user = ModelChoiceField(queryset=User.objects.all(), required=False)
+
+    def clean(self):
+        return_ = super().clean()
+        if return_["user"]:
+            return_["user_id"] = return_.pop("user").id
+        return return_
