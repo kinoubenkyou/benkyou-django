@@ -5,6 +5,7 @@
 ```shell
 git config core.hooksPath hooks
 LC_CTYPE=C sh -c "tr -dc [:alnum:] < /dev/urandom | head -c 50 > django_secret_key"
+sh -c "<password> > email_host_password"
 LC_CTYPE=C sh -c "tr -dc [:alnum:] < /dev/urandom | head -c 20 > postgres_password"
 docker compose run --rm app sh -c "python manage.py migrate"
 ```
