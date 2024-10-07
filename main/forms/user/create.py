@@ -4,6 +4,8 @@ from main.models import User
 
 
 class UserCreateForm(BaseUserCreationForm):
+    usable_password = None
+
     class Meta:
         model = User
         fields = ("email", "name")

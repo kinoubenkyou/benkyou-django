@@ -16,6 +16,7 @@ services:
       - 8000:8000
     secrets:
       - django_secret_key
+      - email_host_password
       - postgres_password
     volumes:
       - .:/app
@@ -36,6 +37,7 @@ services:
     image: ghcr.io/kinoubenkyou/benkyou-django
     secrets:
       - django_secret_key
+      - email_host_password
       - postgres_password
     volumes:
       - .:/app
@@ -74,5 +76,7 @@ services:
 secrets:
   django_secret_key:
     file: django_secret_key
+  email_host_password:
+    file: email_host_password
   postgres_password:
     file: postgres_password
