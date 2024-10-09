@@ -6,7 +6,10 @@ class OrganizationMiddleware:
         self.get_response = get_response
 
     def __call__(self, request):
-        request.organization = Organization.objects.filter(
-            id=request.session.get("organization_id"),
-        ).first()
+        try:
+            request.organization = Organization.objects.get(
+                id=request.session.get("organization_id"),
+            )
+        except Organization.DoesNotExist:
+            request.organization = None
         return self.get_response(request)
