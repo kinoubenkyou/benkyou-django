@@ -26,18 +26,14 @@ class ActivitiesListView(ListView):
     def get_queryset(self):
         if not self.form.is_valid():
             return self.queryset.none()
-        return (
-            super()
-            .get_queryset()
-            .select_models("user")
-            .filter(
-                **{
-                    key: value
-                    for key, value in self.form.cleaned_data.items()
-                    if value and key not in ("per_page", "sort_by")
-                },
-            )
-        )
+        filter_ = {
+            key: value
+            for key, value in self.form.cleaned_data.items()
+            if value and key not in ("per_page", "sort_by")
+        }
+        if "user" in filter_:
+            filter_["user_id"] = filter_.pop("user").id
+        return super().get_queryset().select_models("user").filter(**filter_)
 
     def get_context_data(self, **kwargs):
         return super().get_context_data(form=self.form, **kwargs)

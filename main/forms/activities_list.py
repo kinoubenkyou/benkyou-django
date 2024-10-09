@@ -27,9 +27,3 @@ class ActivitiesListForm(Form):
         widget=DateInput,
     )
     user = ModelChoiceField(queryset=User.objects.all(), required=False)
-
-    def clean(self):
-        return_ = super().clean()
-        if return_["user"]:
-            return_["user_id"] = return_.pop("user").id
-        return return_
