@@ -8,6 +8,13 @@
 - pip
 - uv
 
+### add package
+
+```shell
+uv add <package>
+uv export > requirements.txt
+```
+
 ### configure
 
 ```shell
