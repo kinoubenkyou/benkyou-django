@@ -6,5 +6,10 @@ readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
     "django>=5.1.4",
+    "mypy>=1.14.1",
     "ruff>=0.8.5",
 ]
+
+[[tool.mypy.overrides]]
+module = ["django.*"]
+follow_untyped_imports = true
