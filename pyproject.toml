@@ -10,6 +10,9 @@ dependencies = [
     "ruff>=0.8.5",
 ]
 
+[tool.mypy]
+exclude = "main/migrations"
+
 [[tool.mypy.overrides]]
 module = ["django.*"]
 follow_untyped_imports = true
