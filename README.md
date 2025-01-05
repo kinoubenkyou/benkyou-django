@@ -1,6 +1,6 @@
 # benkyou-django
 
-## devlopment
+## development
 
 ### dependencies
 
