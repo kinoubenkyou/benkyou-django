@@ -29,6 +29,8 @@ jobs:
       - run: python -m mypy .
 
   test:
+    env:
+      DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
