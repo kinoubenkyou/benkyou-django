@@ -1,11 +1,12 @@
 # benkyou-django
 
-## devlopment
+## development
 
 ### dependencies
 
-- python
+- chromium
 - pip
+- python
 - uv
 
 ### add package

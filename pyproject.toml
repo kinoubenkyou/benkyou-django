@@ -8,7 +8,11 @@ dependencies = [
     "django>=5.1.4",
     "mypy>=1.14.1",
     "ruff>=0.8.5",
+    "selenium>=4.27.1",
 ]
+
+[tool.mypy]
+exclude = "main/migrations"
 
 [[tool.mypy.overrides]]
 module = ["django.*"]
