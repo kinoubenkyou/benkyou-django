@@ -4,8 +4,9 @@
 
 ### dependencies
 
-- python
+- chromium
 - pip
+- python
 - uv
 
 ### add package
