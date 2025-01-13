@@ -11,7 +11,7 @@ class CreateUserIntegrationTestCase(IntegrationTestCase):
         self.web_driver.find_element(By.XPATH, '//input[@name="username"]').send_keys(
             username,
         )
-        password = "Dr0wss@p1"  # noqa: S105
+        password = "Dr0wss@p1"
         self.web_driver.find_element(By.XPATH, '//input[@name="password1"]').send_keys(
             password,
         )
