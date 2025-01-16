@@ -6,6 +6,7 @@
 
 - chromium
 - pip
+- postgresql
 - python
 - uv
 
@@ -18,8 +19,17 @@ uv export > requirements.txt
 
 ### configure
 
+1.
+    ```shell
+    cp .env.sample .env
+    ```
+2. fill `.env` file
+
+### run
+
 ```shell
-export DJANGO_SECRET_KEY=<django_secret_key>
+export $(grep -v '^#' .env | xargs)
+python manage.py runserver
 ```
 
 ### lint
