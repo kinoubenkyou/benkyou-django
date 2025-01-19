@@ -20,15 +20,13 @@ from django.urls import path
 
 from main.views.user import (
     UserCreateView,
-    UserCreatedView,
     UserSignInView,
-    UserSignedInView,
+    UserReadView,
 )
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("user/create/", UserCreateView.as_view(), name="user-create"),
-    path("user/created/", UserCreatedView.as_view(), name="user-created"),
+    path("user/", UserReadView.as_view(), name="user-read"),
     path("user/sign_in/", UserSignInView.as_view(), name="user-sign-in"),
-    path("user/signed_in/", UserSignedInView.as_view(), name="user-signed-in"),
 ]

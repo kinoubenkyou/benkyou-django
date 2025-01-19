@@ -1,0 +1,25 @@
+[
+  {
+    "model": "sessions.session",
+    "pk": "ql2ne8u2de4hyfsgor3uzrz9tzy2ufkv",
+    "fields": {
+      "session_data": ".eJxVjEEOwiAQRe_C2hCm0w7g0r1nIANMpWpKUtqV8e7apAvd_vfef6nA21rC1mQJU1ZnBer0u0VOD5l3kO8836pOdV6XKepd0Qdt-lqzPC-H-3dQuJVv3eGQhEck7KM4Tow4CDnODGNvIFmPmEFcQk_GeqAOgNGIJeg9WVLvD-WSNww:1tZCP8:-yavPCcKxA8uDL5SpcwYd8U4pgwIuZ3JnLreEQlULLw",
+      "expire_date": "3000-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "main.user",
+    "pk": 1,
+    "fields": {
+      "password": "pbkdf2_sha256$870000$8uqAZiH9LW1f9JIYbE7Wrr$QgP1ilJmbaX5BuohL1Gy+oa4C1T9HSRu3VFpGk2P0io=",
+      "last_login": "2000-01-01T00:00:00Z",
+      "username": "username1",
+      "first_name": "first_name1",
+      "last_name": "last_name1",
+      "email": "email1@email.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2000-01-01T00:00:00Z"
+    }
+  }
+]

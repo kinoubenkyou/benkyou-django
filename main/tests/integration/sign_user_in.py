@@ -1,9 +1,9 @@
 from selenium.webdriver.common.by import By
 
-from main.tests.integration import IntegrationTestCase
+from main.tests.integration import DriverTestCase
 
 
-class SignUserInIntegrationTestCase(IntegrationTestCase):
+class SignUserInTestCase(DriverTestCase):
     fixtures = ["sign_user_in"]  # type: ignore[assignment]
 
     def test(self):
@@ -15,6 +15,4 @@ class SignUserInIntegrationTestCase(IntegrationTestCase):
             "Dr0wss@p1",
         )
         self.web_driver.find_element(By.XPATH, '//*[@type="submit"]').click()
-        self.assertEqual(
-            self.web_driver.current_url, f"{self.live_server_url}/user/signed_in/"
-        )
+        self.assertEqual(self.web_driver.current_url, f"{self.live_server_url}/user/")
