@@ -6,6 +6,7 @@ class ReadUserTestCase(SignedInTestCase):
 
     def test(self):
         self.web_driver.get(f"{self.live_server_url}/user/")
+        print(self.live_server_url)
         self.assertEqual(
             len(self.find_elements_with_text("last_login: Jan. 1, 2000, midnight")), 1
         )
