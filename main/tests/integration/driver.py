@@ -5,12 +5,12 @@ from selenium.webdriver.common.by import By
 
 
 class DriverTestCase(LiveServerTestCase):
-    def find_elements_with_text(self, text):
+    def find_elements_contain_text(self, text):
         return [
             element
             for element in self.web_driver.find_elements(
                 By.XPATH,
-                f"//*[normalize-space(text())='{text}']",
+                f"//*[contains(text(), '{text}')]",
             )
             if element.is_displayed()
         ]

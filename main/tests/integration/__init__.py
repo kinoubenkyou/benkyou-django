@@ -1,4 +1,4 @@
-__all__ = ["DriverTestCase", "SignedInTestCase"]
+__all__ = ["DriverTestCase", "SignInMixin"]
 
 from main.tests.integration.driver import DriverTestCase
-from main.tests.integration.signed_in import SignedInTestCase
+from main.tests.integration.sign_in_mixin import SignInMixin
