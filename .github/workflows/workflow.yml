@@ -52,4 +52,5 @@ jobs:
       - uses: actions/setup-python@v5
       - run: python -m pip install --upgrade pip
       - run: pip install -r requirements.txt
-      - run: python manage.py test --failfast
+      - run: coverage run --source=main manage.py test --failfast
+      - run: coverage report
