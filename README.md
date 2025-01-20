@@ -43,3 +43,10 @@ ruff check --fix
 ```shell
 ruff format --preview
 ```
+
+### test
+
+```shell
+coverage run --source=main manage.py test
+coverage report
+```
