@@ -5,6 +5,7 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
+    "coverage>=7.6.10",
     "django>=5.1.4",
     "mypy>=1.14.1",
     "psycopg>=3.2.3",
