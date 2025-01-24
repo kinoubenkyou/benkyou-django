@@ -23,11 +23,13 @@ from main.views.user import (
     UserSignInView,
     UserReadView,
     UserSignOutView,
+    UserUpdateView,
 )
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("user/create/", UserCreateView.as_view(), name="user-create"),
+    path("user/update/", UserUpdateView.as_view(), name="user-update"),
     path("user/", UserReadView.as_view(), name="user-read"),
     path("user/sign_in/", UserSignInView.as_view(), name="user-sign-in"),
     path("user/sign_out/", UserSignOutView.as_view(), name="user-sign-out"),

@@ -8,26 +8,15 @@ class CreateUserTestCase(DriverTestCase):
     def test(self):
         self.web_driver.get(f"{self.live_server_url}/user/create/")
         username = "username1"
-        self.web_driver.find_element(By.XPATH, '//input[@name="username"]').send_keys(
-            username,
-        )
+        self.clear_and_send_keys("username", username)
         password = "Dr0wss@p1"
-        self.web_driver.find_element(By.XPATH, '//input[@name="password1"]').send_keys(
-            password,
-        )
-        self.web_driver.find_element(By.XPATH, '//input[@name="password2"]').send_keys(
-            password,
-        )
+        self.clear_and_send_keys("password1", password)
+        self.clear_and_send_keys("password2", password)
         self.web_driver.find_element(By.XPATH, '//*[@type="submit"]').click()
         self.assertEqual(
             self.web_driver.current_url,
             f"{self.live_server_url}/user/sign_in/",
         )
-        self.assertEqual(
-            len([
-                user
-                for user in User.objects.filter(username=username)
-                if user.check_password(password)
-            ]),
-            1,
-        )
+        user = User.objects.filter(username=username).first()
+        self.assertIsNotNone(user)
+        self.assertTrue(user.check_password(password))

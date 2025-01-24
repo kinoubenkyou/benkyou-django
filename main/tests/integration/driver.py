@@ -15,6 +15,13 @@ class DriverTestCase(LiveServerTestCase):
             if element.is_displayed()
         ]
 
+    def clear_and_send_keys(self, input_name, value):
+        user_input = self.web_driver.find_element(
+            By.XPATH, f'//input[@name="{input_name}"]'
+        )
+        user_input.clear()
+        user_input.send_keys(value)
+
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
