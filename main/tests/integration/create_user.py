@@ -5,7 +5,7 @@ from main.tests.integration import DriverTestCase
 
 
 class CreateUserTestCase(DriverTestCase):
-    def test(self):
+    def test(self) -> None:
         self.web_driver.get(f"{self.live_server_url}/user/create/")
         username = "username1"
         self.clear_and_send_keys("username", username)
