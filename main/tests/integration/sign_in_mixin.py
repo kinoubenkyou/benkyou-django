@@ -5,6 +5,7 @@ from main.tests.integration import DriverTestCase
 
 class SignInMixin(DriverTestCase):
     def sign_in(self) -> None:
+        """Use the web driver to sign in."""
         self.web_driver.find_element(By.XPATH, '//input[@name="username"]').send_keys(
             "username1",
         )

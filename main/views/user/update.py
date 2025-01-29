@@ -12,4 +12,5 @@ class UserUpdateView(LoginRequiredMixin, UpdateView):
     template_name = "form.html"  # type: ignore[assignment]
 
     def get_object(self, queryset=None):  # type: ignore[no-untyped-def]
+        """Override the object with the authenticated user."""
         return self.request.user

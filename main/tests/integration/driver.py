@@ -10,7 +10,8 @@ from selenium.webdriver.remote.webelement import WebElement
 class DriverTestCase(LiveServerTestCase):
     web_driver: WebDriver
 
-    def find_elements_contain_text(self, text: str) -> List[WebElement]:
+    def find_displayed_elements(self, text: str) -> List[WebElement]:
+        """Find displayed elements by text."""
         return [
             element
             for element in self.web_driver.find_elements(
@@ -20,7 +21,8 @@ class DriverTestCase(LiveServerTestCase):
             if element.is_displayed()
         ]
 
-    def clear_and_send_keys(self, input_name: str, value: str) -> None:
+    def find_input_and_replace_value(self, input_name: str, value: str) -> None:
+        """Find an input by name attribute and replace the value property."""
         user_input = self.web_driver.find_element(
             By.XPATH, f'//input[@name="{input_name}"]'
         )
@@ -29,6 +31,7 @@ class DriverTestCase(LiveServerTestCase):
 
     @classmethod
     def setUpClass(cls) -> None:
+        """Set up a web driver."""
         super().setUpClass()  # type: ignore[no-untyped-call]
         options = Options()
         options.add_argument("--disable-dev-shm-usage")
@@ -38,5 +41,6 @@ class DriverTestCase(LiveServerTestCase):
 
     @classmethod
     def tearDownClass(cls) -> None:
+        """Quit the web driver."""
         super().tearDownClass()
         cls.web_driver.quit()

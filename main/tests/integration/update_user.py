@@ -8,6 +8,7 @@ class UpdateUserTestCase(SignInMixin, DriverTestCase):
     fixtures = ["update_user"]  # type: ignore[assignment]
 
     def test(self) -> None:
+        """Test success case."""
         self.web_driver.get(f"{self.live_server_url}/user/update/")
         self.assertEqual(
             self.web_driver.current_url,
@@ -18,13 +19,13 @@ class UpdateUserTestCase(SignInMixin, DriverTestCase):
             self.web_driver.current_url, f"{self.live_server_url}/user/update/"
         )
         username = "username01"
-        self.clear_and_send_keys("username", username)
+        self.find_input_and_replace_value("username", username)
         last_name = "last_name01"
-        self.clear_and_send_keys("last_name", last_name)
+        self.find_input_and_replace_value("last_name", last_name)
         first_name = "first_name01"
-        self.clear_and_send_keys("first_name", first_name)
+        self.find_input_and_replace_value("first_name", first_name)
         email = "email01@email.com"
-        self.clear_and_send_keys("email", email)
+        self.find_input_and_replace_value("email", email)
         self.web_driver.find_element(By.XPATH, '//*[@type="submit"]').click()
         self.assertEqual(self.web_driver.current_url, f"{self.live_server_url}/user/")
         self.assertEqual(
