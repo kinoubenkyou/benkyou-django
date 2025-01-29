@@ -41,7 +41,7 @@ ruff check --fix
 ### format
 
 ```shell
-ruff format --preview
+ruff format
 ```
 
 ### test

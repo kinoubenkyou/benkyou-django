@@ -8,6 +8,7 @@ class ReadView(DetailView):
     template_name = "read.html"  # type: ignore[assignment]
 
     def get_context_data(self, **kwargs):  # type: ignore[no-untyped-def]
+        """Add tuples of the object's field name and field value to the context."""
         return_ = super().get_context_data(**kwargs)  # type: ignore[no-untyped-call]
         return_.update(
             object_fields=(
