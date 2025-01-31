@@ -22,7 +22,7 @@ untyped_calls_exclude = ["django"]
 [tool.ruff.lint]
 ignore = ["D100", "D101", "D104", "D106"]
 preview = true
-select = ["D"]
+select = ["D", "I"]
 
 [tool.ruff.lint.pydocstyle]
 convention = "pep257"

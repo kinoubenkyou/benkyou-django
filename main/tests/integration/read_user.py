@@ -1,6 +1,5 @@
 from main.tests.integration import AuthenticationRequiredMixin, DriverTestCase
 
-
 __all__ = ["ReadUserTestCase"]
 
 
