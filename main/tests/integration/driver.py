@@ -10,6 +10,13 @@ from selenium.webdriver.remote.webelement import WebElement
 class DriverTestCase(LiveServerTestCase):
     web_driver: WebDriver
 
+    def add_session_cookie(self) -> None:
+        """Add session cookie to be authenticated."""
+        self.web_driver.get(f"{self.live_server_url}/")
+        self.web_driver.add_cookie(
+            {"name": "sessionid", "value": "544vzd71puvnac7vyzermrtwjkwuq55w"}
+        )
+
     def find_displayed_elements(self, text: str) -> List[WebElement]:
         """Find displayed elements by text."""
         return [
@@ -29,18 +36,16 @@ class DriverTestCase(LiveServerTestCase):
         user_input.clear()
         user_input.send_keys(value)
 
-    @classmethod
-    def setUpClass(cls) -> None:
+    def setUp(self) -> None:
         """Set up a web driver."""
-        super().setUpClass()  # type: ignore[no-untyped-call]
+        super().setUp()
         options = Options()
         options.add_argument("--disable-dev-shm-usage")
         options.add_argument("--headless=new")
         options.add_argument("--no-sandbox")
-        cls.web_driver = WebDriver(options=options)
+        self.web_driver = WebDriver(options=options)
 
-    @classmethod
-    def tearDownClass(cls) -> None:
+    def tearDown(self) -> None:
         """Quit the web driver."""
-        super().tearDownClass()
-        cls.web_driver.quit()
+        super().tearDown()
+        self.web_driver.quit()
