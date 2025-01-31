@@ -20,8 +20,8 @@ from django.urls import path
 
 from main.views.user import (
     UserCreateView,
-    UserSignInView,
     UserReadView,
+    UserSignInView,
     UserSignOutView,
     UserUpdateView,
 )
