@@ -20,6 +20,7 @@ from django.urls import path
 
 from main.views.user import (
     UserCreateView,
+    UserDeleteView,
     UserReadView,
     UserSignInView,
     UserSignOutView,
@@ -29,6 +30,7 @@ from main.views.user import (
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("user/create/", UserCreateView.as_view(), name="user-create"),
+    path("user/delete/", UserDeleteView.as_view(), name="user-delete"),
     path("user/update/", UserUpdateView.as_view(), name="user-update"),
     path("user/", UserReadView.as_view(), name="user-read"),
     path("user/sign_in/", UserSignInView.as_view(), name="user-sign-in"),
