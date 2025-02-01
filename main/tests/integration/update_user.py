@@ -5,7 +5,7 @@ from main.tests.integration import AuthenticationRequiredMixin, DriverTestCase
 
 
 class UpdateUserTestCase(AuthenticationRequiredMixin, DriverTestCase):
-    fixtures = ["user"]  # type: ignore[assignment]
+    fixtures = ["session", "user"]  # type: ignore[assignment]
 
     def test_authentication_required(self) -> None:
         """Test authentication required."""
