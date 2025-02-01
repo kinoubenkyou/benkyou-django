@@ -25,12 +25,8 @@ class UpdateUserTestCase(AuthenticationRequiredMixin, DriverTestCase):
         self.find_input_and_replace_value("email", email)
         self.web_driver.find_element(By.XPATH, '//*[@type="submit"]').click()
         self.assertEqual(self.web_driver.current_url, f"{self.live_server_url}/user/")
-        self.assertEqual(
-            User.objects.filter(
-                username=username,
-                last_name=last_name,
-                first_name=first_name,
-                email=email,
-            ).count(),
-            1,
-        )
+        user = User.objects.get(pk=1)
+        self.assertEqual(user.username, username)
+        self.assertEqual(user.last_name, last_name)
+        self.assertEqual(user.first_name, first_name)
+        self.assertEqual(user.email, email)
