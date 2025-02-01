@@ -11,3 +11,5 @@ class SignUserOutTestCase(DriverTestCase):
         self.assertEqual(
             self.web_driver.current_url, f"{self.live_server_url}/user/sign_in/"
         )
+        client_session = self.web_driver.get_cookie("sessionid")
+        self.assertIsNone(client_session)

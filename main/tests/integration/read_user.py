@@ -4,7 +4,7 @@ __all__ = ["ReadUserTestCase"]
 
 
 class ReadUserTestCase(AuthenticationRequiredMixin, DriverTestCase):
-    fixtures = ["user"]  # type: ignore[assignment]
+    fixtures = ["session", "user"]  # type: ignore[assignment]
 
     def test_authentication_required(self) -> None:
         """Test authentication required."""
