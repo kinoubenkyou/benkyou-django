@@ -14,7 +14,7 @@
 
 ```shell
 uv add <package>
-uv export --no-dev > requirements.txt
+uv export > requirements.txt
 ```
 
 ### configure
