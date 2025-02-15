@@ -30,6 +30,7 @@ jobs:
 
   test:
     env:
+      DJANGO_ALLOWED_HOSTS: localhost
       DJANGO_DEBUG: false
       DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
       POSTGRES_DB: postgres
