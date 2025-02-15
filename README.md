@@ -14,21 +14,21 @@
 
 ```shell
 uv add <package>
-uv export > requirements.txt
+uv export --no-dev > requirements.txt
 ```
 
 ### configure
 
 1.
     ```shell
-    cp .env.sample .env
+    cp .env .env.local
     ```
-2. fill `.env` file
+2. fill `.env.local` file
 
 ### run
 
 ```shell
-export $(grep -v '^#' .env | xargs)
+export $(grep -v '^#' .env.local | xargs)
 python manage.py runserver
 ```
 
@@ -49,4 +49,36 @@ ruff format
 ```shell
 coverage run --source=main manage.py test
 coverage report
+```
+
+## build
+
+### dependencies
+
+- docker
+
+### configure
+
+1.
+    ```shell
+    cp .env .env.container
+    ```
+2. fill `.env.container` file
+
+### build image
+
+```shell
+docker build -t <image> .
+```
+
+### push image
+
+```shell
+docker push <image>:latest
+```
+
+### run container
+
+```shell
+docker run --rm --env-file .env.container -p 127.0.0.1:8000:8000 <image> python manage.py runserver 0.0.0.0:8000
 ```

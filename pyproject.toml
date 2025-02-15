@@ -5,12 +5,8 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
-    "coverage>=7.6.10",
     "django>=5.1.4",
-    "mypy>=1.14.1",
     "psycopg>=3.2.3",
-    "ruff>=0.8.5",
-    "selenium>=4.27.1",
 ]
 
 [tool.mypy]
@@ -26,3 +22,11 @@ select = ["D", "I"]
 
 [tool.ruff.lint.pydocstyle]
 convention = "pep257"
+
+[dependency-groups]
+dev = [
+    "coverage>=7.6.10",
+    "mypy>=1.14.1",
+    "ruff>=0.8.5",
+    "selenium>=4.27.1",
+]

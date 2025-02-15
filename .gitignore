@@ -1,4 +1,5 @@
 .coverage
-.env
+.env.container
+.env.local
 __pycache__/
 db.sqlite3
