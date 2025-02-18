@@ -36,21 +36,28 @@ export $(grep -v '^#' .env.local | xargs)
 python manage.py runserver
 ```
 
-### lint
-
-```shell
-ruff check --fix
-```
-
 ### format
 
 ```shell
 ruff format
 ```
 
+### lint
+
+```shell
+ruff check --fix
+```
+
+### type check
+
+```shell
+mypy .
+```
+
 ### test
 
 ```shell
+export $(grep -v '^#' .env.local | xargs)
 coverage run --source=main manage.py test
 coverage report
 ```
