@@ -15,4 +15,5 @@ README.md
 __pycache__/
 db.sqlite3
 pyproject.toml
+requirements.txt
 uv.lock

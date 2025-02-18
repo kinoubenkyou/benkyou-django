@@ -13,8 +13,9 @@
 ### add package
 
 ```shell
-uv add <package>
+uv add $package
 uv export > requirements.txt
+uv export --no-dev > build.requirements.txt
 ```
 
 ### configure
@@ -68,17 +69,17 @@ coverage report
 ### build image
 
 ```shell
-docker build -t <image> .
+docker build -t $image .
 ```
 
 ### push image
 
 ```shell
-docker push <image>:latest
+docker push ${image}:latest
 ```
 
 ### run container
 
 ```shell
-docker run --rm --env-file .env.container -p 127.0.0.1:8000:8000 <image> python manage.py runserver 0.0.0.0:8000
+docker run --rm --env-file .env.container -p 127.0.0.1:8000:8000 $image python manage.py runserver 0.0.0.0:8000
 ```
