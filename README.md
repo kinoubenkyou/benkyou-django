@@ -14,17 +14,20 @@
 
 ```shell
 uv add $package
-uv export > requirements.txt
 uv export --no-dev > build.requirements.txt
 ```
 
 ### configure
 
-1.
+1. 
+   ```shell
+   uv sync --all-groups
+   ```
+2.
     ```shell
     cp .env .env.local
     ```
-2. fill `.env.local` file
+3. fill `.env.local` file
 
 ### run
 
