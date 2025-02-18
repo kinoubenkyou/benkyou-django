@@ -14,7 +14,6 @@
 
 ```shell
 uv add $package
-uv export --no-dev > build.requirements.txt
 ```
 
 ### configure
@@ -36,21 +35,28 @@ export $(grep -v '^#' .env.local | xargs)
 python manage.py runserver
 ```
 
-### lint
-
-```shell
-ruff check --fix
-```
-
 ### format
 
 ```shell
 ruff format
 ```
 
+### lint
+
+```shell
+ruff check --fix
+```
+
+### type check
+
+```shell
+mypy .
+```
+
 ### test
 
 ```shell
+export $(grep -v '^#' .env.local | xargs)
 coverage run --source=main manage.py test
 coverage report
 ```
@@ -60,18 +66,12 @@ coverage report
 ### dependencies
 
 - docker
-
-### configure
-
-1.
-    ```shell
-    cp .env .env.container
-    ```
-2. fill `.env.container` file
+- uv
 
 ### build image
 
 ```shell
+uv export --no-dev > requirements.txt
 docker build -t $image .
 ```
 
@@ -83,6 +83,12 @@ docker push ${image}:latest
 
 ### run container
 
-```shell
-docker run --rm --env-file .env.container -p 127.0.0.1:8000:8000 $image python manage.py runserver 0.0.0.0:8000
-```
+1.
+    ```shell
+    cp .env .env.container
+    ```
+2. fill `.env.container` file
+3.
+   ```shell
+   docker run --rm --env-file .env.container -p 127.0.0.1:8000:8000 $image python manage.py runserver 0.0.0.0:8000
+   ```

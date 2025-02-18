@@ -30,12 +30,12 @@ dependencies = [
 
 [package.dev-dependencies]
 dev = [
-    { name = "coverage" },
-    { name = "ruff" },
-    { name = "selenium" },
-]
-mypy = [
     { name = "mypy" },
+    { name = "ruff" },
+]
+test = [
+    { name = "coverage" },
+    { name = "selenium" },
 ]
 
 [package.metadata]
@@ -46,11 +46,13 @@ requires-dist = [
 
 [package.metadata.requires-dev]
 dev = [
-    { name = "coverage", specifier = ">=7.6.10" },
+    { name = "mypy", specifier = ">=1.14.1" },
     { name = "ruff", specifier = ">=0.8.5" },
+]
+test = [
+    { name = "coverage", specifier = ">=7.6.10" },
     { name = "selenium", specifier = ">=4.27.1" },
 ]
-mypy = [{ name = "mypy", specifier = ">=1.14.1" }]
 
 [[package]]
 name = "certifi"
