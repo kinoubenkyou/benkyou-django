@@ -25,12 +25,10 @@ convention = "pep257"
 
 [dependency-groups]
 dev = [
+    "mypy>=1.14.1",
     "ruff>=0.8.5",
 ]
 test = [
     "coverage>=7.6.10",
     "selenium>=4.27.1",
-]
-type-check = [
-    "mypy>=1.14.1",
 ]
