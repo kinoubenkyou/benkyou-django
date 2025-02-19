@@ -21,4 +21,6 @@ jobs:
           aws-region: ap-southeast-1
           role-to-assume: arn:aws:iam::050752647288:role/githubActionDelivery
       - uses: aws-actions/amazon-ecr-login@v2
+        with:
+          registry-type: public
       - run: docker push public.ecr.aws/d1p6t0r8/benkyou-django:latest
