@@ -1,0 +1,25 @@
+on:
+  release:
+    types: [published]
+
+jobs:
+
+  deliver:
+    permissions:
+      id-token: write
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+      - uses: astral-sh/setup-uv@v5
+      - run: uv export --no-dev > requirements.txt
+      - run: docker build -t public.ecr.aws/d1p6t0r8/benkyou-django .
+      - uses: aws-actions/configure-aws-credentials@v4
+        with:
+          audience: sts.amazonaws.com
+          aws-region: us-east-1
+          role-to-assume: arn:aws:iam::050752647288:role/githubActionDelivery
+      - uses: aws-actions/amazon-ecr-login@v2
+        with:
+          registry-type: public
+      - run: docker push public.ecr.aws/d1p6t0r8/benkyou-django:latest
