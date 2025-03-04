@@ -1,7 +1,5 @@
 from main.tests.integration import AuthenticationRequiredMixin, DriverTestCase
 
-__all__ = ["ReadUserTestCase"]
-
 
 class ReadUserTestCase(AuthenticationRequiredMixin, DriverTestCase):
     fixtures = ["session", "user"]  # type: ignore[assignment]
