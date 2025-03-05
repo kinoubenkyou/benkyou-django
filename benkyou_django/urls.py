@@ -17,6 +17,8 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path
+from django.urls.conf import include
+from rest_framework.routers import SimpleRouter
 
 from main.views.user import (
     UserCreateView,
@@ -26,9 +28,15 @@ from main.views.user import (
     UserSignOutView,
     UserUpdateView,
 )
+from main.viewsets import UserViewSet
+
+router = SimpleRouter()
+router.register(r"user", UserViewSet, basename="api-user")
+
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("api/", include(router.urls)),
     path("user/create/", UserCreateView.as_view(), name="user-create"),
     path("user/delete/", UserDeleteView.as_view(), name="user-delete"),
     path("user/update/", UserUpdateView.as_view(), name="user-update"),

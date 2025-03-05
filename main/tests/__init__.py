@@ -5,8 +5,10 @@ __all__ = [
     "SignUserInTestCase",
     "SignUserOutTestCase",
     "UpdateUserTestCase",
+    "CreateUserApiTestCase",
 ]
 
+from main.tests.integration.api.create_user import CreateUserApiTestCase
 from main.tests.integration.create_user import CreateUserTestCase
 from main.tests.integration.delete_user import DeleteUserTestCase
 from main.tests.integration.read_user import ReadUserTestCase
