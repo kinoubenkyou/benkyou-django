@@ -18,6 +18,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.urls.conf import include
+from rest_framework.authtoken.views import obtain_auth_token
 from rest_framework.routers import SimpleRouter
 
 from main.views.user import (
@@ -34,9 +35,15 @@ router = SimpleRouter()
 router.register(r"user", UserViewSet, basename="api-user")
 
 
+api_urlpatterns = [
+    path("user/sign_in/", obtain_auth_token, name="api-user-sign-in"),
+    path("", include(router.urls)),
+]
+
+
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("api/", include(router.urls)),
+    path("api/", include(api_urlpatterns)),
     path("user/create/", UserCreateView.as_view(), name="user-create"),
     path("user/delete/", UserDeleteView.as_view(), name="user-delete"),
     path("user/update/", UserUpdateView.as_view(), name="user-update"),
