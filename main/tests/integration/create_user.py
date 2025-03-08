@@ -18,7 +18,6 @@ class CreateUserTestCase(DriverTestCase):
             self.web_driver.current_url,
             f"{self.live_server_url}/user/sign_in/",
         )
-        user = User.objects.first()
+        user = User.objects.filter(username=username).first()
         self.assertIsNotNone(user)
-        self.assertEqual(user.username, username)
         self.assertTrue(user.check_password(password))
