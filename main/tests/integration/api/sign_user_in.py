@@ -4,7 +4,7 @@ from rest_framework.test import APILiveServerTestCase
 
 
 class SignUserInApiTestCase(APILiveServerTestCase):
-    fixtures = ["user"]
+    fixtures = ["user"]  # type: ignore[assignment]
 
     def test(self) -> None:
         """Test success case."""
@@ -12,4 +12,4 @@ class SignUserInApiTestCase(APILiveServerTestCase):
             reverse("api-user-sign-in"),
             data={"username": "username1", "password": "Dr0wss@p1"},
         )
-        self.assertEqual(Token.objects.get(key=response.json()["token"]).user.id, 1)
+        self.assertEqual(Token.objects.get(key=response.json()["token"]).user.id, 1)  # type: ignore[attr-defined]
