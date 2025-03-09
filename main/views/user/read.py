@@ -4,7 +4,14 @@ from main.views import ReadView
 
 
 class UserReadView(LoginRequiredMixin, ReadView):
-    excluded_fields = ("id", "is_active", "is_staff", "is_superuser", "password")
+    field_names = (
+        "last_login",
+        "username",
+        "first_name",
+        "last_name",
+        "email",
+        "date_joined",
+    )
 
     def get_object(self, queryset=None):  # type: ignore[no-untyped-def]
         """Override the object with the authenticated user."""

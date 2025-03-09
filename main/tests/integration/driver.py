@@ -8,8 +8,6 @@ from selenium.webdriver.remote.webelement import WebElement
 
 
 class DriverTestCase(LiveServerTestCase):
-    web_driver: WebDriver
-
     def add_session_cookie(self) -> None:
         """Add session cookie to be authenticated."""
         self.web_driver.get(f"{self.live_server_url}/")
