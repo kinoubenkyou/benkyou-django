@@ -10,7 +10,7 @@ class CreateUserTokenApiTestCase(APILiveServerTestCase):
     def test(self) -> None:
         """Test success case."""
         response = self.client.post(
-            reverse("api-user-token-create"),
+            reverse("api-user-token"),
             data={"username": "username1", "password": "Dr0wss@p1"},
         )
         self.assertEqual(response.status_code, HTTP_200_OK)
