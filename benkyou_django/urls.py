@@ -19,7 +19,7 @@ router.register(r"user/", UserViewSet, basename="api-user")  # type: ignore[no-u
 
 
 api_urlpatterns = [
-    path("user/get_token/", obtain_auth_token, name="api-user-get-token"),
+    path("user/token/", obtain_auth_token, name="api-user-token-create"),
     path("", include(router.urls)),
 ]
 
