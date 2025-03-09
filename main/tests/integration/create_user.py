@@ -1,10 +1,10 @@
 from selenium.webdriver.common.by import By
 
 from main.models import User
-from main.tests.integration import DriverTestCase
+from main.tests.integration import SeleniumTestCase
 
 
-class CreateUserTestCase(DriverTestCase):
+class CreateUserTestCase(SeleniumTestCase):
     def test(self) -> None:
         """Test success case."""
         self.web_driver.get(f"{self.live_server_url}/user/create/")

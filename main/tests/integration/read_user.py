@@ -1,7 +1,7 @@
-from main.tests.integration import AuthenticationRequiredMixin, DriverTestCase
+from main.tests.integration import AuthenticationRequiredMixin, SeleniumTestCase
 
 
-class ReadUserTestCase(AuthenticationRequiredMixin, DriverTestCase):
+class ReadUserTestCase(AuthenticationRequiredMixin, SeleniumTestCase):
     fixtures = ["session", "user"]  # type: ignore[assignment]
 
     def test_authentication_required(self) -> None:

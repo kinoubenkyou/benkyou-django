@@ -1,10 +1,10 @@
 from selenium.webdriver.common.by import By
 
 from main.models import User
-from main.tests.integration import AuthenticationRequiredMixin, DriverTestCase
+from main.tests.integration import AuthenticationRequiredMixin, SeleniumTestCase
 
 
-class UpdateUserTestCase(AuthenticationRequiredMixin, DriverTestCase):
+class UpdateUserTestCase(AuthenticationRequiredMixin, SeleniumTestCase):
     fixtures = ["session", "user"]  # type: ignore[assignment]
 
     def test_authentication_required(self) -> None:
