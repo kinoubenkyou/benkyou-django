@@ -1,7 +1,7 @@
 from rest_framework.test import APIClient, APITestCase
 
 
-class ClientTestCase(APITestCase):
+class ApiTestCase(APITestCase):
     client: APIClient
 
     def add_authentication_token(self) -> None:

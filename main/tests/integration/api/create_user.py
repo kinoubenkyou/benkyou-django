@@ -1,11 +1,11 @@
 from rest_framework.reverse import reverse
 from rest_framework.status import HTTP_201_CREATED
-from rest_framework.test import APILiveServerTestCase
 
 from main.models import User
+from main.tests.integration.api import ApiTestCase
 
 
-class CreateUserApiTestCase(APILiveServerTestCase):
+class CreateUserApiTestCase(ApiTestCase):
     def test(self) -> None:
         """Test success case."""
         username = "username"

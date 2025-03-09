@@ -1,3 +1,3 @@
-__all__ = ["ClientTestCase"]
+__all__ = ["ApiTestCase"]
 
-from main.tests.integration.api.client import ClientTestCase
+from main.tests.integration.api.client import ApiTestCase
