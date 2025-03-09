@@ -19,8 +19,8 @@ from django.contrib import admin
 from django.urls import path
 from django.urls.conf import include
 from rest_framework.authtoken.views import obtain_auth_token
-from rest_framework.routers import SimpleRouter
 
+from main.routers import SingleResourceRouter
 from main.views.user import (
     UserCreateView,
     UserDeleteView,
@@ -31,8 +31,8 @@ from main.views.user import (
 )
 from main.viewsets import UserViewSet
 
-router = SimpleRouter()
-router.register(r"user", UserViewSet, basename="api-user")
+router = SingleResourceRouter()  # type: ignore[no-untyped-call]
+router.register(r"user/", UserViewSet, basename="api-user")  # type: ignore[no-untyped-call]
 
 
 api_urlpatterns = [

@@ -11,7 +11,15 @@ from main.models import User
 class UserSerializer(ModelSerializer):
     class Meta:
         model = User
-        fields = ("username", "first_name", "last_name", "email", "password")
+        fields = (
+            "username",
+            "last_login",
+            "first_name",
+            "last_name",
+            "email",
+            "date_joined",
+            "password",
+        )
 
     password = CharField(
         help_text=password_validators_help_text_html(),

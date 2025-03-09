@@ -135,3 +135,9 @@ AUTH_USER_MODEL = "main.User"
 LOGIN_REDIRECT_URL = "user-read"
 LOGIN_URL = "user-sign-in"
 LOGOUT_REDIRECT_URL = "user-sign-in"
+
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework.authentication.TokenAuthentication",
+    ]
+}

@@ -10,7 +10,7 @@ class CreateUserApiTestCase(APILiveServerTestCase):
         username = "username"
         password = "Dr0wss@p"
         self.client.post(
-            reverse("api-user-list"), data={"username": username, "password": password}
+            reverse("api-user"), data={"username": username, "password": password}
         )
         user = User.objects.filter(username=username).first()
         self.assertIsNotNone(user)
