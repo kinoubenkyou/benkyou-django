@@ -1,9 +1,9 @@
 from django.contrib import admin
 from django.urls import path
 from django.urls.conf import include
-from rest_framework.authtoken.views import obtain_auth_token
 
 from main.routers import SingleResourceRouter
+from main.views.api.user import UserTokenApiView
 from main.views.user import (
     UserCreateView,
     UserDeleteView,
@@ -19,7 +19,7 @@ router.register(r"user/", UserViewSet, basename="api-user")  # type: ignore[no-u
 
 
 api_urlpatterns = [
-    path("user/token/", obtain_auth_token, name="api-user-token-create"),
+    path("user/token/", UserTokenApiView.as_view(), name="api-user-token"),  # type: ignore[no-untyped-call]
     path("", include(router.urls)),
 ]
 
