@@ -12,13 +12,13 @@ class UserSerializer(ModelSerializer):
     class Meta:
         model = User
         fields = (
+            "password",
             "username",
             "last_login",
             "first_name",
             "last_name",
             "email",
             "date_joined",
-            "password",
         )
 
     password = CharField(
