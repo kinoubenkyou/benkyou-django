@@ -36,7 +36,7 @@ router.register(r"user", UserViewSet, basename="api-user")
 
 
 api_urlpatterns = [
-    path("user/sign_in/", obtain_auth_token, name="api-user-sign-in"),
+    path("user/get_token/", obtain_auth_token, name="api-user-get-token"),
     path("", include(router.urls)),
 ]
 
