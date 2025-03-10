@@ -20,4 +20,4 @@ class CreateUserTestCase(SeleniumTestCase):
         )
         user = User.objects.filter(username=username).first()
         self.assertIsNotNone(user)
-        self.assertTrue(user.check_password(password))
+        self.assertTrue(user.check_password(password))  # type: ignore[union-attr]

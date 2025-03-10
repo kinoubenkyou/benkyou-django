@@ -5,7 +5,7 @@ from main.tests.integration import AuthenticationRequiredMixin, SeleniumTestCase
 
 
 class DeleteUserTestCase(AuthenticationRequiredMixin, SeleniumTestCase):
-    fixtures = ["session", "user"]  # type: ignore[assignment]
+    fixtures = ["session", "user"]
 
     def test_authentication_required(self) -> None:
         """Test authentication required."""
