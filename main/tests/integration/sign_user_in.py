@@ -1,10 +1,10 @@
 from django.contrib.sessions.models import Session
 from selenium.webdriver.common.by import By
 
-from main.tests.integration import DriverTestCase
+from main.tests.integration import SeleniumTestCase
 
 
-class SignUserInTestCase(DriverTestCase):
+class SignUserInTestCase(SeleniumTestCase):
     fixtures = ["user"]  # type: ignore[assignment]
 
     def test(self) -> None:

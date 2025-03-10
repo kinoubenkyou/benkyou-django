@@ -1,10 +1,11 @@
 from rest_framework.authtoken.models import Token
 from rest_framework.reverse import reverse
 from rest_framework.status import HTTP_200_OK
-from rest_framework.test import APILiveServerTestCase
+
+from main.tests.integration.api import ApiTestCase
 
 
-class CreateUserTokenApiTestCase(APILiveServerTestCase):
+class CreateUserTokenApiTestCase(ApiTestCase):
     fixtures = ["user"]  # type: ignore[assignment]
 
     def test(self) -> None:

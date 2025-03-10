@@ -7,9 +7,9 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webelement import WebElement
 
 
-class DriverTestCase(LiveServerTestCase):
+class SeleniumTestCase(LiveServerTestCase):
     def add_session_cookie(self) -> None:
-        """Add session cookie to be authenticated."""
+        """Add session cookie."""
         self.web_driver.get(f"{self.live_server_url}/")
         self.web_driver.add_cookie(
             {"name": "sessionid", "value": "544vzd71puvnac7vyzermrtwjkwuq55w"}
