@@ -1,16 +1,16 @@
 __all__ = [
+    "CreateUserApiTestCase",
     "CreateUserTestCase",
+    "CreateUserTokenApiTestCase",
+    "DeleteUserApiTestCase",
     "DeleteUserTestCase",
+    "DeleteUserTokenApiTestCase",
+    "ReadUserApiTestCase",
     "ReadUserTestCase",
     "SignUserInTestCase",
     "SignUserOutTestCase",
-    "UpdateUserTestCase",
-    "CreateUserApiTestCase",
-    "CreateUserTokenApiTestCase",
-    "DeleteUserTokenApiTestCase",
-    "ReadUserApiTestCase",
     "UpdateUserApiTestCase",
-    "DeleteUserApiTestCase",
+    "UpdateUserTestCase",
 ]
 
 from main.tests.integration.api.create_user import CreateUserApiTestCase
