@@ -26,6 +26,9 @@ jobs:
       DJANGO_ALLOWED_HOSTS: localhost
       DJANGO_DEBUG: false
       DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
+      POSTGRES_HOST:
+      POSTGRES_PASSWORD:
+      POSTGRES_USER:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
