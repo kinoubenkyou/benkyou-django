@@ -19,7 +19,7 @@ class UserDeleteView(LoginRequiredMixin, DeleteView_):  # type: ignore[misc]
     success_url = reverse_lazy("user-sign-in")
     template_name = "form.html"
 
-    def get_object(self, queryset: Optional[QuerySet[User, User]]=None) -> User:
+    def get_object(self, queryset: Optional[QuerySet[User, User]] = None) -> User:
         """Override the object with the authenticated user."""
         user = self.request.user
         assert user.is_authenticated
