@@ -48,5 +48,5 @@ class SeleniumTestCase(LiveServerTestCase):
 
     def tearDown(self) -> None:
         """Quit the web driver."""
-        super().tearDown()
         self.web_driver.quit()
+        super().tearDown()
