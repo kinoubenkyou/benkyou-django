@@ -1,7 +1,8 @@
-from typing import Any
+from typing import Any, Sequence
 
+from rest_framework.authtoken.models import Token
 from rest_framework.authtoken.views import ObtainAuthToken
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import BasePermission, IsAuthenticated
 from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework.status import HTTP_204_NO_CONTENT
@@ -14,17 +15,18 @@ class UserTokenApiView(ObtainAuthToken):
         self, request: Request, *args: tuple[Any, ...], **kwargs: dict[str, Any]
     ) -> Response:
         """Handle DELETE request."""
-        self.get_object().delete()  # type: ignore[no-untyped-call]
+        self.get_object().delete()
         return Response(status=HTTP_204_NO_CONTENT)
 
-    def get_object(self):  # type: ignore[no-untyped-def]
+    def get_object(self) -> Token:
         """Get authenticated token."""
         token = self.request.auth
-        self.check_object_permissions(self.request, token)  # type: ignore[no-untyped-call]
+        self.check_object_permissions(self.request, token)
         return token
 
-    def get_permissions(self):  # type: ignore[no-untyped-def]
+    def get_permissions(self) -> Sequence[BasePermission]:
         """Get permissions based on request method."""
+        assert self.request.method is not None
         return [
             permission()
             for permission in self.permission_mapping.get(self.request.method, [])

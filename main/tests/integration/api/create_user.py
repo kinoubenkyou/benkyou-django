@@ -16,4 +16,4 @@ class CreateUserApiTestCase(ApiTestCase):
         self.assertEqual(response.status_code, HTTP_201_CREATED)
         user = User.objects.filter(username=username).first()
         self.assertIsNotNone(user)
-        self.assertTrue(user.check_password(password))
+        self.assertTrue(user.check_password(password))  # type: ignore[union-attr]

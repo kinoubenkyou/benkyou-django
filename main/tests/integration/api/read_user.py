@@ -6,7 +6,7 @@ from main.tests.integration.api import ApiTestCase
 
 
 class ReadUserApiTestCase(ApiTestCase):
-    fixtures = ["user"]  # type: ignore[assignment]
+    fixtures = ["user"]
 
     def test_authentication_required(self) -> None:
         """Test authentication required."""

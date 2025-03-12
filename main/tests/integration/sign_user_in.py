@@ -6,7 +6,7 @@ from main.tests.integration import SeleniumTestCase
 
 
 class SignUserInTestCase(SeleniumTestCase):
-    fixtures = ["user"]  # type: ignore[assignment]
+    fixtures = ["user"]
 
     def test(self) -> None:
         """Test success case."""
@@ -24,5 +24,5 @@ class SignUserInTestCase(SeleniumTestCase):
         server_session = Session.objects.first()
         client_session = self.web_driver.get_cookie("sessionid")
         self.assertIsNotNone(client_session)
-        self.assertEqual(server_session.pk, client_session["value"])  # type: ignore[index]
-        self.assertEqual(server_session.get_decoded()["_auth_user_id"], "1")
+        self.assertEqual(server_session.pk, client_session["value"])  # type: ignore[union-attr, index]
+        self.assertEqual(server_session.get_decoded()["_auth_user_id"], "1")  # type: ignore[union-attr]

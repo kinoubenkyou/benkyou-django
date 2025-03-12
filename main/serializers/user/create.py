@@ -1,3 +1,5 @@
+from typing import Any
+
 from django.contrib.auth.password_validation import (
     password_validators_help_text_html,
     validate_password,
@@ -8,7 +10,7 @@ from rest_framework.serializers import ModelSerializer
 from main.models import User
 
 
-class UserCreateSerializer(ModelSerializer):
+class UserCreateSerializer(ModelSerializer[User]):
     class Meta:
         model = User
         fields = (
@@ -25,9 +27,9 @@ class UserCreateSerializer(ModelSerializer):
         validators=(validate_password,),
     )
 
-    def create(self, validated_data):  # type: ignore[no-untyped-def]
+    def create(self, validated_data: Any) -> User:
         """Create user."""
-        return_ = super().create(validated_data)  # type: ignore[no-untyped-call]
+        return_ = super().create(validated_data)
         return_.set_password(validated_data["password"])
         return_.save()
         return return_

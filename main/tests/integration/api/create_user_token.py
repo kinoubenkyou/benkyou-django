@@ -6,7 +6,7 @@ from main.tests.integration.api import ApiTestCase
 
 
 class CreateUserTokenApiTestCase(ApiTestCase):
-    fixtures = ["user"]  # type: ignore[assignment]
+    fixtures = ["user"]
 
     def test(self) -> None:
         """Test success case."""
@@ -15,6 +15,6 @@ class CreateUserTokenApiTestCase(ApiTestCase):
             data={"username": "username1", "password": "Dr0wss@p1"},
         )
         self.assertEqual(response.status_code, HTTP_200_OK)
-        token = Token.objects.filter(user=1).first()  # type: ignore[attr-defined]
+        token = Token.objects.filter(user=1).first()
         self.assertIsNotNone(token)
-        self.assertEqual(response.json()["token"], token.key)
+        self.assertEqual(response.json()["token"], token.key)  # type: ignore[union-attr]

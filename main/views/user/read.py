@@ -1,5 +1,9 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
+from typing import Optional
 
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models import QuerySet
+
+from main.models import User
 from main.views import ReadView
 
 
@@ -13,6 +17,8 @@ class UserReadView(LoginRequiredMixin, ReadView):
         "date_joined",
     )
 
-    def get_object(self, queryset=None):  # type: ignore[no-untyped-def]
+    def get_object(self, queryset: Optional[QuerySet[User, User]] = None) -> User:
         """Override the object with the authenticated user."""
-        return self.request.user
+        user = self.request.user
+        assert user.is_authenticated
+        return user

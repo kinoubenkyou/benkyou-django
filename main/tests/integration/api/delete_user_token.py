@@ -6,7 +6,7 @@ from main.tests.integration.api import ApiTestCase
 
 
 class DeleteUserTokenApiTestCase(ApiTestCase):
-    fixtures = ["token", "user"]  # type: ignore[assignment]
+    fixtures = ["token", "user"]
 
     def test_authentication_required(self) -> None:
         """Test authentication required."""
@@ -18,4 +18,4 @@ class DeleteUserTokenApiTestCase(ApiTestCase):
         self.add_authentication_token()
         response = self.client.delete(reverse("api-user-token"))
         self.assertEqual(response.status_code, HTTP_204_NO_CONTENT)
-        self.assertFalse(Token.objects.filter(user=1).exists())  # type: ignore[attr-defined]
+        self.assertFalse(Token.objects.filter(user=1).exists())

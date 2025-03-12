@@ -1,3 +1,5 @@
+from typing import Any
+
 from rest_framework.mixins import (
     CreateModelMixin,
     DestroyModelMixin,
@@ -16,14 +18,14 @@ from main.serializers.user import (
 from main.viewsets import PermissionMixin, SerializerMixin
 
 
-class UserViewSet(  # type: ignore[misc]
+class UserViewSet(
     CreateModelMixin,
     DestroyModelMixin,
     RetrieveModelMixin,
     UpdateModelMixin,
     PermissionMixin,
     SerializerMixin,
-    GenericViewSet,
+    GenericViewSet[Any],
 ):
     queryset = User.objects.all()
     serializer_dict = {
@@ -37,8 +39,9 @@ class UserViewSet(  # type: ignore[misc]
         "destroy": (IsAuthenticated,),
     }
 
-    def get_object(self):  # type: ignore[no-untyped-def]
+    def get_object(self) -> User:
         """Get authenticated user."""
         user = self.request.user
-        self.check_object_permissions(self.request, user)  # type: ignore[no-untyped-call]
+        assert user.is_authenticated
+        self.check_object_permissions(self.request, user)
         return user
