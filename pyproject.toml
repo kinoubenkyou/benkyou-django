@@ -19,10 +19,13 @@ follow_untyped_imports = true
 plugins = ["mypy_django_plugin.main", "mypy_drf_plugin.main"]
 strict = true
 
+[tool.ruff]
+extend-exclude = ["main/migrations"]
+
 [tool.ruff.lint]
 ignore = ["D100", "D101", "D104", "D106"]
 preview = true
-select = ["D", "I"]
+select = ["D", "E", "F", "I"]
 
 [tool.ruff.lint.pydocstyle]
 convention = "pep257"

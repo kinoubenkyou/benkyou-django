@@ -1,4 +1,5 @@
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.expected_conditions import url_changes
 
 from main.models import User
 from main.tests.integration import AuthenticationRequiredMixin, SeleniumTestCase
@@ -14,7 +15,8 @@ class UpdateUserTestCase(AuthenticationRequiredMixin, SeleniumTestCase):
     def test(self) -> None:
         """Test success case."""
         self.add_session_cookie()
-        self.web_driver.get(f"{self.live_server_url}/user/update/")
+        url = f"{self.live_server_url}/user/update/"
+        self.web_driver.get(url)
         username = "username01"
         self.find_input_and_replace_value("username", username)
         last_name = "last_name01"
@@ -24,6 +26,7 @@ class UpdateUserTestCase(AuthenticationRequiredMixin, SeleniumTestCase):
         email = "email01@email.com"
         self.find_input_and_replace_value("email", email)
         self.web_driver.find_element(By.XPATH, '//*[@type="submit"]').click()
+        self.web_driver_wait.until(url_changes(url))
         self.assertEqual(self.web_driver.current_url, f"{self.live_server_url}/user/")
         user = User.objects.get(pk=1)
         self.assertEqual(user.username, username)
