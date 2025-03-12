@@ -7,5 +7,5 @@ class ApiTestCase(APITestCase):
     def add_authentication_token(self) -> None:
         """Add authentication token."""
         self.client.credentials(
-            HTTP_AUTHORIZATION=f"Token 703f63305242864e94b7937af0dd7a4976f05b20"
+            HTTP_AUTHORIZATION="Token 703f63305242864e94b7937af0dd7a4976f05b20"
         )

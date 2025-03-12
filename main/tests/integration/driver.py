@@ -13,7 +13,10 @@ class SeleniumTestCase(LiveServerTestCase):
         """Add session cookie."""
         self.web_driver.get(f"{self.live_server_url}/")
         self.web_driver.add_cookie(
-            {"name": "sessionid", "value": "544vzd71puvnac7vyzermrtwjkwuq55w"}
+            {
+                "name": "sessionid",
+                "value": "544vzd71puvnac7vyzermrtwjkwuq55w",
+            }
         )
 
     def find_displayed_elements(self, text: str) -> List[WebElement]:
