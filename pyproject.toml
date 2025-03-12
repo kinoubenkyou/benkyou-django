@@ -16,10 +16,13 @@ follow_untyped_imports = true
 strict = true
 untyped_calls_exclude = ["django", "rest_framework"]
 
+[tool.ruff]
+extend-exclude = ["main/migrations"]
+
 [tool.ruff.lint]
 ignore = ["D100", "D101", "D104", "D106"]
 preview = true
-select = ["D", "I"]
+select = ["D", "E", "F", "I"]
 
 [tool.ruff.lint.pydocstyle]
 convention = "pep257"
