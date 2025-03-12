@@ -5,6 +5,7 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webelement import WebElement
+from selenium.webdriver.support.wait import WebDriverWait
 
 
 class SeleniumTestCase(LiveServerTestCase):
@@ -41,7 +42,9 @@ class SeleniumTestCase(LiveServerTestCase):
         options.add_argument("--disable-dev-shm-usage")
         options.add_argument("--headless=new")
         options.add_argument("--no-sandbox")
+        options.timeouts = {"implicit": 1000, "pageLoad": 1000}
         self.web_driver = WebDriver(options=options)
+        self.web_driver_wait = WebDriverWait(self.web_driver, 1)
 
     def tearDown(self) -> None:
         """Quit the web driver."""
