@@ -5,7 +5,7 @@ from django.views.generic.detail import DetailView
 from main.models import User
 
 if TYPE_CHECKING:
-    DetailView_ = DetailView[User]
+    DetailView_ = DetailView[User]  # pragma: no cover
 else:
     DetailView_ = DetailView
 

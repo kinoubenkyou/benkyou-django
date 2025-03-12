@@ -9,7 +9,7 @@ from django.views.generic.edit import UpdateView
 from main.models import User
 
 if TYPE_CHECKING:
-    UpdateView_ = UpdateView[User, ModelForm[User]]
+    UpdateView_ = UpdateView[User, ModelForm[User]]  # pragma: no cover
 else:
     UpdateView_ = UpdateView
 

@@ -9,7 +9,7 @@ from django.views.generic.edit import DeleteView
 from main.models import User
 
 if TYPE_CHECKING:
-    DeleteView_ = DeleteView[User, ModelForm[User]]
+    DeleteView_ = DeleteView[User, ModelForm[User]]  # pragma: no cover
 else:
     DeleteView_ = DeleteView
 

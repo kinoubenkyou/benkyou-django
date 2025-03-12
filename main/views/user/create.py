@@ -8,7 +8,7 @@ from main.forms.user import UserCreateForm
 from main.models import User
 
 if TYPE_CHECKING:
-    CreateView_ = CreateView[User, ModelForm[User]]
+    CreateView_ = CreateView[User, ModelForm[User]]  # pragma: no cover
 else:
     CreateView_ = CreateView
 
