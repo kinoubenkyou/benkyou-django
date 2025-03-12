@@ -50,6 +50,7 @@ ruff check --fix
 ### type check
 
 ```shell
+export $(grep -v '^#' .env.local | xargs)
 mypy .
 ```
 
