@@ -17,7 +17,7 @@ class UserReadView(LoginRequiredMixin, ReadView):
         "date_joined",
     )
 
-    def get_object(self, queryset: Optional[QuerySet[User, User]] = None) -> User:
+    def get_object(self, _queryset: Optional[QuerySet[User, User]] = None) -> User:
         """Override the object with the authenticated user."""
         user = self.request.user
         assert user.is_authenticated
