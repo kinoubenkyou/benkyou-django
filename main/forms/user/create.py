@@ -5,7 +5,7 @@ from django.contrib.auth.forms import BaseUserCreationForm, UserCreationForm
 from main.models import User
 
 if TYPE_CHECKING:
-    UserCreationForm_ = UserCreationForm[User]
+    UserCreationForm_ = UserCreationForm[User]  # pragma: no cover
 else:
     UserCreationForm_ = UserCreationForm
 

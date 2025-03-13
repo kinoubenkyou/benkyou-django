@@ -9,7 +9,7 @@ from django.views.generic.edit import UpdateView
 from main.models import User
 
 if TYPE_CHECKING:
-    UpdateView_ = UpdateView[User, ModelForm[User]]
+    UpdateView_ = UpdateView[User, ModelForm[User]]  # pragma: no cover
 else:
     UpdateView_ = UpdateView
 
@@ -20,7 +20,7 @@ class UserUpdateView(LoginRequiredMixin, UpdateView_):
     success_url = reverse_lazy("user-read")
     template_name = "form.html"
 
-    def get_object(self, queryset: Optional[QuerySet[User, User]] = None) -> User:
+    def get_object(self, _queryset: Optional[QuerySet[User, User]] = None) -> User:
         """Override the object with the authenticated user."""
         user = self.request.user
         assert user.is_authenticated

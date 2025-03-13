@@ -65,4 +65,4 @@ jobs:
       - uses: astral-sh/setup-uv@v5
       - run: uv sync --no-dev --group test
       - run: uv run coverage run --source=main manage.py test --failfast
-      - run: uv run coverage report
+      - run: uv run coverage report --fail-under 100
