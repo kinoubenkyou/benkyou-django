@@ -4,7 +4,7 @@ from rest_framework.routers import Route, SimpleRouter
 class SingleResourceRouter(SimpleRouter):
     routes = [
         Route(
-            url=r"^{prefix}$",
+            url=r"^{prefix}{trailing_slash}$",
             mapping={
                 "delete": "destroy",
                 "get": "retrieve",
