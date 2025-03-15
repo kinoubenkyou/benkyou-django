@@ -32,10 +32,12 @@ class UserViewSet(
         "create": UserCreateSerializer,
         "retrieve": UserReadSerializer,
         "update": UserUpdateSerializer,
+        "partial_update": UserUpdateSerializer,
     }
     permission_dict = {
         "retrieve": (IsAuthenticated,),
         "update": (IsAuthenticated,),
+        "partial_update": (IsAuthenticated,),
         "destroy": (IsAuthenticated,),
     }
 
