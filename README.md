@@ -59,7 +59,7 @@ mypy .
 ```shell
 export $(grep -v '^#' .env.local | xargs)
 coverage run --source=main manage.py test
-coverage report
+coverage report -m
 ```
 
 ## build
