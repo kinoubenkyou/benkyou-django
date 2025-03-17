@@ -59,7 +59,7 @@ mypy .
 ```shell
 export $(grep -v '^#' .env.local | xargs)
 coverage run --source=main manage.py test
-coverage report
+coverage report -m
 ```
 
 ## build
@@ -73,13 +73,7 @@ coverage report
 
 ```shell
 uv export --no-dev > requirements.txt
-docker build -t $image .
-```
-
-### push image
-
-```shell
-docker push ${image}:latest
+docker build -t benkyou-django .
 ```
 
 ### run container
@@ -91,5 +85,5 @@ docker push ${image}:latest
 2. fill `.env.container` file
 3.
    ```shell
-   docker run --rm --env-file .env.container -p 127.0.0.1:8000:8000 $image python manage.py runserver 0.0.0.0:8000
+   docker run --rm --env-file .env.container -p 127.0.0.1:8000:8000 benkyou-django python manage.py runserver 0.0.0.0:8000
    ```
