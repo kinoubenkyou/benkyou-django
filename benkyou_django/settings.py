@@ -69,10 +69,10 @@ WSGI_APPLICATION = "benkyou_django.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "HOST": environ["POSTGRES_HOST"],
-        "NAME": environ["POSTGRES_DB"],
-        "PASSWORD": environ["POSTGRES_PASSWORD"],
-        "USER": environ["POSTGRES_USER"],
+        "HOST": environ["DATABASE_HOST"],
+        "NAME": environ["DATABASE_DB"],
+        "PASSWORD": environ["DATABASE_PASSWORD"],
+        "USER": environ["DATABASE_USER"],
     }
 }
 

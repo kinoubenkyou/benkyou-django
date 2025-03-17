@@ -26,10 +26,10 @@ jobs:
       DJANGO_ALLOWED_HOSTS: localhost
       DJANGO_DEBUG: false
       DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
-      POSTGRES_DB:
-      POSTGRES_HOST:
-      POSTGRES_PASSWORD:
-      POSTGRES_USER:
+      DATABASE_DB:
+      DATABASE_HOST:
+      DATABASE_PASSWORD:
+      DATABASE_USER:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -43,16 +43,16 @@ jobs:
       DJANGO_ALLOWED_HOSTS: localhost
       DJANGO_DEBUG: false
       DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
-      POSTGRES_DB: postgres
-      POSTGRES_HOST: localhost
-      POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
-      POSTGRES_USER: postgres
+      DATABASE_DB: postgres
+      DATABASE_HOST: localhost
+      DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
+      DATABASE_USER: postgres
     runs-on: ubuntu-latest
     services:
       postgres:
         image: postgres
         env:
-          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+          POSTGRES_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
         options: >-
           --health-cmd pg_isready
           --health-start-interval 1s
