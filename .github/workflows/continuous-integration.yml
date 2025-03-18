@@ -23,13 +23,13 @@ jobs:
 
   type-check:
     env:
-      DJANGO_ALLOWED_HOSTS: localhost
-      DJANGO_DEBUG: false
-      DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
       DATABASE_DB:
       DATABASE_HOST:
       DATABASE_PASSWORD:
       DATABASE_USER:
+      DJANGO_ALLOWED_HOSTS: localhost
+      DJANGO_DEBUG: false
+      DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -40,13 +40,13 @@ jobs:
 
   test:
     env:
-      DJANGO_ALLOWED_HOSTS: localhost
-      DJANGO_DEBUG: false
-      DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
       DATABASE_DB: postgres
       DATABASE_HOST: localhost
       DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
       DATABASE_USER: postgres
+      DJANGO_ALLOWED_HOSTS: localhost
+      DJANGO_DEBUG: false
+      DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
     runs-on: ubuntu-latest
     services:
       postgres:
