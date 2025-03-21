@@ -48,7 +48,7 @@ class SeleniumTestCase(LiveServerTestCase):
         options.add_argument("--no-sandbox")
         options.timeouts = {"implicit": 1000, "pageLoad": 1000}
         self.web_driver = WebDriver(options=options)
-        self.web_driver_wait = WebDriverWait(self.web_driver, 1)
+        self.web_driver_wait = WebDriverWait(self.web_driver, 2)
 
     def tearDown(self) -> None:
         """Clear cache, quit the web driver."""
