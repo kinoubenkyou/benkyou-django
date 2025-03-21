@@ -9,12 +9,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = environ["DJANGO_SECRET_KEY"]
+SECRET_KEY = environ["SECRET_KEY"]
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = environ["DJANGO_DEBUG"] == "true"
+DEBUG = environ["DEBUG"] == "true"
 
-ALLOWED_HOSTS = environ["DJANGO_ALLOWED_HOSTS"].split(",")
+ALLOWED_HOSTS = environ["ALLOWED_HOSTS"].split(",")
 
 
 # Application definition
@@ -126,15 +126,11 @@ AUTH_USER_MODEL = "main.User"
 CACHES = {
     "default": {
         "BACKEND": "django.core.cache.backends.redis.RedisCache",
-        "LOCATION": f"redis://{environ['CACHE_HOST']}:6379",
+        "LOCATION": f"{environ['CACHE_SCHEME']}://{environ['CACHE_HOST']}:{environ['CACHE_PORT']}",
     }
 }
 
-CELERY_BROKER_URL = (
-    f"amqp://{environ['CELERY_BROKER_USER']}"
-    f":{environ['CELERY_BROKER_PASSWORD']}"
-    f"@{environ['CELERY_BROKER_HOST']}:5672"
-)
+CELERY_BROKER_URL = f"{environ['CELERY_BROKER_SCHEME']}://{environ['CELERY_BROKER_USER']}:{environ['CELERY_BROKER_PASSWORD']}@{environ['CELERY_BROKER_HOST']}:{environ['CELERY_BROKER_PORT']}"
 
 EMAIL_HOST = environ["EMAIL_HOST"]
 EMAIL_HOST_USER = environ["EMAIL_HOST_USER"]
