@@ -58,7 +58,7 @@ jobs:
       CELERY_BROKER_HOST:
       CELERY_BROKER_PASSWORD:
       CELERY_BROKER_PORT:
-      CELERY_BROKER_SCHEME:
+      CELERY_BROKER_SCHEME: amqp
       CELERY_BROKER_USER:
       DATABASE_DB: postgres
       DATABASE_HOST: localhost
@@ -68,7 +68,7 @@ jobs:
       EMAIL_HOST:
       EMAIL_HOST_USER:
       EMAIL_PORT:
-      SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
+      SECRET_KEY: ${{ secrets.SECRET_KEY }}
     runs-on: ubuntu-latest
     services:
       postgres:
