@@ -1,5 +1,6 @@
 from typing import List
 
+from django.core.cache import cache
 from django.test.testcases import LiveServerTestCase
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.webdriver import WebDriver
@@ -50,6 +51,7 @@ class SeleniumTestCase(LiveServerTestCase):
         self.web_driver_wait = WebDriverWait(self.web_driver, 1)
 
     def tearDown(self) -> None:
-        """Quit the web driver."""
+        """Clear cache, quit the web driver."""
+        cache.clear()
         self.web_driver.quit()
         super().tearDown()
