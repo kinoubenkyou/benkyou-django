@@ -40,7 +40,7 @@ class CreateUserTestCase(SeleniumTestCase):
         token = cache.get(f"verify_user_email.{user.pk}", sentinel)  # type: ignore[union-attr]
         self.assertIsNot(token, sentinel)
         self.assertIn(
-            f"{self.live_server_url}/user/verify_email?{urlencode({"token": token})}",
+            f"{self.live_server_url}/user/verify_email?{urlencode({'token': token})}",
             mail.outbox[0].body,
         )
         self.assertEqual(mail.outbox[0].subject, "Verify Email")

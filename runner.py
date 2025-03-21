@@ -9,7 +9,7 @@ class DiscoverRunner(DjangoDiscoverRunner):
         """Set cache to another Redis logical database."""
         return_ = super().setup_test_environment(**kwargs)
         settings.CACHES["default"]["LOCATION"] = (
-            f"{settings.CACHES["default"]["LOCATION"]}/1"
+            f"{settings.CACHES['default']['LOCATION']}/1"
         )
         settings.CELERY_TASK_ALWAYS_EAGER = True
         return return_

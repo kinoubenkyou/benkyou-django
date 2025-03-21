@@ -126,14 +126,14 @@ AUTH_USER_MODEL = "main.User"
 CACHES = {
     "default": {
         "BACKEND": "django.core.cache.backends.redis.RedisCache",
-        "LOCATION": f"redis://{environ["CACHE_HOST"]}:6379",
+        "LOCATION": f"redis://{environ['CACHE_HOST']}:6379",
     }
 }
 
 CELERY_BROKER_URL = (
-    f"amqp://{environ["CELERY_BROKER_USER"]}"
-    f":{environ["CELERY_BROKER_PASSWORD"]}"
-    f"@{environ["CELERY_BROKER_HOST"]}:5672"
+    f"amqp://{environ['CELERY_BROKER_USER']}"
+    f":{environ['CELERY_BROKER_PASSWORD']}"
+    f"@{environ['CELERY_BROKER_HOST']}:5672"
 )
 
 EMAIL_HOST = environ["EMAIL_HOST"]
