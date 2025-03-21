@@ -25,6 +25,7 @@ class CreateUserTestCase(SeleniumTestCase):
         self.find_input_and_replace_value("password1", password)
         self.find_input_and_replace_value("password2", password)
         self.web_driver.find_element(By.XPATH, '//*[@type="submit"]').click()
+        print(self.web_driver.page_source)
         self.web_driver_wait.until(url_changes(url))
         self.assertEqual(
             self.web_driver.current_url,
