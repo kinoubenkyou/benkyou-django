@@ -23,6 +23,10 @@ jobs:
 
   type-check:
     env:
+      CACHE_HOST:
+      CELERY_BROKER_HOST:
+      CELERY_BROKER_PASSWORD:
+      CELERY_BROKER_USER:
       DJANGO_ALLOWED_HOSTS: localhost
       DJANGO_DEBUG: false
       DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
@@ -30,6 +34,9 @@ jobs:
       DATABASE_HOST:
       DATABASE_PASSWORD:
       DATABASE_USER:
+      EMAIL_HOST:
+      EMAIL_HOST_USER:
+      EMAIL_PORT:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -40,6 +47,10 @@ jobs:
 
   test:
     env:
+      CACHE_HOST: localhost
+      CELERY_BROKER_HOST:
+      CELERY_BROKER_PASSWORD:
+      CELERY_BROKER_USER:
       DJANGO_ALLOWED_HOSTS: localhost
       DJANGO_DEBUG: false
       DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
@@ -47,6 +58,9 @@ jobs:
       DATABASE_HOST: localhost
       DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
       DATABASE_USER: postgres
+      EMAIL_HOST:
+      EMAIL_HOST_USER:
+      EMAIL_PORT:
     runs-on: ubuntu-latest
     services:
       postgres:
@@ -59,6 +73,10 @@ jobs:
           --health-start-period 5s
         ports:
           - 5432:5432
+      redis:
+        image: redis
+        ports:
+          - 6379:6379
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
