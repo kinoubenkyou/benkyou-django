@@ -1,3 +1,6 @@
+from django.core import mail
+from django.core.cache import cache
+from django.utils.http import urlencode
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.expected_conditions import url_changes
 
@@ -33,3 +36,12 @@ class CreateUserTestCase(SeleniumTestCase):
         self.assertEqual(user.first_name, first_name)  # type: ignore[union-attr]
         self.assertEqual(user.email, email)  # type: ignore[union-attr]
         self.assertTrue(user.check_password(password))  # type: ignore[union-attr]
+        sentinel = object()
+        token = cache.get(f"verify_user_email.{user.pk}", sentinel)  # type: ignore[union-attr]
+        self.assertIsNot(token, sentinel)
+        self.assertIn(
+            f"{self.live_server_url}/user/verify_email?{urlencode({'token': token})}",
+            mail.outbox[0].body,
+        )
+        self.assertEqual(mail.outbox[0].subject, "Verify Email")
+        self.assertIn(email, mail.outbox[0].to)
