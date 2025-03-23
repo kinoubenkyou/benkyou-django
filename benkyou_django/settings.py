@@ -126,11 +126,11 @@ AUTH_USER_MODEL = "main.User"
 CACHES = {
     "default": {
         "BACKEND": "django.core.cache.backends.redis.RedisCache",
-        "LOCATION": f"{environ['CACHE_SCHEME']}://{environ['CACHE_HOST']}:{environ['CACHE_PORT']}",
+        "LOCATION": environ["CACHE_LOCATION"],
     }
 }
 
-CELERY_BROKER_URL = f"{environ['CELERY_BROKER_SCHEME']}://{environ['CELERY_BROKER_USER']}:{environ['CELERY_BROKER_PASSWORD']}@{environ['CELERY_BROKER_HOST']}:{environ['CELERY_BROKER_PORT']}"
+CELERY_BROKER_URL = environ["CELERY_BROKER_URL"]
 
 DEFAULT_FROM_EMAIL = environ["DEFAULT_FROM_EMAIL"]
 

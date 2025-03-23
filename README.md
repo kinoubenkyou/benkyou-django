@@ -23,10 +23,13 @@ uv add $package
    uv sync --all-groups
    ```
 2.
-    ```shell
-    cp .env .env.local
-    ```
-3. fill `.env.local` file
+   ```shell
+   cp .env .env.local
+   cp .env .env.container
+   ```
+3.
+   - fill `.env.local` file
+   - fill `.env.container` file
 
 ### run
 
@@ -78,12 +81,6 @@ docker build -t benkyou-django .
 
 ### run container
 
-1.
-    ```shell
-    cp .env .env.container
-    ```
-2. fill `.env.container` file
-3.
-   ```shell
-   docker run --rm --env-file .env.container -p 127.0.0.1:8000:8000 benkyou-django python manage.py runserver 0.0.0.0:8000
-   ```
+```shell
+docker run --rm --env-file .env.container -p 127.0.0.1:8000:8000 benkyou-django python manage.py runserver 0.0.0.0:8000
+```
