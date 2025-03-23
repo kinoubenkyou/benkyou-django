@@ -138,7 +138,7 @@ EMAIL_HOST = environ["EMAIL_HOST"]
 EMAIL_HOST_PASSWORD = environ["EMAIL_HOST_PASSWORD"]
 EMAIL_HOST_USER = environ["EMAIL_HOST_USER"]
 EMAIL_PORT = environ["EMAIL_PORT"]
-EMAIL_USE_TLS = True
+EMAIL_USE_TLS = environ["EMAIL_USE_TLS"] == "true"
 
 LOGIN_REDIRECT_URL = "user-read"
 LOGIN_URL = "user-sign-in"
