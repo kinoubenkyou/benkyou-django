@@ -37,7 +37,9 @@ jobs:
       DATABASE_PASSWORD:
       DATABASE_USER:
       DEBUG:
+      DEFAULT_FROM_EMAIL:
       EMAIL_HOST:
+      EMAIL_HOST_PASSWORD:
       EMAIL_HOST_USER:
       EMAIL_PORT:
       SECRET_KEY:
@@ -67,6 +69,7 @@ jobs:
       DEBUG: true
       DEFAULT_FROM_EMAIL:
       EMAIL_HOST:
+      EMAIL_HOST_PASSWORD:
       EMAIL_HOST_USER:
       EMAIL_PORT:
       SECRET_KEY: ${{ secrets.SECRET_KEY }}
