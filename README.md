@@ -83,4 +83,5 @@ docker build -t benkyou-django .
 
 ```shell
 docker run --rm --env-file .env.container -p 127.0.0.1:8000:8000 benkyou-django python manage.py runserver 0.0.0.0:8000
+docker run --rm --env-file .env.container benkyou-django celery -A benkyou_django worker
 ```
