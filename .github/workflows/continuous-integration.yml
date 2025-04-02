@@ -36,6 +36,7 @@ jobs:
       EMAIL_HOST_PASSWORD:
       EMAIL_HOST_USER:
       EMAIL_PORT:
+      EMAIL_USE_TLS:
       SECRET_KEY:
     runs-on: ubuntu-latest
     steps:
@@ -60,6 +61,7 @@ jobs:
       EMAIL_HOST_PASSWORD:
       EMAIL_HOST_USER:
       EMAIL_PORT:
+      EMAIL_USE_TLS:
       SECRET_KEY: ${{ secrets.SECRET_KEY }}
     runs-on: ubuntu-latest
     services:

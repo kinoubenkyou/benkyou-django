@@ -1,5 +1,9 @@
-<ul>
-    {% for name, value in object_fields %}
-    <li>{{ name }}: {{ value }}</li>
-    {% endfor %}
-</ul>
+{% extends "html.html" %}
+
+{% block body %}
+    <ul>
+        {% for name, value in object_fields %}
+            <li>{{ name }}: {{ value }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
