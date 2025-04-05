@@ -9,6 +9,7 @@ __all__ = [
     "ReadUserTestCase",
     "SignUserInTestCase",
     "SignUserOutTestCase",
+    "StartVerifyUserEmailTestCase",
     "UpdateUserApiTestCase",
     "UpdateUserTestCase",
 ]
@@ -24,4 +25,5 @@ from main.tests.integration.delete_user import DeleteUserTestCase
 from main.tests.integration.read_user import ReadUserTestCase
 from main.tests.integration.sign_user_in import SignUserInTestCase
 from main.tests.integration.sign_user_out import SignUserOutTestCase
+from main.tests.integration.start_verify_email import StartVerifyUserEmailTestCase
 from main.tests.integration.update_user import UpdateUserTestCase

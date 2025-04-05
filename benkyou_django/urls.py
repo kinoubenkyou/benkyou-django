@@ -15,6 +15,7 @@ from main.views.user import (
     UserReadView,
     UserSignInView,
     UserSignOutView,
+    UserStartVerifyEmailView,
     UserUpdateView,
 )
 from main.viewsets import UserViewSet
@@ -32,6 +33,11 @@ urlpatterns = [
     path("user/", UserReadView.as_view(), name="user-read"),
     path("user/sign_in/", UserSignInView.as_view(), name="user-sign-in"),
     path("user/sign_out/", UserSignOutView.as_view(), name="user-sign-out"),
+    path(
+        "user/start_verify_email/",
+        UserStartVerifyEmailView.as_view(),
+        name="user-start-verify-email",
+    ),
 ]
 
 if settings.DEBUG:
