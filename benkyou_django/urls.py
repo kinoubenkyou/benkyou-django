@@ -7,18 +7,16 @@ from drf_spectacular.views import (
     SpectacularRedocView,
 )
 
-from main.routers import SingleResourceRouter
-from main.views.api.user import UserTokenApiView
-from main.views.user import (
-    UserCreateView,
-    UserDeleteView,
-    UserReadView,
-    UserSignInView,
-    UserSignOutView,
-    UserStartVerifyEmailView,
-    UserUpdateView,
-)
-from main.viewsets import UserViewSet
+from main.routers.single_resource import SingleResourceRouter
+from main.views.api.user.token import UserTokenApiView
+from main.views.user.create import UserCreateView
+from main.views.user.delete import UserDeleteView
+from main.views.user.read import UserReadView
+from main.views.user.sign_in import UserSignInView
+from main.views.user.sign_out import UserSignOutView
+from main.views.user.start_verify_email import UserStartVerifyEmailView
+from main.views.user.update import UserUpdateView
+from main.viewsets.user import UserViewSet
 
 router = SingleResourceRouter()
 router.register(r"user", UserViewSet, basename="api-user")

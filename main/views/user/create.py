@@ -4,9 +4,9 @@ from django.http import HttpResponse
 from django.urls.base import reverse_lazy
 from django.views.generic.edit import CreateView
 
-from main.forms.user import UserCreateForm
+from main.forms.user.create import UserCreateForm
 from main.models import User
-from main.tasks import start_verify_user_email
+from main.tasks.start_verify_user_email import start_verify_user_email
 
 if TYPE_CHECKING:
     CreateView_ = CreateView[User, UserCreateForm]  # pragma: no cover

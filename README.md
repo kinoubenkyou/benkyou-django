@@ -75,7 +75,7 @@ coverage report -m
 ### build image
 
 ```shell
-uv export --no-dev > requirements.txt
+uv export --no-dev --no-hashes > requirements.txt
 docker build -t benkyou-django .
 ```
 

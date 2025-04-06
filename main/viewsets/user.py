@@ -10,12 +10,11 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.viewsets import GenericViewSet
 
 from main.models import User
-from main.serializers.user import (
-    UserCreateSerializer,
-    UserReadSerializer,
-    UserUpdateSerializer,
-)
-from main.viewsets import PermissionMixin, SerializerMixin
+from main.serializers.user.create import UserCreateSerializer
+from main.serializers.user.read import UserReadSerializer
+from main.serializers.user.update import UserUpdateSerializer
+from main.viewsets.permission_mixin import PermissionMixin
+from main.viewsets.serializer_mixin import SerializerMixin
 
 
 class UserViewSet(

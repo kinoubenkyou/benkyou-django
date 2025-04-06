@@ -4,7 +4,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import QuerySet
 
 from main.models import User
-from main.views import ReadView
+from main.views.read import ReadView
 
 
 class UserReadView(LoginRequiredMixin, ReadView):

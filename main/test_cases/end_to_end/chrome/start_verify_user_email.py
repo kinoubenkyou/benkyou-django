@@ -4,10 +4,13 @@ from django.utils.http import urlencode
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.expected_conditions import url_changes
 
-from main.tests.integration import AuthenticationRequiredMixin, SeleniumTestCase
+from main.test_cases.end_to_end.chrome import ChromeTestCase
+from main.test_cases.end_to_end.chrome.authentication_required_mixin import (
+    AuthenticationRequiredMixin,
+)
 
 
-class StartVerifyUserEmailTestCase(AuthenticationRequiredMixin, SeleniumTestCase):
+class StartVerifyUserEmailTestCase(AuthenticationRequiredMixin, ChromeTestCase):
     fixtures = ["session", "user"]
 
     def test_authentication_required(self) -> None:

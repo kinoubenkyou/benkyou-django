@@ -1,10 +1,10 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.expected_conditions import url_changes
 
-from main.tests.integration import SeleniumTestCase
+from main.test_cases.end_to_end.chrome import ChromeTestCase
 
 
-class SignUserOutTestCase(SeleniumTestCase):
+class SignUserOutTestCase(ChromeTestCase):
     def test(self) -> None:
         """Test success case."""
         url = f"{self.live_server_url}/user/sign_out/"

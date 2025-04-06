@@ -1,21 +1,21 @@
-from rest_framework.authtoken.models import Token
 from rest_framework.reverse import reverse
 from rest_framework.status import HTTP_204_NO_CONTENT, HTTP_401_UNAUTHORIZED
 
-from main.tests.integration.api import ApiTestCase
+from main.models import User
+from main.test_cases.end_to_end.api import ApiTestCase
 
 
-class DeleteUserTokenApiTestCase(ApiTestCase):
-    fixtures = ["token", "user"]
+class DeleteUserApiTestCase(ApiTestCase):
+    fixtures = ["user"]
 
     def test_authentication_required(self) -> None:
         """Test authentication required."""
-        response = self.client.delete(reverse("api-user-token"))
+        response = self.client.delete(reverse("api-user"))
         self.assertEqual(response.status_code, HTTP_401_UNAUTHORIZED)
 
     def test(self) -> None:
         """Test success case."""
-        self.add_authentication_token()
-        response = self.client.delete(reverse("api-user-token"))
+        self.client.force_authenticate(user=User.objects.get(pk=1))
+        response = self.client.delete(reverse("api-user"))
         self.assertEqual(response.status_code, HTTP_204_NO_CONTENT)
-        self.assertFalse(Token.objects.filter(user=1).exists())
+        self.assertFalse(User.objects.filter(pk=1).exists())

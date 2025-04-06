@@ -9,7 +9,7 @@ from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support.wait import WebDriverWait
 
 
-class SeleniumTestCase(LiveServerTestCase):
+class ChromeTestCase(LiveServerTestCase):
     def add_session_cookie(self) -> None:
         """Add session cookie."""
         self.web_driver.get(f"{self.live_server_url}/")

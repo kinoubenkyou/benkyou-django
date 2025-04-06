@@ -8,7 +8,7 @@ from rest_framework.fields import CharField
 from rest_framework.serializers import ModelSerializer
 
 from main.models import User
-from main.tasks import start_verify_user_email
+from main.tasks.start_verify_user_email import start_verify_user_email
 
 
 class UserCreateSerializer(ModelSerializer[User]):
