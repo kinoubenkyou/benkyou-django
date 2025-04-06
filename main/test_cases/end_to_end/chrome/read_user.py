@@ -1,7 +1,10 @@
-from main.tests.integration import AuthenticationRequiredMixin, SeleniumTestCase
+from main.test_cases.end_to_end.chrome import ChromeTestCase
+from main.test_cases.end_to_end.chrome.authentication_required_mixin import (
+    AuthenticationRequiredMixin,
+)
 
 
-class ReadUserTestCase(AuthenticationRequiredMixin, SeleniumTestCase):
+class ReadUserTestCase(AuthenticationRequiredMixin, ChromeTestCase):
     fixtures = ["session", "user"]
 
     def test_authentication_required(self) -> None:
