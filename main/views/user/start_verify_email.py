@@ -6,7 +6,7 @@ from django.http import HttpResponse
 from django.views.generic import FormView
 from rest_framework.reverse import reverse_lazy
 
-from main.tasks import start_verify_user_email
+from main.tasks.start_verify_user_email import start_verify_user_email
 
 if TYPE_CHECKING:
     FormView_ = FormView[Form]  # pragma: no cover
