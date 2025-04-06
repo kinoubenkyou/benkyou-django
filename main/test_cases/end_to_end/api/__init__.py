@@ -1,8 +1,9 @@
 from django.core.cache import cache
-from rest_framework.test import APIClient, APITestCase
+from rest_framework.test import APIClient
+from rest_framework.test import APITestCase as RestFrameworkAPITestCase
 
 
-class ApiTestCase(APITestCase):
+class ApiTestCase(RestFrameworkAPITestCase):
     client: APIClient
 
     def add_authentication_token(self) -> None:
