@@ -9,6 +9,7 @@ __all__ = [
     "ReadUserTestCase",
     "SignUserInTestCase",
     "SignUserOutTestCase",
+    "StartVerifyUserEmailApiTestCase",
     "StartVerifyUserEmailTestCase",
     "UpdateUserApiTestCase",
     "UpdateUserTestCase",
@@ -19,6 +20,9 @@ from main.test_cases.end_to_end.api.create_user_token import CreateUserTokenApiT
 from main.test_cases.end_to_end.api.delete_user import DeleteUserApiTestCase
 from main.test_cases.end_to_end.api.delete_user_token import DeleteUserTokenApiTestCase
 from main.test_cases.end_to_end.api.read_user import ReadUserApiTestCase
+from main.test_cases.end_to_end.api.start_verify_user_email import (
+    StartVerifyUserEmailApiTestCase,
+)
 from main.test_cases.end_to_end.api.update_user import UpdateUserApiTestCase
 from main.test_cases.end_to_end.chrome.create_user import CreateUserTestCase
 from main.test_cases.end_to_end.chrome.delete_user import DeleteUserTestCase

@@ -1,4 +1,4 @@
-from rest_framework.routers import Route, SimpleRouter
+from rest_framework.routers import DynamicRoute, Route, SimpleRouter
 
 
 class SingleResourceRouter(SimpleRouter):
@@ -13,6 +13,12 @@ class SingleResourceRouter(SimpleRouter):
                 "put": "update",
             },
             name="{basename}",
+            detail=False,
+            initkwargs={},
+        ),
+        DynamicRoute(
+            url=r"^{prefix}/{url_path}{trailing_slash}$",
+            name="{basename}-{url_name}",
             detail=False,
             initkwargs={},
         ),
