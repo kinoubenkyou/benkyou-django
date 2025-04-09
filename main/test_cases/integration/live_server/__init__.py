@@ -1,7 +1,7 @@
 from typing import List
 
 from django.core.cache import cache
-from django.test.testcases import LiveServerTestCase
+from django.test.testcases import LiveServerTestCase as DjangoLiveServerTestCase
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.common.by import By
@@ -9,7 +9,7 @@ from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support.wait import WebDriverWait
 
 
-class ChromeTestCase(LiveServerTestCase):
+class LiveServerTestCase(DjangoLiveServerTestCase):
     def add_session_cookie(self) -> None:
         """Add session cookie."""
         self.web_driver.get(f"{self.live_server_url}/")

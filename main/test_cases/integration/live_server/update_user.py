@@ -2,13 +2,13 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.expected_conditions import url_changes
 
 from main.models import User
-from main.test_cases.end_to_end.chrome import ChromeTestCase
-from main.test_cases.end_to_end.chrome.authentication_required_mixin import (
+from main.test_cases.integration.live_server import LiveServerTestCase
+from main.test_cases.integration.live_server.authentication_required_mixin import (
     AuthenticationRequiredMixin,
 )
 
 
-class UpdateUserTestCase(AuthenticationRequiredMixin, ChromeTestCase):
+class UpdateUserLiveServerTestCase(AuthenticationRequiredMixin, LiveServerTestCase):
     fixtures = ["session", "user"]
 
     def test_authentication_required(self) -> None:

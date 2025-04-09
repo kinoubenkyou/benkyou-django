@@ -2,7 +2,7 @@ from rest_framework.authtoken.models import Token
 from rest_framework.reverse import reverse
 from rest_framework.status import HTTP_204_NO_CONTENT, HTTP_401_UNAUTHORIZED
 
-from main.test_cases.end_to_end.api import ApiTestCase
+from main.test_cases.integration.api import ApiTestCase
 
 
 class DeleteUserTokenApiTestCase(ApiTestCase):
