@@ -5,7 +5,7 @@ from rest_framework.reverse import reverse
 from rest_framework.status import HTTP_201_CREATED
 
 from main.models import User
-from main.test_cases.end_to_end.api import ApiTestCase
+from main.test_cases.integration.api import ApiTestCase
 
 
 class CreateUserApiTestCase(ApiTestCase):

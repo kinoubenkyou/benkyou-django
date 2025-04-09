@@ -1,10 +1,10 @@
-from main.test_cases.end_to_end.chrome import ChromeTestCase
-from main.test_cases.end_to_end.chrome.authentication_required_mixin import (
+from main.test_cases.integration.live_server import LiveServerTestCase
+from main.test_cases.integration.live_server.authentication_required_mixin import (
     AuthenticationRequiredMixin,
 )
 
 
-class ReadUserTestCase(AuthenticationRequiredMixin, ChromeTestCase):
+class ReadUserLiveServerTestCase(AuthenticationRequiredMixin, LiveServerTestCase):
     fixtures = ["session", "user"]
 
     def test_authentication_required(self) -> None:

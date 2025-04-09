@@ -2,10 +2,10 @@ from django.contrib.sessions.models import Session
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.expected_conditions import url_changes
 
-from main.test_cases.end_to_end.chrome import ChromeTestCase
+from main.test_cases.integration.live_server import LiveServerTestCase
 
 
-class SignUserInTestCase(ChromeTestCase):
+class SignUserInLiveServerTestCase(LiveServerTestCase):
     fixtures = ["user"]
 
     def test(self) -> None:
