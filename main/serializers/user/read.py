@@ -13,4 +13,5 @@ class UserReadSerializer(ModelSerializer[User]):
             "last_name",
             "email",
             "date_joined",
+            "email_is_verified",
         )

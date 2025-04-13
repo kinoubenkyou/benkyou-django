@@ -15,6 +15,7 @@ class UserReadView(LoginRequiredMixin, ReadView):
         "last_name",
         "email",
         "date_joined",
+        "email_is_verified",
     )
 
     def get_object(self, _queryset: Optional[QuerySet[User, User]] = None) -> User:

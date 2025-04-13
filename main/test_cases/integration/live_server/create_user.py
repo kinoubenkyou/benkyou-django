@@ -36,6 +36,7 @@ class CreateUserLiveServerTestCase(LiveServerTestCase):
         self.assertEqual(user.first_name, first_name)  # type: ignore[union-attr]
         self.assertEqual(user.email, email)  # type: ignore[union-attr]
         self.assertTrue(user.check_password(password))  # type: ignore[union-attr]
+        self.assertFalse(user.email_is_verified)  # type: ignore[union-attr]
         sentinel = object()
         token = cache.get(f"verify_user_email.{user.pk}", sentinel)  # type: ignore[union-attr]
         self.assertIsNot(token, sentinel)

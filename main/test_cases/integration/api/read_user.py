@@ -25,3 +25,4 @@ class ReadUserApiTestCase(ApiTestCase):
         self.assertEqual(actual_data["last_name"], "last_name1")
         self.assertEqual(actual_data["email"], "email1@email.com")
         self.assertEqual(actual_data["date_joined"], "2000-01-01T00:00:00Z")
+        self.assertEqual(actual_data["email_is_verified"], False)
