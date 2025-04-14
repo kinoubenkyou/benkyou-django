@@ -16,6 +16,7 @@ from main.views.user.sign_in import UserSignInView
 from main.views.user.sign_out import UserSignOutView
 from main.views.user.start_verify_email import UserStartVerifyEmailView
 from main.views.user.update import UserUpdateView
+from main.views.user.verify_email import UserVerifyEmailView
 from main.viewsets.user import UserViewSet
 
 router = SingleResourceRouter()
@@ -36,6 +37,7 @@ urlpatterns = [
         UserStartVerifyEmailView.as_view(),
         name="user-start-verify-email",
     ),
+    path("user/verify_email/", UserVerifyEmailView.as_view(), name="user-verify-email"),
 ]
 
 if settings.DEBUG:
