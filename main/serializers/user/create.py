@@ -30,6 +30,7 @@ class UserCreateSerializer(ModelSerializer[User]):
 
     def create(self, validated_data: Any) -> User:
         """Set password, queue task to start verify email."""
+        validated_data["email_is_verified"] = False
         user = super().create(validated_data)
         user.set_password(validated_data["password"])
         user.save()

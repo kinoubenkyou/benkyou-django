@@ -30,3 +30,7 @@ class ReadUserLiveServerTestCase(AuthenticationRequiredMixin, LiveServerTestCase
             len(self.find_displayed_elements("date_joined: Jan. 1, 2000, midnight")),
             1,
         )
+        self.assertEqual(
+            len(self.find_displayed_elements("email_is_verified: False")),
+            1,
+        )
