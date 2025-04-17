@@ -13,6 +13,7 @@ __all__ = [
     "StartVerifyUserEmailLiveServerTestCase",
     "UpdateUserApiTestCase",
     "UpdateUserLiveServerTestCase",
+    "VerifyUserEmailApiTestCase",
     "VerifyUserEmailLiveServerTestCase",
 ]
 
@@ -25,6 +26,7 @@ from main.test_cases.integration.api.start_verify_user_email import (
     StartVerifyUserEmailApiTestCase,
 )
 from main.test_cases.integration.api.update_user import UpdateUserApiTestCase
+from main.test_cases.integration.api.verify_user_email import VerifyUserEmailApiTestCase
 from main.test_cases.integration.live_server.create_user import (
     CreateUserLiveServerTestCase,
 )
