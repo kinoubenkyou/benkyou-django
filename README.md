@@ -5,9 +5,12 @@
 ### dependencies
 
 - chromium
+- mailhog
 - pip
 - postgresql
 - python
+- rabbitmq
+- redis
 - uv
 
 ### add package
