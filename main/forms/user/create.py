@@ -20,6 +20,6 @@ class UserCreateForm(UserCreationForm_):
         field_classes = {"username": UsernameField}
 
     def save(self, commit: bool = True) -> User:
-        """Set email_is_verified to False."""
+        """Set email as not verified."""
         self.instance.email_is_verified = False
         return super().save(commit=commit)

@@ -15,7 +15,7 @@ class ReadView(DetailView_):
     template_name = "read.html"
 
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
-        """Add tuples of the object's field name and field value to the context."""
+        """Add object's field name and value to context."""
         DetailView.get_context_data(self, **kwargs)
         return_ = super().get_context_data(**kwargs)
         return_.update(

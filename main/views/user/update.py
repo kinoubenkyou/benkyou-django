@@ -21,7 +21,7 @@ class UserUpdateView(LoginRequiredMixin, UpdateView_):
     template_name = "form.html"
 
     def get_object(self, _queryset: Optional[QuerySet[User, User]] = None) -> User:
-        """Override the object with the authenticated user."""
+        """Override object with authenticated user."""
         user = self.request.user
         assert user.is_authenticated
         return user
