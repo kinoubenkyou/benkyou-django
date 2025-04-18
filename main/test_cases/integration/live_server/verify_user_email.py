@@ -34,7 +34,7 @@ class VerifyUserEmailLiveServerTestCase(
         self.assertTrue(User.objects.get(pk=1).email_is_verified)
 
     def test__incorrect_token(self) -> None:
-        """Test success case."""
+        """Test incorrect token case."""
         self.add_session_cookie()
         token = token_urlsafe()
         cache.set("verify_user_email.1", token, 600)
@@ -47,7 +47,7 @@ class VerifyUserEmailLiveServerTestCase(
         self.assertEqual(len(self.find_displayed_elements("incorrect token")), 1)
 
     def test__token_not_found(self) -> None:
-        """Test success case."""
+        """Test token not found case."""
         self.add_session_cookie()
         token = token_urlsafe()
         cache.set("verify_user_email.1", token, 0)
