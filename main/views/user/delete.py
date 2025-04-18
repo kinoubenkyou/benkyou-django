@@ -22,5 +22,4 @@ class UserDeleteView(LoginRequiredMixin, DeleteView_):  # type: ignore[misc]
     def get_object(self, _queryset: Optional[QuerySet[User, User]] = None) -> User:
         """Override object with authenticated user."""
         user = self.request.user
-        assert user.is_authenticated
-        return user
+        return user  # type: ignore[return-value]
