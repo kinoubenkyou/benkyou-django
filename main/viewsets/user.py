@@ -48,9 +48,8 @@ class UserViewSet(
     def get_object(self) -> User:
         """Get authenticated user."""
         user = self.request.user
-        assert user.is_authenticated
         self.check_object_permissions(self.request, user)
-        return user
+        return user  # type: ignore[return-value]
 
     @action(detail=False, methods=["post"])
     def start_verify_email(self, request: Request) -> Response:

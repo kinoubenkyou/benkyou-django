@@ -32,7 +32,7 @@ class LiveServerTestCase(DjangoLiveServerTestCase):
         ]
 
     def find_input_and_replace_value(self, input_name: str, value: str) -> None:
-        """Find an input by name attribute and replace the value property."""
+        """Find input by name attribute and replace value property."""
         user_input = self.web_driver.find_element(
             By.XPATH, f'//input[@name="{input_name}"]'
         )
@@ -40,7 +40,7 @@ class LiveServerTestCase(DjangoLiveServerTestCase):
         user_input.send_keys(value)
 
     def setUp(self) -> None:
-        """Set up a web driver."""
+        """Set up web driver."""
         super().setUp()
         options = Options()
         options.add_argument("--disable-dev-shm-usage")

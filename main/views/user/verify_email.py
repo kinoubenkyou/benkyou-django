@@ -20,20 +20,20 @@ class UserVerifyEmailView(LoginRequiredMixin, FormView_):
     template_name = "form.html"
 
     def form_valid(self, form: UserVerifyEmailForm) -> HttpResponse:
-        """Set the email as verified, delete the token from the cache."""
+        """Set email as verified, delete token from cache."""
         self.request.user.email_is_verified = True  # type: ignore[union-attr]
         self.request.user.save()
         cache.delete(f"verify_user_email.{self.request.user.id}")
         return super().form_valid(form)
 
     def get_form_kwargs(self) -> dict[str, Any]:
-        """Pass the user id to the form."""
+        """Pass user id to form."""
         kwargs = super().get_form_kwargs()
         kwargs["user_id"] = self.request.user.id
         return kwargs
 
     def get_initial(self) -> dict[str, Any]:
-        """Set initial token value from the query string."""
+        """Set initial token value from query string."""
         initial = super().get_initial()
         initial["token"] = self.request.GET.get("token")
         return initial

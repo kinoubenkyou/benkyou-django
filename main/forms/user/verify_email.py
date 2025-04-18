@@ -47,7 +47,7 @@ class UserVerifyEmailForm(Form):
         )
 
     def clean_token(self) -> Any:
-        """Validate with token in cache."""
+        """Validate with token in the cache."""
         return_ = self.cleaned_data["token"]
         sentinel = object()
         token = cache.get(f"verify_user_email.{self.user_id}", sentinel)
