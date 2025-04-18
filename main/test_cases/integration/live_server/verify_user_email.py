@@ -38,7 +38,10 @@ class VerifyUserEmailLiveServerTestCase(
         self.add_session_cookie()
         token = token_urlsafe()
         cache.set("verify_user_email.1", token, 600)
-        url = f"{self.live_server_url}/user/verify_email?{urlencode({'token': '_'})}"
+        url = (
+            f"{self.live_server_url}/user/verify_email"
+            f"?{urlencode({'token': f'{token}_'})}"
+        )
         self.web_driver.get(url)
         self.web_driver.find_element(By.XPATH, '//*[@type="submit"]').click()
         self.assertEqual(len(self.find_displayed_elements("incorrect token")), 1)
