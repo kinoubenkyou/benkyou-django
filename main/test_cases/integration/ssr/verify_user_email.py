@@ -59,8 +59,8 @@ class VerifyUserEmailSsrTestCase(SsrTestCase):
             {"token": f"{token}_"},
         )
         self.assertEqual(
-            len(fromstring(response.content).xpath("//*[text()='incorrect token']")),
-            1,  # type: ignore[no-untyped-call]
+            len(fromstring(response.content).xpath("//*[text()='incorrect token']")),  # type: ignore[no-untyped-call]
+            1,
         )
 
     def test__token_not_found(self) -> None:
@@ -73,6 +73,6 @@ class VerifyUserEmailSsrTestCase(SsrTestCase):
             {"token": token},
         )
         self.assertEqual(
-            len(fromstring(response.content).xpath("//*[text()='token not found']")),
-            1,  # type: ignore[no-untyped-call]
+            len(fromstring(response.content).xpath("//*[text()='token not found']")),  # type: ignore[no-untyped-call]
+            1,
         )
