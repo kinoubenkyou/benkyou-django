@@ -1,20 +1,20 @@
 __all__ = [
     "CreateUserApiTestCase",
-    "CreateUserLiveServerTestCase",
+    "CreateUserSsrTestCase",
     "CreateUserTokenApiTestCase",
     "DeleteUserApiTestCase",
-    "DeleteUserLiveServerTestCase",
+    "DeleteUserSsrTestCase",
     "DeleteUserTokenApiTestCase",
     "ReadUserApiTestCase",
-    "ReadUserLiveServerTestCase",
-    "SignUserInLiveServerTestCase",
-    "SignUserOutLiveServerTestCase",
+    "ReadUserSsrTestCase",
+    "SignUserInSsrTestCase",
+    "SignUserOutSsrTestCase",
     "StartVerifyUserEmailApiTestCase",
-    "StartVerifyUserEmailLiveServerTestCase",
+    "StartVerifyUserEmailSsrTestCase",
     "UpdateUserApiTestCase",
-    "UpdateUserLiveServerTestCase",
+    "UpdateUserSsrTestCase",
     "VerifyUserEmailApiTestCase",
-    "VerifyUserEmailLiveServerTestCase",
+    "VerifyUserEmailSsrTestCase",
 ]
 
 from main.test_cases.integration.api.create_user import CreateUserApiTestCase
@@ -27,25 +27,13 @@ from main.test_cases.integration.api.start_verify_user_email import (
 )
 from main.test_cases.integration.api.update_user import UpdateUserApiTestCase
 from main.test_cases.integration.api.verify_user_email import VerifyUserEmailApiTestCase
-from main.test_cases.integration.live_server.create_user import (
-    CreateUserLiveServerTestCase,
+from main.test_cases.integration.ssr.create_user import CreateUserSsrTestCase
+from main.test_cases.integration.ssr.delete_user import DeleteUserSsrTestCase
+from main.test_cases.integration.ssr.read_user import ReadUserSsrTestCase
+from main.test_cases.integration.ssr.sign_user_in import SignUserInSsrTestCase
+from main.test_cases.integration.ssr.sign_user_out import SignUserOutSsrTestCase
+from main.test_cases.integration.ssr.start_verify_user_email import (
+    StartVerifyUserEmailSsrTestCase,
 )
-from main.test_cases.integration.live_server.delete_user import (
-    DeleteUserLiveServerTestCase,
-)
-from main.test_cases.integration.live_server.read_user import ReadUserLiveServerTestCase
-from main.test_cases.integration.live_server.sign_user_in import (
-    SignUserInLiveServerTestCase,
-)
-from main.test_cases.integration.live_server.sign_user_out import (
-    SignUserOutLiveServerTestCase,
-)
-from main.test_cases.integration.live_server.start_verify_user_email import (
-    StartVerifyUserEmailLiveServerTestCase,
-)
-from main.test_cases.integration.live_server.update_user import (
-    UpdateUserLiveServerTestCase,
-)
-from main.test_cases.integration.live_server.verify_user_email import (
-    VerifyUserEmailLiveServerTestCase,
-)
+from main.test_cases.integration.ssr.update_user import UpdateUserSsrTestCase
+from main.test_cases.integration.ssr.verify_user_email import VerifyUserEmailSsrTestCase
