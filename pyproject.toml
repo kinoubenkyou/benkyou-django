@@ -38,6 +38,7 @@ dev = [
 ]
 test = [
     "coverage>=7.6.10",
+    "lxml>=5.3.2",
     "selenium>=4.27.1",
 ]
 type-check = [
