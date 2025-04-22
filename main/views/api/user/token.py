@@ -26,8 +26,7 @@ class UserTokenApiView(ObtainAuthToken):
 
     def get_permissions(self) -> Sequence[BasePermission]:
         """Get permissions based on request method."""
-        assert self.request.method is not None
         return [
             permission()
-            for permission in self.permission_mapping.get(self.request.method, [])
+            for permission in self.permission_mapping.get(self.request.method, [])  # type: ignore[arg-type]
         ]

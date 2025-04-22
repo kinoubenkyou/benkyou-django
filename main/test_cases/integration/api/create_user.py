@@ -38,7 +38,8 @@ class CreateUserApiTestCase(ApiTestCase):
         token = cache.get(f"verify_user_email.{user.pk}", sentinel)  # type: ignore[union-attr]
         self.assertIsNot(token, sentinel)
         self.assertEqual(
-            f"http://testserver/user/verify_email?{urlencode({'token': token})}",
+            f"http://testserver{reverse('user-verify-email')}"
+            f"?{urlencode({'token': token})}",
             mail.outbox[0].body,
         )
         self.assertEqual(mail.outbox[0].subject, "Verify Email")
