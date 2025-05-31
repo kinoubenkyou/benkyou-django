@@ -41,6 +41,11 @@ export $(grep -v '^#' .env.local | xargs)
 python manage.py runserver
 ```
 
+```shell
+export $(grep -v '^#' .env.local | xargs)
+celery -A benkyou_django worker
+```
+
 ### format
 
 ```shell
