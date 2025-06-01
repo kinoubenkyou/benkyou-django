@@ -17,6 +17,7 @@ from main.models import User
 from main.serializers.user.create import UserCreateSerializer
 from main.serializers.user.read import UserReadSerializer
 from main.serializers.user.update import UserUpdateSerializer
+from main.serializers.user.update_password import UserUpdatePasswordSerializer
 from main.serializers.user.verify_email import UserVerifyEmailSerializer
 from main.tasks.start_verify_user_email import start_verify_user_email
 from main.viewsets.permission_mixin import PermissionMixin
@@ -38,6 +39,7 @@ class UserViewSet(
         "retrieve": UserReadSerializer,
         "update": UserUpdateSerializer,
         "partial_update": UserUpdateSerializer,
+        "update_password": UserUpdatePasswordSerializer,
         "verify_email": UserVerifyEmailSerializer,
     }
     permission_dict = {
@@ -46,6 +48,7 @@ class UserViewSet(
         "partial_update": (IsAuthenticated,),
         "destroy": (IsAuthenticated,),
         "start_verify_email": (IsAuthenticated,),
+        "update_password": (IsAuthenticated,),
         "verify_email": (IsAuthenticated,),
     }
 
@@ -61,6 +64,15 @@ class UserViewSet(
         start_verify_user_email.delay(
             request.get_host(), request.scheme, request.user.pk
         )
+        return Response()
+
+    @action(detail=False, methods=["post"])
+    def update_password(self, request: Request) -> Response:
+        """Set new password."""
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        request.user.set_password(serializer.validated_data["new_password"])
+        request.user.save()
         return Response()
 
     @action(detail=False, methods=["post"])
