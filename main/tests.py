@@ -12,6 +12,7 @@ __all__ = [
     "StartVerifyUserEmailApiTestCase",
     "StartVerifyUserEmailSsrTestCase",
     "UpdateUserApiTestCase",
+    "UpdateUserPasswordSsrTestCase",
     "UpdateUserSsrTestCase",
     "VerifyUserEmailApiTestCase",
     "VerifyUserEmailSsrTestCase",
@@ -36,4 +37,7 @@ from main.test_cases.integration.ssr.start_verify_user_email import (
     StartVerifyUserEmailSsrTestCase,
 )
 from main.test_cases.integration.ssr.update_user import UpdateUserSsrTestCase
+from main.test_cases.integration.ssr.update_user_password import (
+    UpdateUserPasswordSsrTestCase,
+)
 from main.test_cases.integration.ssr.verify_user_email import VerifyUserEmailSsrTestCase
