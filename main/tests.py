@@ -9,6 +9,7 @@ __all__ = [
     "ReadUserSsrTestCase",
     "SignUserInSsrTestCase",
     "SignUserOutSsrTestCase",
+    "StartResetUserPasswordSsrTestCase",
     "StartVerifyUserEmailApiTestCase",
     "StartVerifyUserEmailSsrTestCase",
     "UpdateUserApiTestCase",
@@ -37,6 +38,9 @@ from main.test_cases.integration.ssr.delete_user import DeleteUserSsrTestCase
 from main.test_cases.integration.ssr.read_user import ReadUserSsrTestCase
 from main.test_cases.integration.ssr.sign_user_in import SignUserInSsrTestCase
 from main.test_cases.integration.ssr.sign_user_out import SignUserOutSsrTestCase
+from main.test_cases.integration.ssr.start_reset_user_password import (
+    StartResetUserPasswordSsrTestCase,
+)
 from main.test_cases.integration.ssr.start_verify_user_email import (
     StartVerifyUserEmailSsrTestCase,
 )

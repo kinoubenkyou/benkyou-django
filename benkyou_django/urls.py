@@ -14,6 +14,7 @@ from main.views.user.delete import UserDeleteView
 from main.views.user.read import UserReadView
 from main.views.user.sign_in import UserSignInView
 from main.views.user.sign_out import UserSignOutView
+from main.views.user.start_reset_password import UserStartResetPasswordView
 from main.views.user.start_verify_email import UserStartVerifyEmailView
 from main.views.user.update import UserUpdateView
 from main.views.user.update_password import UserUpdatePasswordView
@@ -32,6 +33,11 @@ urlpatterns = [
     path("user/delete/", UserDeleteView.as_view(), name="user-delete"),
     path("user/sign_in/", UserSignInView.as_view(), name="user-sign-in"),
     path("user/sign_out/", UserSignOutView.as_view(), name="user-sign-out"),
+    path(
+        "user/start_reset_password/",
+        UserStartResetPasswordView.as_view(),
+        name="user-start-reset-password",
+    ),
     path(
         "user/start_verify_email/",
         UserStartVerifyEmailView.as_view(),
