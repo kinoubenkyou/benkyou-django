@@ -3,8 +3,8 @@ from typing import TYPE_CHECKING
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.forms import Form
 from django.http import HttpResponse
+from django.urls import reverse_lazy
 from django.views.generic import FormView
-from rest_framework.reverse import reverse_lazy
 
 from main.tasks.start_verify_user_email import start_verify_user_email
 
@@ -21,10 +21,9 @@ class UserStartVerifyEmailView(LoginRequiredMixin, FormView_):
 
     def form_valid(self, form: Form) -> HttpResponse:
         """Queue task to start verify email."""
-        response = super().form_valid(form)
         start_verify_user_email.delay(
             self.request.get_host(),
             self.request.scheme,
             self.request.user.pk,
         )
-        return response
+        return super().form_valid(form)

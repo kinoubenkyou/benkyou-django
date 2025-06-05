@@ -3,7 +3,7 @@ from typing import TYPE_CHECKING, Optional
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import QuerySet
 from django.forms import ModelForm
-from django.urls.base import reverse_lazy
+from django.urls import reverse_lazy
 from django.views.generic.edit import UpdateView
 
 from main.models import User
