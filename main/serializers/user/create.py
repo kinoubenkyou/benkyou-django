@@ -22,11 +22,7 @@ class UserCreateSerializer(ModelSerializer[User]):
             "email",
         )
 
-    password = CharField(
-        help_text=password_validators_help_text_html(),
-        write_only=True,
-        validators=(validate_password,),
-    )
+    password = CharField(write_only=True, validators=(validate_password,))
 
     def create(self, validated_data: Any) -> User:
         """Set password, queue task to start verify email."""
