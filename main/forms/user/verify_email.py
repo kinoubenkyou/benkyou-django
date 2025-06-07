@@ -17,7 +17,7 @@ class UserVerifyEmailForm(Form):
 
     def __init__(
         self,
-        user_id: User,
+        user: User,
         data: Mapping[str, Any] | None = None,
         files: MultiValueDict[str, UploadedFile] | None = None,
         auto_id: bool | str = "id_%s",
@@ -31,7 +31,7 @@ class UserVerifyEmailForm(Form):
         renderer: BaseRenderer | None = None,
     ):
         """Initialize form with user id."""
-        self.user_id = user_id
+        self.user = user
         super().__init__(
             data,
             files,
@@ -48,11 +48,11 @@ class UserVerifyEmailForm(Form):
 
     def clean_token(self) -> Any:
         """Validate with token in the cache."""
-        return_ = self.cleaned_data["token"]
+        token = self.cleaned_data["token"]
         sentinel = object()
-        token = cache.get(f"verify_user_email.{self.user_id}", sentinel)
-        if token is sentinel:
+        cached_token = cache.get(f"verify_user_email.{self.user.id}", sentinel)
+        if cached_token is sentinel:
             raise ValidationError("token not found")
-        elif token != return_:
+        elif cached_token != token:
             raise ValidationError("incorrect token")
-        return return_
+        return token

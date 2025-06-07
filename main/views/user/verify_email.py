@@ -29,7 +29,7 @@ class UserVerifyEmailView(LoginRequiredMixin, FormView_):
     def get_form_kwargs(self) -> dict[str, Any]:
         """Pass user id to form."""
         kwargs = super().get_form_kwargs()
-        kwargs["user_id"] = self.request.user.id
+        kwargs["user"] = self.request.user
         return kwargs
 
     def get_initial(self) -> dict[str, Any]:
