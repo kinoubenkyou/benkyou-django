@@ -67,3 +67,24 @@ class UpdateUserPasswordSsrTestCase(SsrTestCase):
             ),
             1,
         )
+
+    def test__new_password_and_confirmation_not_match(self) -> None:
+        """Test incorrect password and confirmation not match case."""
+        self.add_session_cookie()
+        password = "Dr0wss@p01"
+        response = self.client.post(
+            reverse("user-update-password"),
+            {
+                "old_password": "Dr0wss@p1",
+                "new_password": password,
+                "new_password_confirmation": f"{password}_",
+            },
+        )
+        self.assertEqual(
+            len(
+                fromstring(response.content).xpath(  # type: ignore[no-untyped-call]
+                    "//*[text()='new password and confirmation not match']"
+                )
+            ),
+            1,
+        )
