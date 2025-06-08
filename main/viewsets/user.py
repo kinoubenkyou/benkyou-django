@@ -68,7 +68,7 @@ class UserViewSet(
 
     @action(detail=False, methods=["post"])
     def update_password(self, request: Request) -> Response:
-        """Set new password."""
+        """Set user password."""
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         request.user.set_password(serializer.validated_data["new_password"])

@@ -19,8 +19,8 @@ class CreateUserSsrTestCase(SsrTestCase):
         [//input[@name='last_name']]
         [//input[@name='first_name']]
         [//input[@name='email']]
-        [//input[@name='password1']]
-        [//input[@name='password2']]
+        [//input[@name='password']]
+        [//input[@name='password_confirmation']]
         [//input[@type='submit']]
         """
         self.assertEqual(len(fromstring(response.content).xpath(xpath)), 1)  # type: ignore[no-untyped-call]
@@ -39,8 +39,8 @@ class CreateUserSsrTestCase(SsrTestCase):
                 "last_name": last_name,
                 "first_name": first_name,
                 "email": email,
-                "password1": password,
-                "password2": password,
+                "password": password,
+                "password_confirmation": password,
             },
         )
         self.assertRedirects(response, reverse("user-sign-in"))
@@ -61,3 +61,26 @@ class CreateUserSsrTestCase(SsrTestCase):
         )
         self.assertEqual(mail.outbox[0].subject, "Verify Email")
         self.assertIn(email, mail.outbox[0].to)
+
+    def test__password_and_confirmation_not_match(self) -> None:
+        """Test password and confirmation not match case."""
+        password = "Dr0wss@p1"
+        response = self.client.post(
+            reverse("user-create"),
+            {
+                "username": "username1",
+                "last_name": "last_name1",
+                "first_name": "first_name1",
+                "email": "email1@email.com",
+                "password": password,
+                "password_confirmation": f"{password}_",
+            },
+        )
+        self.assertEqual(
+            len(
+                fromstring(response.content).xpath(  # type: ignore[no-untyped-call]
+                    "//*[text()='password and confirmation not match']"
+                )
+            ),
+            1,
+        )

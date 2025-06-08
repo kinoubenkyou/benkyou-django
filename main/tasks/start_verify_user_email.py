@@ -1,5 +1,4 @@
 from secrets import token_urlsafe
-from typing import Any
 from urllib.parse import urlunparse
 
 from celery import shared_task
@@ -12,8 +11,8 @@ from main.models import User
 
 
 @shared_task  # type: ignore[misc]
-def start_verify_user_email(netloc: str, scheme: str, user_id: Any) -> None:
-    """Set token to verify user email in cache."""
+def start_verify_user_email(netloc: str, scheme: str, user_id: int) -> None:
+    """Set token to verify user email in cache, send email."""
     token = token_urlsafe()
     cache.set(f"verify_user_email.{user_id}", token, 600)
     send_mail(

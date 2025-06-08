@@ -27,21 +27,21 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/", include(router.urls)),
     path("api/user/token/", UserTokenApiView.as_view(), name="api-user-token"),
+    path("user/", UserReadView.as_view(), name="user-read"),
     path("user/create/", UserCreateView.as_view(), name="user-create"),
     path("user/delete/", UserDeleteView.as_view(), name="user-delete"),
-    path("user/update/", UserUpdateView.as_view(), name="user-update"),
-    path(
-        "user/update_password/",
-        UserUpdatePasswordView.as_view(),
-        name="user-update-password",
-    ),
-    path("user/", UserReadView.as_view(), name="user-read"),
     path("user/sign_in/", UserSignInView.as_view(), name="user-sign-in"),
     path("user/sign_out/", UserSignOutView.as_view(), name="user-sign-out"),
     path(
         "user/start_verify_email/",
         UserStartVerifyEmailView.as_view(),
         name="user-start-verify-email",
+    ),
+    path("user/update/", UserUpdateView.as_view(), name="user-update"),
+    path(
+        "user/update_password/",
+        UserUpdatePasswordView.as_view(),
+        name="user-update-password",
     ),
     path("user/verify_email/", UserVerifyEmailView.as_view(), name="user-verify-email"),
 ]

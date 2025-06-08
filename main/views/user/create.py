@@ -1,7 +1,7 @@
 from typing import TYPE_CHECKING
 
 from django.http import HttpResponse
-from django.urls.base import reverse_lazy
+from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView
 
 from main.forms.user.create import UserCreateForm
