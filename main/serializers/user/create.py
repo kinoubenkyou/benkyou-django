@@ -1,7 +1,6 @@
 from typing import Any
 
 from django.contrib.auth.password_validation import (
-    password_validators_help_text_html,
     validate_password,
 )
 from rest_framework.fields import CharField

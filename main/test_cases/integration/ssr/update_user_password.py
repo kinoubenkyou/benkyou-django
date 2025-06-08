@@ -26,8 +26,8 @@ class UpdateUserPasswordSsrTestCase(SsrTestCase):
         //form
         [@method='post']
         [//input[@name='old_password']]
-        [//input[@name='new_password1']]
-        [//input[@name='new_password2']]
+        [//input[@name='new_password']]
+        [//input[@name='new_password_confirmation']]
         [//input[@type='submit']]
         """
         self.assertEqual(len(fromstring(response.content).xpath(xpath)), 1)  # type: ignore[no-untyped-call]
@@ -40,8 +40,8 @@ class UpdateUserPasswordSsrTestCase(SsrTestCase):
             reverse("user-update-password"),
             {
                 "old_password": "Dr0wss@p1",
-                "new_password1": password,
-                "new_password2": password,
+                "new_password": password,
+                "new_password_confirmation": password,
             },
         )
         self.assertRedirects(response, reverse("user-read"))
