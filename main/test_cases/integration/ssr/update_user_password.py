@@ -46,3 +46,24 @@ class UpdateUserPasswordSsrTestCase(SsrTestCase):
         )
         self.assertRedirects(response, reverse("user-read"))
         self.assertTrue(User.objects.get(pk=1).check_password(password))
+
+    def test__incorrect_old_password(self) -> None:
+        """Test incorrect old password case."""
+        self.add_session_cookie()
+        password = "Dr0wss@p01"
+        response = self.client.post(
+            reverse("user-update-password"),
+            {
+                "old_password": "Dr0wss@p1_",
+                "new_password": password,
+                "new_password_confirmation": password,
+            },
+        )
+        self.assertEqual(
+            len(
+                fromstring(response.content).xpath(  # type: ignore[no-untyped-call]
+                    "//*[text()='incorrect old password']"
+                )
+            ),
+            1,
+        )
