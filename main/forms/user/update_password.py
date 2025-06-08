@@ -25,6 +25,7 @@ class UserUpdatePasswordForm(UserForm):
             raise ValidationError("incorrect old password")
         return old_password
 
+    @sensitive_variables("new_password", "new_password_confirmation")
     def clean(self) -> None:
         """Validate new password and confirmation match."""
         new_password = self.cleaned_data.get("new_password")
