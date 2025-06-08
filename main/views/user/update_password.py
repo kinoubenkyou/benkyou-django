@@ -20,7 +20,7 @@ class UserUpdatePasswordView(LoginRequiredMixin, FormView_):
     template_name = "form.html"
 
     def form_valid(self, form: UserUpdatePasswordForm) -> HttpResponse:
-        """Update user password."""
+        """Set new password."""
         self.request.user.set_password(form.cleaned_data["new_password"])
         self.request.user.save()
         update_session_auth_hash(self.request, self.request.user)  # type: ignore[arg-type]
