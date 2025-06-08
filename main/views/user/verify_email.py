@@ -27,7 +27,7 @@ class UserVerifyEmailView(LoginRequiredMixin, FormView_):
         return super().form_valid(form)
 
     def get_form_kwargs(self) -> dict[str, Any]:
-        """Pass user id to form."""
+        """Pass user to form."""
         kwargs = super().get_form_kwargs()
         kwargs["user"] = self.request.user
         return kwargs
