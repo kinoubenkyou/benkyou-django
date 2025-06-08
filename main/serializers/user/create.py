@@ -1,8 +1,5 @@
 from typing import Any
 
-from django.contrib.auth.password_validation import (
-    validate_password,
-)
 from rest_framework.fields import CharField
 from rest_framework.serializers import ModelSerializer
 
@@ -21,7 +18,7 @@ class UserCreateSerializer(ModelSerializer[User]):
             "email",
         )
 
-    password = CharField(write_only=True, validators=(validate_password,))
+    password = CharField()
 
     def create(self, validated_data: Any) -> User:
         """Set password, queue task to start verify email."""

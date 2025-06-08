@@ -1,7 +1,4 @@
 from django.contrib.auth import authenticate
-from django.contrib.auth.password_validation import (
-    validate_password,
-)
 from rest_framework.exceptions import ValidationError
 from rest_framework.fields import CharField
 from rest_framework.serializers import Serializer
@@ -9,7 +6,7 @@ from rest_framework.serializers import Serializer
 
 class UserUpdatePasswordSerializer(Serializer[None]):
     old_password = CharField()
-    new_password = CharField(write_only=True, validators=(validate_password,))
+    new_password = CharField()
 
     def validate_old_password(self, value: str) -> str:
         """Validate the old password."""

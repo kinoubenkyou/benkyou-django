@@ -5,7 +5,7 @@ from rest_framework.serializers import Serializer
 
 
 class UserVerifyEmailSerializer(Serializer[None]):
-    token = CharField(write_only=True)
+    token = CharField()
 
     def validate_token(self, value: str) -> str:
         """Validate with token in cache."""
