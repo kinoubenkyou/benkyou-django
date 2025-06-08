@@ -11,6 +11,6 @@ class UserUpdatePasswordSerializer(Serializer[None]):
     @sensitive_variables("value")
     def validate_old_password(self, value: str) -> str:
         """Validate with user password."""
-        if not self.context.get("request").user.check_password(value):
+        if not self.context.get("request").user.check_password(value):  # type: ignore[union-attr]
             raise ValidationError("incorrect old password")
         return value
