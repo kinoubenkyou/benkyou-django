@@ -1,25 +1,38 @@
 from typing import TYPE_CHECKING
 
-from django.contrib.auth.forms import (
-    UserCreationForm,
-    UsernameField,
-)
+from django.core.exceptions import ValidationError
+from django.forms import CharField, ModelForm
+from django.forms.widgets import PasswordInput
+from django.views.decorators.debug import sensitive_variables
 
 from main.models import User
 
 if TYPE_CHECKING:
-    UserCreationForm_ = UserCreationForm[User]  # pragma: no cover
+    ModelForm_ = ModelForm[User]  # pragma: no cover
 else:
-    UserCreationForm_ = UserCreationForm
+    ModelForm_ = ModelForm
 
 
-class UserCreateForm(UserCreationForm_):
+class UserCreateForm(ModelForm_):
+    password = CharField(widget=PasswordInput(attrs={"autocomplete": "new-password"}))
+    password_confirmation = CharField(
+        widget=PasswordInput(attrs={"autocomplete": "new-password"})
+    )
+
     class Meta:
         model = User
         fields = ("username", "first_name", "last_name", "email")
-        field_classes = {"username": UsernameField}
+
+    @sensitive_variables("password", "password_confirmation")
+    def clean(self) -> None:
+        """Validate password and confirmation match."""
+        password = self.cleaned_data.get("password")
+        password_confirmation = self.cleaned_data.get("password_confirmation")
+        if password and password_confirmation and password != password_confirmation:
+            raise ValidationError("password and confirmation not match")
 
     def save(self, commit: bool = True) -> User:
-        """Set email as not verified."""
+        """Set email as not verified, set password."""
         self.instance.email_is_verified = False
+        self.instance.set_password(self.cleaned_data["password"])
         return super().save(commit=commit)

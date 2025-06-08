@@ -19,8 +19,8 @@ class CreateUserSsrTestCase(SsrTestCase):
         [//input[@name='last_name']]
         [//input[@name='first_name']]
         [//input[@name='email']]
-        [//input[@name='password1']]
-        [//input[@name='password2']]
+        [//input[@name='password']]
+        [//input[@name='password_confirmation']]
         [//input[@type='submit']]
         """
         self.assertEqual(len(fromstring(response.content).xpath(xpath)), 1)  # type: ignore[no-untyped-call]
@@ -39,8 +39,8 @@ class CreateUserSsrTestCase(SsrTestCase):
                 "last_name": last_name,
                 "first_name": first_name,
                 "email": email,
-                "password1": password,
-                "password2": password,
+                "password": password,
+                "password_confirmation": password,
             },
         )
         self.assertRedirects(response, reverse("user-sign-in"))
