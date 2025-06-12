@@ -4,7 +4,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import QuerySet
 from django.forms import ModelForm
 from django.urls import reverse_lazy
-from django.views.generic.edit import DeleteView
+from django.views.generic import DeleteView
 
 from main.models import User
 

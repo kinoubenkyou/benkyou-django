@@ -21,7 +21,7 @@ class UpdateUserPasswordApiTestCase(ApiTestCase):
         """Test success case."""
         user = User.objects.get(pk=1)
         self.client.force_authenticate(user=user)
-        new_password = "Dr0wss@p01"
+        new_password = "Dr0wss@p1_"
         response = self.client.post(
             reverse("api-user-update-password"),
             data={"old_password": "Dr0wss@p1", "new_password": new_password},
@@ -30,13 +30,13 @@ class UpdateUserPasswordApiTestCase(ApiTestCase):
         user.refresh_from_db()
         self.assertTrue(user.check_password(new_password))
 
-    def test__incorrect_old_password(self) -> None:
+    def test_incorrect_old_password(self) -> None:
         """Test incorrect old password case."""
         user = User.objects.get(pk=1)
         self.client.force_authenticate(user=user)
         response = self.client.post(
             reverse("api-user-update-password"),
-            data={"old_password": "Dr0wss@p1_", "new_password": "Dr0wss@p01"},
+            data={"old_password": "Dr0wss@p1_", "new_password": "Dr0wss@p1_"},
         )
         self.assertEqual(response.status_code, HTTP_400_BAD_REQUEST)
         self.assertEqual(response.json(), {"old_password": ["incorrect old password"]})

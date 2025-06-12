@@ -49,7 +49,7 @@ class VerifyUserEmailSsrTestCase(SsrTestCase):
         self.assertRedirects(response, reverse("user-read"))
         self.assertTrue(User.objects.get(pk=1).email_is_verified)
 
-    def test__incorrect_token(self) -> None:
+    def test_incorrect_token(self) -> None:
         """Test incorrect token case."""
         self.add_session_cookie()
         token = token_urlsafe()
@@ -63,7 +63,7 @@ class VerifyUserEmailSsrTestCase(SsrTestCase):
             1,
         )
 
-    def test__token_not_found(self) -> None:
+    def test_token_not_found(self) -> None:
         """Test token not found case."""
         self.add_session_cookie()
         token = token_urlsafe()

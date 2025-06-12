@@ -34,9 +34,9 @@ class UpdateUserSsrTestCase(SsrTestCase):
     def test_post(self) -> None:
         """Test submit form."""
         self.add_session_cookie()
-        username = "username01"
-        last_name = "last_name01"
-        first_name = "first_name01"
+        username = "username1_"
+        last_name = "last_name1_"
+        first_name = "first_name1_"
         email = "email01@email.com"
         response = self.client.post(
             reverse("user-update"),

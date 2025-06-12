@@ -17,9 +17,9 @@ class UpdateUserApiTestCase(ApiTestCase):
         """Test success case."""
         user = User.objects.get(pk=1)
         self.client.force_authenticate(user=user)
-        username = "username01"
-        last_name = "last_name01"
-        first_name = "first_name01"
+        username = "username1_"
+        last_name = "last_name1_"
+        first_name = "first_name1_"
         email = "email01@email.com"
         response = self.client.put(
             reverse("api-user"),
