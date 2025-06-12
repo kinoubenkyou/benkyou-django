@@ -62,7 +62,7 @@ class CreateUserSsrTestCase(SsrTestCase):
         self.assertEqual(mail.outbox[0].subject, "Verify Email")
         self.assertIn(email, mail.outbox[0].to)
 
-    def test__password_and_confirmation_not_match(self) -> None:
+    def test_password_and_confirmation_not_match(self) -> None:
         """Test password and confirmation not match case."""
         password = "Dr0wss@p1"
         response = self.client.post(

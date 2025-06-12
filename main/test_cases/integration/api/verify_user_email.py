@@ -33,7 +33,7 @@ class VerifyUserEmailApiTestCase(ApiTestCase):
         user.refresh_from_db()
         self.assertTrue(user.email_is_verified)
 
-    def test__incorrect_token(self) -> None:
+    def test_incorrect_token(self) -> None:
         """Test incorrect token case."""
         user = User.objects.get(pk=1)
         self.client.force_authenticate(user=user)
@@ -45,7 +45,7 @@ class VerifyUserEmailApiTestCase(ApiTestCase):
         self.assertEqual(response.status_code, HTTP_400_BAD_REQUEST)
         self.assertEqual(response.json(), {"token": ["incorrect token"]})
 
-    def test__token_not_found(self) -> None:
+    def test_token_not_found(self) -> None:
         """Test token not found case."""
         user = User.objects.get(pk=1)
         self.client.force_authenticate(user=user)

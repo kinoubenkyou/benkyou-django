@@ -35,7 +35,7 @@ class UpdateUserPasswordSsrTestCase(SsrTestCase):
     def test_post(self) -> None:
         """Test submit form."""
         self.add_session_cookie()
-        password = "Dr0wss@p01"
+        password = "Dr0wss@p1_"
         response = self.client.post(
             reverse("user-update-password"),
             {
@@ -47,10 +47,10 @@ class UpdateUserPasswordSsrTestCase(SsrTestCase):
         self.assertRedirects(response, reverse("user-read"))
         self.assertTrue(User.objects.get(pk=1).check_password(password))
 
-    def test__incorrect_old_password(self) -> None:
+    def test_incorrect_old_password(self) -> None:
         """Test incorrect old password case."""
         self.add_session_cookie()
-        password = "Dr0wss@p01"
+        password = "Dr0wss@p1_"
         response = self.client.post(
             reverse("user-update-password"),
             {
@@ -68,10 +68,10 @@ class UpdateUserPasswordSsrTestCase(SsrTestCase):
             1,
         )
 
-    def test__new_password_and_confirmation_not_match(self) -> None:
+    def test_new_password_and_confirmation_not_match(self) -> None:
         """Test incorrect password and confirmation not match case."""
         self.add_session_cookie()
-        password = "Dr0wss@p01"
+        password = "Dr0wss@p1_"
         response = self.client.post(
             reverse("user-update-password"),
             {
