@@ -34,4 +34,4 @@ class UserUpdatePasswordForm(UserForm):
             and new_password_confirmation
             and new_password != new_password_confirmation
         ):
-            raise ValidationError("new password and confirmation not match")
+            self.add_error(None, "new password and confirmation not match")

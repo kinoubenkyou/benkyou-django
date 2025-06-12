@@ -1,6 +1,5 @@
 from typing import TYPE_CHECKING
 
-from django.core.exceptions import ValidationError
 from django.forms import CharField, ModelForm, PasswordInput
 from django.views.decorators.debug import sensitive_variables
 
@@ -28,7 +27,7 @@ class UserCreateForm(ModelForm_):
         password = self.cleaned_data.get("password")
         password_confirmation = self.cleaned_data.get("password_confirmation")
         if password and password_confirmation and password != password_confirmation:
-            raise ValidationError("password and confirmation not match")
+            self.add_error(None, "password and confirmation not match")
 
     def save(self, commit: bool = True) -> User:
         """Set email as not verified, set password."""
