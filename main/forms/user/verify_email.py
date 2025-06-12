@@ -2,7 +2,7 @@ from typing import Any
 
 from django.core.cache import cache
 from django.core.exceptions import ValidationError
-from django.forms.fields import CharField
+from django.forms import CharField
 
 from main.forms.user import UserForm
 

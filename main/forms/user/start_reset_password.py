@@ -2,8 +2,7 @@ from typing import Any
 
 from django.contrib.auth.forms import UsernameField
 from django.core.exceptions import ValidationError
-from django.forms.forms import Form
-from django.forms.widgets import TextInput
+from django.forms import Form, TextInput
 
 from main.models import User
 

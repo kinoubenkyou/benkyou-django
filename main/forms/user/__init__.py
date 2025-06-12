@@ -1,7 +1,7 @@
 from typing import Any, Iterable, Mapping
 
 from django.core.files.uploadedfile import UploadedFile
-from django.forms.forms import Form
+from django.forms import Form
 from django.forms.renderers import BaseRenderer
 from django.forms.utils import ErrorList
 from django.utils.datastructures import MultiValueDict

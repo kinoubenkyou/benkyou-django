@@ -1,8 +1,7 @@
 from typing import TYPE_CHECKING
 
 from django.core.exceptions import ValidationError
-from django.forms import CharField, ModelForm
-from django.forms.widgets import PasswordInput
+from django.forms import CharField, ModelForm, PasswordInput
 from django.views.decorators.debug import sensitive_variables
 
 from main.models import User

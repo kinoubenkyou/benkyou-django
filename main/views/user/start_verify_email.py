@@ -1,7 +1,7 @@
 from typing import TYPE_CHECKING
 
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.forms.forms import Form
+from django.forms import Form
 from django.http import HttpResponse
 from django.urls import reverse_lazy
 from django.views.generic import FormView
