@@ -16,6 +16,7 @@ from rest_framework.viewsets import GenericViewSet
 from main.models import User
 from main.serializers.user.create import UserCreateSerializer
 from main.serializers.user.read import UserReadSerializer
+from main.serializers.user.reset_password import UserResetPasswordSerializer
 from main.serializers.user.start_reset_password import UserStartResetPasswordSerializer
 from main.serializers.user.update import UserUpdateSerializer
 from main.serializers.user.update_password import UserUpdatePasswordSerializer
@@ -41,6 +42,7 @@ class UserViewSet(
         "retrieve": UserReadSerializer,
         "update": UserUpdateSerializer,
         "partial_update": UserUpdateSerializer,
+        "reset_password": UserResetPasswordSerializer,
         "start_reset_password": UserStartResetPasswordSerializer,
         "update_password": UserUpdatePasswordSerializer,
         "verify_email": UserVerifyEmailSerializer,
@@ -60,6 +62,17 @@ class UserViewSet(
         user = self.request.user
         self.check_object_permissions(self.request, user)
         return user  # type: ignore[return-value]
+
+    @action(detail=False, methods=["post"])
+    def reset_password(self, request: Request) -> Response:
+        """Set user password, delete the token from cache."""
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        user = User.objects.get(username=serializer.validated_data["username"])
+        user.set_password(serializer.validated_data["password"])
+        user.save()
+        cache.delete(f"reset_user_password.{serializer.validated_data['username']}")
+        return Response()
 
     @action(detail=False, methods=["post"])
     def start_reset_password(self, request: Request) -> Response:
