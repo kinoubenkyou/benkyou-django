@@ -90,7 +90,7 @@ class UserViewSet(
 
     @action(detail=False, methods=["post"])
     def verify_email(self, request: Request) -> Response:
-        """Set the email as verified, delete the token from the cache."""
+        """Set the email as verified, delete the token from cache."""
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         self.request.user.email_is_verified = True  # type: ignore[union-attr]
