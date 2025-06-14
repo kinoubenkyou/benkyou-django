@@ -16,9 +16,11 @@ from rest_framework.viewsets import GenericViewSet
 from main.models import User
 from main.serializers.user.create import UserCreateSerializer
 from main.serializers.user.read import UserReadSerializer
+from main.serializers.user.start_reset_password import UserStartResetPasswordSerializer
 from main.serializers.user.update import UserUpdateSerializer
 from main.serializers.user.update_password import UserUpdatePasswordSerializer
 from main.serializers.user.verify_email import UserVerifyEmailSerializer
+from main.tasks.start_reset_user_password import start_reset_user_password
 from main.tasks.start_verify_user_email import start_verify_user_email
 from main.viewsets.permission_mixin import PermissionMixin
 from main.viewsets.serializer_mixin import SerializerMixin
@@ -39,6 +41,7 @@ class UserViewSet(
         "retrieve": UserReadSerializer,
         "update": UserUpdateSerializer,
         "partial_update": UserUpdateSerializer,
+        "start_reset_password": UserStartResetPasswordSerializer,
         "update_password": UserUpdatePasswordSerializer,
         "verify_email": UserVerifyEmailSerializer,
     }
@@ -57,6 +60,16 @@ class UserViewSet(
         user = self.request.user
         self.check_object_permissions(self.request, user)
         return user  # type: ignore[return-value]
+
+    @action(detail=False, methods=["post"])
+    def start_reset_password(self, request: Request) -> Response:
+        """Queue task to start reset password."""
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        start_reset_user_password.delay(
+            request.get_host(), request.scheme, serializer.validated_data["username"]
+        )
+        return Response()
 
     @action(detail=False, methods=["post"])
     def start_verify_email(self, request: Request) -> Response:
