@@ -12,6 +12,7 @@ from main.views.api.user.token import UserTokenApiView
 from main.views.user.create import UserCreateView
 from main.views.user.delete import UserDeleteView
 from main.views.user.read import UserReadView
+from main.views.user.reset_password import UserResetPasswordView
 from main.views.user.sign_in import UserSignInView
 from main.views.user.sign_out import UserSignOutView
 from main.views.user.start_reset_password import UserStartResetPasswordView
@@ -31,6 +32,11 @@ urlpatterns = [
     path("user/", UserReadView.as_view(), name="user-read"),
     path("user/create/", UserCreateView.as_view(), name="user-create"),
     path("user/delete/", UserDeleteView.as_view(), name="user-delete"),
+    path(
+        "user/reset_password",
+        UserResetPasswordView.as_view(),
+        name="user-reset-password",
+    ),
     path("user/sign_in/", UserSignInView.as_view(), name="user-sign-in"),
     path("user/sign_out/", UserSignOutView.as_view(), name="user-sign-out"),
     path(

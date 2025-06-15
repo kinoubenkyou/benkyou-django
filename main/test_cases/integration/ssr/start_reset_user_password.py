@@ -31,8 +31,8 @@ class StartResetUserPasswordSsrTestCase(SsrTestCase):
         token = cache.get("reset_user_password.username1", sentinel)
         self.assertIsNot(token, sentinel)
         self.assertEqual(
-            "http://testserver/user/reset_password?"
-            f"{urlencode({'token': token, 'username': 'username1'})}",
+            f"http://testserver{reverse('user-reset-password')}"
+            f"?{urlencode({'token': token, 'username': 'username1'})}",
             mail.outbox[0].body,
         )
         self.assertEqual(mail.outbox[0].subject, "Reset Password")
