@@ -16,12 +16,6 @@ class ReadView(DetailView_):
 
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
         """Add object's field name and value to context."""
-        DetailView.get_context_data(self, **kwargs)
         context_data = super().get_context_data(**kwargs)
-        context_data.update(
-            object_fields=tuple(
-                (field_name, getattr(self.object, field_name))
-                for field_name in self.field_names
-            )
-        )
+        context_data.update(field_names=self.field_names)
         return context_data
