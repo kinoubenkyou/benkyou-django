@@ -10,7 +10,7 @@ from main.test_cases.integration.ssr import SsrTestCase
 
 
 class ResetUserPasswordSsrTestCase(SsrTestCase):
-    fixtures = ["user"]
+    fixtures = ["users"]
 
     def test_get(self) -> None:
         """Test get form."""

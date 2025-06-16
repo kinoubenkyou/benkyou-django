@@ -6,7 +6,7 @@ from main.test_cases.integration.api import ApiTestCase
 
 
 class CreateUserTokenApiTestCase(ApiTestCase):
-    fixtures = ["user"]
+    fixtures = ["users"]
 
     def test(self) -> None:
         """Test success case."""
