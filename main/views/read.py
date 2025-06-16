@@ -2,10 +2,8 @@ from typing import TYPE_CHECKING, Any
 
 from django.views.generic.detail import DetailView
 
-from main.models import User
-
 if TYPE_CHECKING:
-    DetailView_ = DetailView[User]  # pragma: no cover
+    DetailView_ = DetailView[Any]  # pragma: no cover
 else:
     DetailView_ = DetailView
 
