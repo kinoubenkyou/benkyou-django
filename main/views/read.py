@@ -13,7 +13,7 @@ class ReadView(DetailView_):
     template_name = "read.html"
 
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
-        """Add object's field name and value to context."""
+        """Add object's field names to context."""
         context_data = super().get_context_data(**kwargs)
         context_data.update(field_names=self.field_names)
         return context_data
