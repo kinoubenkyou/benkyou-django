@@ -127,6 +127,8 @@ class ResetUserPasswordSsrTestCase(SsrTestCase):
             },
         )
         self.assertEqual(
-            len(fromstring(response.content).xpath(".//*[text()='username not found']")),  # type: ignore[no-untyped-call]
+            len(
+                fromstring(response.content).xpath(".//*[text()='username not found']")  # type: ignore[no-untyped-call]
+            ),
             1,
         )

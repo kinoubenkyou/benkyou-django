@@ -22,7 +22,9 @@ class ReadUserSsrTestCase(SsrTestCase):
         response = self.client.get(reverse("user-read"))
         html_element = fromstring(response.content)  # type: ignore[no-untyped-call]
         self.assertEqual(
-            len(html_element.xpath(".//*[text()='last_login: Jan. 1, 2000, midnight']")),
+            len(
+                html_element.xpath(".//*[text()='last_login: Jan. 1, 2000, midnight']")
+            ),
             1,
         )
         self.assertEqual(
