@@ -10,7 +10,7 @@ from main.test_cases.integration.ssr import SsrTestCase
 
 
 class VerifyUserEmailSsrTestCase(SsrTestCase):
-    fixtures = ["session", "user"]
+    fixtures = ["sessions", "users"]
 
     def test_authentication_required(self) -> None:
         """Test authentication required."""
@@ -30,10 +30,10 @@ class VerifyUserEmailSsrTestCase(SsrTestCase):
             f"{reverse('user-verify-email')}?{urlencode({'token': token})}"
         )
         xpath = f"""
-        //form
+        .//form
         [@method='post']
-        [//input[@name="token" and @value="{token}"]]
-        [//input[@type='submit']]
+        [.//input[@name="token" and @value="{token}"]]
+        [.//input[@type='submit']]
         """
         self.assertEqual(len(fromstring(response.content).xpath(xpath)), 1)  # type: ignore[no-untyped-call]
 
@@ -59,7 +59,7 @@ class VerifyUserEmailSsrTestCase(SsrTestCase):
             {"token": f"{token}_"},
         )
         self.assertEqual(
-            len(fromstring(response.content).xpath("//*[text()='incorrect token']")),  # type: ignore[no-untyped-call]
+            len(fromstring(response.content).xpath(".//*[text()='incorrect token']")),  # type: ignore[no-untyped-call]
             1,
         )
 
@@ -73,6 +73,6 @@ class VerifyUserEmailSsrTestCase(SsrTestCase):
             {"token": token},
         )
         self.assertEqual(
-            len(fromstring(response.content).xpath("//*[text()='token not found']")),  # type: ignore[no-untyped-call]
+            len(fromstring(response.content).xpath(".//*[text()='token not found']")),  # type: ignore[no-untyped-call]
             1,
         )

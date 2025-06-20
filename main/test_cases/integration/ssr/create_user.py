@@ -13,15 +13,15 @@ class CreateUserSsrTestCase(SsrTestCase):
         """Test get form."""
         response = self.client.get(reverse("user-create"))
         xpath = """
-        //form
+        .//form
         [@method='post']
-        [//input[@name='username']]
-        [//input[@name='last_name']]
-        [//input[@name='first_name']]
-        [//input[@name='email']]
-        [//input[@name='password']]
-        [//input[@name='password_confirmation']]
-        [//input[@type='submit']]
+        [.//input[@name='username']]
+        [.//input[@name='last_name']]
+        [.//input[@name='first_name']]
+        [.//input[@name='email']]
+        [.//input[@name='password']]
+        [.//input[@name='password_confirmation']]
+        [.//input[@type='submit']]
         """
         self.assertEqual(len(fromstring(response.content).xpath(xpath)), 1)  # type: ignore[no-untyped-call]
 
@@ -79,7 +79,7 @@ class CreateUserSsrTestCase(SsrTestCase):
         self.assertEqual(
             len(
                 fromstring(response.content).xpath(  # type: ignore[no-untyped-call]
-                    "//*[text()='password and confirmation not match']"
+                    ".//*[text()='password and confirmation not match']"
                 )
             ),
             1,

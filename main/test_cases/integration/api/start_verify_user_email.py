@@ -9,7 +9,7 @@ from main.test_cases.integration.api import ApiTestCase
 
 
 class StartVerifyUserEmailApiTestCase(ApiTestCase):
-    fixtures = ["user"]
+    fixtures = ["users"]
 
     def test_authentication_required(self) -> None:
         """Test authentication required."""

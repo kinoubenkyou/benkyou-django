@@ -6,7 +6,7 @@ from main.test_cases.integration.ssr import SsrTestCase
 
 
 class ReadUserSsrTestCase(SsrTestCase):
-    fixtures = ["session", "user"]
+    fixtures = ["sessions", "users"]
 
     def test_authentication_required(self) -> None:
         """Test authentication required."""
@@ -22,27 +22,29 @@ class ReadUserSsrTestCase(SsrTestCase):
         response = self.client.get(reverse("user-read"))
         html_element = fromstring(response.content)  # type: ignore[no-untyped-call]
         self.assertEqual(
-            len(html_element.xpath("//*[text()='last_login: Jan. 1, 2000, midnight']")),
-            1,
-        )
-        self.assertEqual(
-            len(html_element.xpath("//*[text()='username: username1']")), 1
-        )
-        self.assertEqual(
-            len(html_element.xpath("//*[text()='first_name: first_name1']")), 1
-        )
-        self.assertEqual(
-            len(html_element.xpath("//*[text()='last_name: last_name1']")), 1
-        )
-        self.assertEqual(
-            len(html_element.xpath("//*[text()='email: email1@email.com']")), 1
-        )
-        self.assertEqual(
             len(
-                html_element.xpath("//*[text()='date_joined: Jan. 1, 2000, midnight']")
+                html_element.xpath(".//*[text()='last_login: Jan. 1, 2000, midnight']")
             ),
             1,
         )
         self.assertEqual(
-            len(html_element.xpath("//*[text()='email_is_verified: False']")), 1
+            len(html_element.xpath(".//*[text()='username: username1']")), 1
+        )
+        self.assertEqual(
+            len(html_element.xpath(".//*[text()='first_name: first_name1']")), 1
+        )
+        self.assertEqual(
+            len(html_element.xpath(".//*[text()='last_name: last_name1']")), 1
+        )
+        self.assertEqual(
+            len(html_element.xpath(".//*[text()='email: email1@email.com']")), 1
+        )
+        self.assertEqual(
+            len(
+                html_element.xpath(".//*[text()='date_joined: Jan. 1, 2000, midnight']")
+            ),
+            1,
+        )
+        self.assertEqual(
+            len(html_element.xpath(".//*[text()='email_is_verified: False']")), 1
         )

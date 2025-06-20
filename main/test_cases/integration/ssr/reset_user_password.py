@@ -10,7 +10,7 @@ from main.test_cases.integration.ssr import SsrTestCase
 
 
 class ResetUserPasswordSsrTestCase(SsrTestCase):
-    fixtures = ["user"]
+    fixtures = ["users"]
 
     def test_get(self) -> None:
         """Test get form."""
@@ -21,11 +21,11 @@ class ResetUserPasswordSsrTestCase(SsrTestCase):
             f"?{urlencode({'token': token, 'username': 'username1'})}"
         )
         xpath = f"""
-        //form
+        .//form
         [@method='post']
-        [//input[@name="username" and @value="username1"]]
-        [//input[@name="token" and @value="{token}"]]
-        [//input[@type='submit']]
+        [.//input[@name="username" and @value="username1"]]
+        [.//input[@name="token" and @value="{token}"]]
+        [.//input[@type='submit']]
         """
         self.assertEqual(len(fromstring(response.content).xpath(xpath)), 1)  # type: ignore[no-untyped-call]
 
@@ -63,7 +63,7 @@ class ResetUserPasswordSsrTestCase(SsrTestCase):
             },
         )
         self.assertEqual(
-            len(fromstring(response.content).xpath("//*[text()='incorrect token']")),  # type: ignore[no-untyped-call]
+            len(fromstring(response.content).xpath(".//*[text()='incorrect token']")),  # type: ignore[no-untyped-call]
             1,
         )
 
@@ -85,7 +85,7 @@ class ResetUserPasswordSsrTestCase(SsrTestCase):
         self.assertEqual(
             len(
                 fromstring(response.content).xpath(  # type: ignore[no-untyped-call]
-                    "//*[text()='password and confirmation not match']"
+                    ".//*[text()='password and confirmation not match']"
                 )
             ),
             1,
@@ -107,7 +107,7 @@ class ResetUserPasswordSsrTestCase(SsrTestCase):
             },
         )
         self.assertEqual(
-            len(fromstring(response.content).xpath("//*[text()='token not found']")),  # type: ignore[no-untyped-call]
+            len(fromstring(response.content).xpath(".//*[text()='token not found']")),  # type: ignore[no-untyped-call]
             1,
         )
 
@@ -127,6 +127,8 @@ class ResetUserPasswordSsrTestCase(SsrTestCase):
             },
         )
         self.assertEqual(
-            len(fromstring(response.content).xpath("//*[text()='username not found']")),  # type: ignore[no-untyped-call]
+            len(
+                fromstring(response.content).xpath(".//*[text()='username not found']")  # type: ignore[no-untyped-call]
+            ),
             1,
         )

@@ -8,7 +8,7 @@ from main.test_cases.integration.ssr import SsrTestCase
 
 
 class StartVerifyUserEmailSsrTestCase(SsrTestCase):
-    fixtures = ["session", "user"]
+    fixtures = ["sessions", "users"]
 
     def test_authentication_required(self) -> None:
         """Test authentication required."""

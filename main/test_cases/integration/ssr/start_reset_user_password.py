@@ -8,16 +8,16 @@ from main.test_cases.integration.ssr import SsrTestCase
 
 
 class StartResetUserPasswordSsrTestCase(SsrTestCase):
-    fixtures = ["user"]
+    fixtures = ["users"]
 
     def test_get(self) -> None:
         """Test get form."""
         response = self.client.get(reverse("user-start-reset-password"))
         xpath = """
-        //form
+        .//form
         [@method='post']
-        [//input[@name='username']]
-        [//input[@type='submit']]
+        [.//input[@name='username']]
+        [.//input[@type='submit']]
         """
         self.assertEqual(len(fromstring(response.content).xpath(xpath)), 1)  # type: ignore[no-untyped-call]
 
@@ -44,6 +44,8 @@ class StartResetUserPasswordSsrTestCase(SsrTestCase):
             reverse("user-start-reset-password"), {"username": "username1_"}
         )
         self.assertEqual(
-            len(fromstring(response.content).xpath("//*[text()='username not found']")),  # type: ignore[no-untyped-call]
+            len(
+                fromstring(response.content).xpath(".//*[text()='username not found']")  # type: ignore[no-untyped-call]
+            ),
             1,
         )
