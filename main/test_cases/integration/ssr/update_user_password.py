@@ -23,12 +23,12 @@ class UpdateUserPasswordSsrTestCase(SsrTestCase):
         self.add_session_cookie()
         response = self.client.get(reverse("user-update-password"))
         xpath = """
-        //form
+        .//form
         [@method='post']
-        [//input[@name='old_password']]
-        [//input[@name='new_password']]
-        [//input[@name='new_password_confirmation']]
-        [//input[@type='submit']]
+        [.//input[@name='old_password']]
+        [.//input[@name='new_password']]
+        [.//input[@name='new_password_confirmation']]
+        [.//input[@type='submit']]
         """
         self.assertEqual(len(fromstring(response.content).xpath(xpath)), 1)  # type: ignore[no-untyped-call]
 
@@ -62,7 +62,7 @@ class UpdateUserPasswordSsrTestCase(SsrTestCase):
         self.assertEqual(
             len(
                 fromstring(response.content).xpath(  # type: ignore[no-untyped-call]
-                    "//*[text()='incorrect old password']"
+                    ".//*[text()='incorrect old password']"
                 )
             ),
             1,
@@ -83,7 +83,7 @@ class UpdateUserPasswordSsrTestCase(SsrTestCase):
         self.assertEqual(
             len(
                 fromstring(response.content).xpath(  # type: ignore[no-untyped-call]
-                    "//*[text()='new password and confirmation not match']"
+                    ".//*[text()='new password and confirmation not match']"
                 )
             ),
             1,
