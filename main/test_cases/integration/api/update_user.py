@@ -18,21 +18,15 @@ class UpdateUserApiTestCase(ApiTestCase):
         user = User.objects.get(pk=1)
         self.client.force_authenticate(user=user)
         username = "username1_"
-        last_name = "last_name1_"
-        first_name = "first_name1_"
         email = "email01@email.com"
         response = self.client.put(
             reverse("api-user"),
             data={
                 "username": username,
-                "last_name": last_name,
-                "first_name": first_name,
                 "email": email,
             },
         )
         self.assertEqual(response.status_code, HTTP_200_OK)
         user.refresh_from_db()
         self.assertEqual(user.username, username)
-        self.assertEqual(user.last_name, last_name)
-        self.assertEqual(user.first_name, first_name)
         self.assertEqual(user.email, email)

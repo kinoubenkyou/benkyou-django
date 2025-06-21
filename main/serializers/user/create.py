@@ -13,8 +13,6 @@ class UserCreateSerializer(ModelSerializer[User]):
         fields = (
             "password",
             "username",
-            "first_name",
-            "last_name",
             "email",
         )
 

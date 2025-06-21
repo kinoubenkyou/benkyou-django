@@ -4,12 +4,8 @@
     "pk": 1,
     "fields": {
       "password": "pbkdf2_sha256$870000$2XRgPtTUA5bRgo8fnSipeh$lLheEv/afSGiHYoAyZLs3Rp5X6tZp6vEWL9fMPvuO6g=",
-      "last_login": "2000-01-01T00:00:00Z",
       "username": "username1",
-      "first_name": "first_name1",
-      "last_name": "last_name1",
       "email": "email1@email.com",
-      "date_joined": "2000-01-01T00:00:00Z",
       "email_is_verified": false
     }
   }
