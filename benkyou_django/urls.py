@@ -1,5 +1,4 @@
 from django.conf import settings
-from django.contrib import admin
 from django.urls import path
 from django.urls.conf import include
 from drf_spectacular.views import (
@@ -26,7 +25,6 @@ router = SingleResourceRouter()
 router.register(r"user", UserViewSet, basename="api-user")
 
 urlpatterns = [
-    path("admin/", admin.site.urls),
     path("api/", include(router.urls)),
     path("api/user/token/", UserTokenApiView.as_view(), name="api-user-token"),
     path("user/", UserReadView.as_view(), name="user-read"),

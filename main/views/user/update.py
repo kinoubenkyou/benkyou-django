@@ -15,7 +15,7 @@ else:
 
 
 class UserUpdateView(LoginRequiredMixin, UpdateView_):
-    fields = ("username", "first_name", "last_name", "email")
+    fields = ("username", "email")
     model = User
     success_url = reverse_lazy("user-read")
     template_name = "form.html"

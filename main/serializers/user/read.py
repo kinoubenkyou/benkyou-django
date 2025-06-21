@@ -8,10 +8,6 @@ class UserReadSerializer(ModelSerializer[User]):
         model = User
         fields = (
             "username",
-            "last_login",
-            "first_name",
-            "last_name",
             "email",
-            "date_joined",
             "email_is_verified",
         )

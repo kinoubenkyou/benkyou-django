@@ -8,7 +8,5 @@ class UserUpdateSerializer(ModelSerializer[User]):
         model = User
         fields = (
             "username",
-            "first_name",
-            "last_name",
             "email",
         )

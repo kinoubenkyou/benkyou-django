@@ -1,9 +1,12 @@
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
 from django.db.models import EmailField
 from django.db.models.fields import BooleanField, CharField
 
 
-class User(AbstractUser):
+class User(AbstractBaseUser):
+    USERNAME_FIELD = "username"
     email = EmailField(unique=True)
     email_is_verified = BooleanField()
+    objects = BaseUserManager()
+    password = CharField()
     username = CharField(unique=True)

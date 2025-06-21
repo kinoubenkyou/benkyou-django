@@ -19,7 +19,7 @@ class UserCreateForm(ModelForm_):
 
     class Meta:
         model = User
-        fields = ("username", "first_name", "last_name", "email")
+        fields = ("username", "email")
 
     @sensitive_variables("password", "password_confirmation")
     def clean(self) -> None:
