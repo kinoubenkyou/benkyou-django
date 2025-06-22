@@ -9,11 +9,11 @@ else:
 
 
 class ReadView(DetailView_):
-    field_names: tuple[str, ...]
+    object_fields: tuple[str, ...]
     template_name = "read.html"
 
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
         """Add object's field names to context."""
         context_data = super().get_context_data(**kwargs)
-        context_data.update(field_names=self.field_names)
+        context_data.update(object_fields=self.object_fields)
         return context_data

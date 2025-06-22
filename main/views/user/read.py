@@ -8,7 +8,7 @@ from main.views.read import ReadView
 
 
 class UserReadView(LoginRequiredMixin, ReadView):
-    field_names = (
+    object_fields = (
         "username",
         "email",
         "email_is_verified",
