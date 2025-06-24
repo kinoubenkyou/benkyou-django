@@ -7,6 +7,7 @@ __all__ = [
     "DeleteUserTokenApiTestCase",
     "ReadUserApiTestCase",
     "ReadUserSsrTestCase",
+    "ResetUserPasswordApiTestCase",
     "ResetUserPasswordSsrTestCase",
     "SignUserInSsrTestCase",
     "SignUserOutSsrTestCase",
@@ -27,6 +28,9 @@ from main.test_cases.integration.api.create_user_token import CreateUserTokenApi
 from main.test_cases.integration.api.delete_user import DeleteUserApiTestCase
 from main.test_cases.integration.api.delete_user_token import DeleteUserTokenApiTestCase
 from main.test_cases.integration.api.read_user import ReadUserApiTestCase
+from main.test_cases.integration.api.reset_user_password import (
+    ResetUserPasswordApiTestCase,
+)
 from main.test_cases.integration.api.start_reset_user_password import (
     StartResetUserPasswordApiTestCase,
 )
