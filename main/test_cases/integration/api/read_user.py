@@ -19,6 +19,11 @@ class ReadUserApiTestCase(ApiTestCase):
         response = self.client.get(reverse("api-user"))
         self.assertEqual(response.status_code, HTTP_200_OK)
         actual_data = response.json()
-        self.assertEqual(actual_data["username"], "username1")
-        self.assertEqual(actual_data["email"], "email1@email.com")
-        self.assertEqual(actual_data["email_is_verified"], False)
+        self.assertEqual(
+            actual_data,
+            {
+                "username": "username1",
+                "email": "email1@email.com",
+                "email_is_verified": False,
+            },
+        )

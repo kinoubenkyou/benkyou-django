@@ -2,9 +2,7 @@ from typing import Any
 
 from django.core.cache import cache
 from django.core.exceptions import ValidationError
-from django.forms import Form
-from django.forms.fields import CharField
-from django.forms.widgets import PasswordInput
+from django.forms import CharField, Form, PasswordInput
 from django.views.decorators.debug import sensitive_variables
 
 from main.models import User

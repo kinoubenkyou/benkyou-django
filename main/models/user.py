@@ -1,6 +1,5 @@
 from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
-from django.db.models import EmailField
-from django.db.models.fields import BooleanField, CharField
+from django.db.models import BooleanField, CharField, EmailField
 
 
 class User(AbstractBaseUser):
