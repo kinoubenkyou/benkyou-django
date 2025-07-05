@@ -1,5 +1,3 @@
-from typing import Any
-
 from django.core.cache import cache
 from rest_framework.decorators import action
 from rest_framework.mixins import (
@@ -34,8 +32,17 @@ class UserViewSet(
     UpdateModelMixin,
     PermissionMixin,
     SerializerMixin,
-    GenericViewSet[Any],
+    GenericViewSet[User],
 ):
+    permission_dict = {
+        "retrieve": (IsAuthenticated,),
+        "update": (IsAuthenticated,),
+        "partial_update": (IsAuthenticated,),
+        "destroy": (IsAuthenticated,),
+        "start_verify_email": (IsAuthenticated,),
+        "update_password": (IsAuthenticated,),
+        "verify_email": (IsAuthenticated,),
+    }
     queryset = User.objects.all()
     serializer_dict = {
         "create": UserCreateSerializer,
@@ -46,15 +53,6 @@ class UserViewSet(
         "start_reset_password": UserStartResetPasswordSerializer,
         "update_password": UserUpdatePasswordSerializer,
         "verify_email": UserVerifyEmailSerializer,
-    }
-    permission_dict = {
-        "retrieve": (IsAuthenticated,),
-        "update": (IsAuthenticated,),
-        "partial_update": (IsAuthenticated,),
-        "destroy": (IsAuthenticated,),
-        "start_verify_email": (IsAuthenticated,),
-        "update_password": (IsAuthenticated,),
-        "verify_email": (IsAuthenticated,),
     }
 
     def get_object(self) -> User:
