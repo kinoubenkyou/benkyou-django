@@ -7,6 +7,7 @@ __all__ = [
     "DeleteUserTokenApiTestCase",
     "ListOrganizationsApiTestCase",
     "ListOrganizationsSsrTestCase",
+    "ReadOrganizationSsrTestCase",
     "ReadOrganizationsApiTestCase",
     "ReadOrganizationsSsrTestCase",
     "ReadUserApiTestCase",
@@ -53,6 +54,9 @@ from main.test_cases.integration.api.user.update_password import (
     UpdateUserPasswordApiTestCase,
 )
 from main.test_cases.integration.api.user.verify_email import VerifyUserEmailApiTestCase
+from main.test_cases.integration.ssr.organization.read import (
+    ReadOrganizationSsrTestCase,
+)
 from main.test_cases.integration.ssr.organization.switch import (
     SwitchOrganizationSsrTestCase,
 )

@@ -6,5 +6,13 @@
       "session_data": ".eJxVjMsOwiAQRf-FtSE8HKAu3fcbyMwAUjU0Ke3K-O_apAvd3nPOfYmI21rj1vMSpyQuQovT70bIj9x2kO7YbrPkua3LRHJX5EG7HOeUn9fD_Tuo2Ou3zvbstUYIBghhICIfStCmcAanKBVXCmZHCRT7AbxRhTWTJVCOLFvx_gD0zjiH:1tdPb1:xZK_SQJz_qa5t-8cQvmNCUWiAM1AJ3J_gmL91366Uus",
       "expire_date": "3000-01-01T00:00:00Z"
     }
+  },
+  {
+    "model": "sessions.session",
+    "pk": "8mxcmv2hj2apvdbtzailbcbyxrmnwzee",
+    "fields": {
+      "session_data": ".eJxVjjsOwjAQRO_iGln2xiaGkp4zRJP1OjEgW8qnAXF3CKKAdt7M6D1Uh3UZu3WWqctRHZVVu9-sB1-lbCBeUIaquZZlyr3eKvpLZ32uUW6nb_fvYMQ8vtfwPcUgphXysREKzsMagg_JUzLsm0ZcCpwsLPPB7Q0Fihzg2ADtZlWnASXfseRaPq72-QKKlz8C:1ucf72:br9JC_ci8uf1IPc40AIn8GL7aBuEm6zfBny2IktoSrk",
+      "expire_date": "3000-01-01T00:00:00Z"
+    }
   }
 ]
