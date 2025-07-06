@@ -5,6 +5,7 @@ __all__ = [
     "DeleteUserApiTestCase",
     "DeleteUserSsrTestCase",
     "DeleteUserTokenApiTestCase",
+    "ReadOrganizationsSsrTestCase",
     "ReadUserApiTestCase",
     "ReadUserSsrTestCase",
     "ResetUserPasswordApiTestCase",
@@ -44,6 +45,9 @@ from main.test_cases.integration.api.update_user_password import (
 from main.test_cases.integration.api.verify_user_email import VerifyUserEmailApiTestCase
 from main.test_cases.integration.ssr.create_user import CreateUserSsrTestCase
 from main.test_cases.integration.ssr.delete_user import DeleteUserSsrTestCase
+from main.test_cases.integration.ssr.read_organizations import (
+    ReadOrganizationsSsrTestCase,
+)
 from main.test_cases.integration.ssr.read_user import ReadUserSsrTestCase
 from main.test_cases.integration.ssr.reset_user_password import (
     ResetUserPasswordSsrTestCase,
