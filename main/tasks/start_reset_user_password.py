@@ -13,7 +13,7 @@ from main.models import User
 def start_reset_user_password(netloc: str, scheme: str, username: str) -> None:
     """Set token to reset user password in cache, send email."""
     token = token_urlsafe()
-    cache.set(f"reset_user_password.{username}", token, 600)
+    cache.set(f"reset_user_password.{username}", token)
     send_mail(
         "Reset Password",
         urlunparse(

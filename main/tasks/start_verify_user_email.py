@@ -14,7 +14,7 @@ from main.models import User
 def start_verify_user_email(netloc: str, scheme: str, user_id: int) -> None:
     """Set token to verify user email in cache, send email."""
     token = token_urlsafe()
-    cache.set(f"verify_user_email.{user_id}", token, 600)
+    cache.set(f"verify_user_email.{user_id}", token)
     send_mail(
         "Verify Email",
         urlunparse(
