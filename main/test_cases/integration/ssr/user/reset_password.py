@@ -15,7 +15,7 @@ class ResetUserPasswordSsrTestCase(SsrTestCase):
     def test_get(self) -> None:
         """Test get form."""
         token = token_urlsafe()
-        cache.set("reset_user_password.username1", token, 600)
+        cache.set("reset_user_password.username1", token)
         response = self.client.get(
             f"{reverse('user-reset-password')}"
             f"?{urlencode({'token': token, 'username': 'username1'})}"
@@ -32,7 +32,7 @@ class ResetUserPasswordSsrTestCase(SsrTestCase):
     def test_post(self) -> None:
         """Test submit form."""
         token = token_urlsafe()
-        cache.set("reset_user_password.username1", token, 600)
+        cache.set("reset_user_password.username1", token)
         password = "Dr0wss@p1_"
         response = self.client.post(
             f"{reverse('user-reset-password')}"
@@ -50,7 +50,7 @@ class ResetUserPasswordSsrTestCase(SsrTestCase):
     def test_incorrect_token(self) -> None:
         """Test incorrect token case."""
         token = token_urlsafe()
-        cache.set("reset_user_password.username1", token, 600)
+        cache.set("reset_user_password.username1", token)
         password = "Dr0wss@p1_"
         response = self.client.post(
             f"{reverse('user-reset-password')}"
@@ -70,7 +70,7 @@ class ResetUserPasswordSsrTestCase(SsrTestCase):
     def test_password_and_confirmation_not_match(self) -> None:
         """Test incorrect password and confirmation not match case."""
         token = token_urlsafe()
-        cache.set("reset_user_password.username1", token, 600)
+        cache.set("reset_user_password.username1", token)
         password = "Dr0wss@p1_"
         response = self.client.post(
             f"{reverse('user-reset-password')}"
@@ -114,7 +114,7 @@ class ResetUserPasswordSsrTestCase(SsrTestCase):
     def test_username_not_found(self) -> None:
         """Test username not found case."""
         token = token_urlsafe()
-        cache.set("reset_user_password.username1", token, 600)
+        cache.set("reset_user_password.username1", token)
         password = "Dr0wss@p1_"
         response = self.client.post(
             f"{reverse('user-reset-password')}"

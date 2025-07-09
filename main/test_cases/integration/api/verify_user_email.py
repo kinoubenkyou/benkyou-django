@@ -25,7 +25,7 @@ class VerifyUserEmailApiTestCase(ApiTestCase):
         user = User.objects.get(pk=1)
         self.client.force_authenticate(user=user)
         token = token_urlsafe()
-        cache.set("verify_user_email.1", token, 600)
+        cache.set("verify_user_email.1", token)
         response = self.client.post(
             reverse("api-user-verify-email"), data={"token": token}
         )
@@ -38,7 +38,7 @@ class VerifyUserEmailApiTestCase(ApiTestCase):
         user = User.objects.get(pk=1)
         self.client.force_authenticate(user=user)
         token = token_urlsafe()
-        cache.set("verify_user_email.1", token, 600)
+        cache.set("verify_user_email.1", token)
         response = self.client.post(
             reverse("api-user-verify-email"), data={"token": f"{token}_"}
         )

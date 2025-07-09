@@ -17,7 +17,7 @@ class ResetUserPasswordApiTestCase(ApiTestCase):
     def test(self) -> None:
         """Test success case."""
         token = token_urlsafe()
-        cache.set("reset_user_password.username1", token, 600)
+        cache.set("reset_user_password.username1", token)
         password = "Dr0wss@p1_"
         response = self.client.post(
             reverse("api-user-reset-password"),
@@ -29,7 +29,7 @@ class ResetUserPasswordApiTestCase(ApiTestCase):
     def test_incorrect_token(self) -> None:
         """Test incorrect token case."""
         token = token_urlsafe()
-        cache.set("reset_user_password.username1", token, 600)
+        cache.set("reset_user_password.username1", token)
         response = self.client.post(
             reverse("api-user-reset-password"),
             data={
@@ -57,7 +57,7 @@ class ResetUserPasswordApiTestCase(ApiTestCase):
     def test_username_not_found(self) -> None:
         """Test username not found case."""
         token = token_urlsafe()
-        cache.set("reset_user_password.username1", token, 600)
+        cache.set("reset_user_password.username1", token)
         password = "Dr0wss@p1_"
         response = self.client.post(
             reverse("api-user-reset-password"),

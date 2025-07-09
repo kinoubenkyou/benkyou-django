@@ -25,7 +25,7 @@ class VerifyUserEmailSsrTestCase(SsrTestCase):
         """Test get form."""
         self.add_session_cookie()
         token = token_urlsafe()
-        cache.set("verify_user_email.1", token, 600)
+        cache.set("verify_user_email.1", token)
         response = self.client.get(
             f"{reverse('user-verify-email')}?{urlencode({'token': token})}"
         )
@@ -41,7 +41,7 @@ class VerifyUserEmailSsrTestCase(SsrTestCase):
         """Test submit form."""
         self.add_session_cookie()
         token = token_urlsafe()
-        cache.set("verify_user_email.1", token, 600)
+        cache.set("verify_user_email.1", token)
         response = self.client.post(
             f"{reverse('user-verify-email')}?{urlencode({'token': token})}",
             {"token": token},
@@ -53,7 +53,7 @@ class VerifyUserEmailSsrTestCase(SsrTestCase):
         """Test incorrect token case."""
         self.add_session_cookie()
         token = token_urlsafe()
-        cache.set("verify_user_email.1", token, 600)
+        cache.set("verify_user_email.1", token)
         response = self.client.post(
             f"{reverse('user-verify-email')}?{urlencode({'token': f'{token}_'})}",
             {"token": f"{token}_"},
