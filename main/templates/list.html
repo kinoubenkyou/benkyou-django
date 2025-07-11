@@ -1,0 +1,41 @@
+{% extends "html.html" %}
+{% load library %}
+
+{% block body %}
+    <form method="get">
+        {{ form }}
+        <input type="submit">
+    </form>
+    <table>
+        <thead>
+            <tr>
+                {% for object_field in object_fields %}
+                    <th>{{ object_field }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for object in object_list %}
+                <tr>
+                    {% for object_field in object_fields %}
+                        <td>{{ object|get_attribute:object_field }}</td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <ul>
+        <li>object count: {{ paginator.count }}</li>
+        <li>page count: {{ paginator.num_pages }}</li>
+        <li>
+            page:
+            {% if page_obj.has_previous %}
+                <a href="{% querystring page=page_obj.previous_page_number %}">previous</a>
+            {% endif %}
+            {{ page_obj.number }}
+            {% if page_obj.has_next %}
+                <a href="{% querystring page=page_obj.next_page_number %}">next</a>
+            {% endif %}
+        </li>
+    </ul>
+{% endblock %}
