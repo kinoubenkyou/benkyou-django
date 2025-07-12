@@ -25,25 +25,25 @@ __all__ = [
     "VerifyUserEmailSsrTestCase",
 ]
 
-from main.test_cases.integration.api.create_user import CreateUserApiTestCase
-from main.test_cases.integration.api.create_user_token import CreateUserTokenApiTestCase
-from main.test_cases.integration.api.delete_user import DeleteUserApiTestCase
-from main.test_cases.integration.api.delete_user_token import DeleteUserTokenApiTestCase
-from main.test_cases.integration.api.read_user import ReadUserApiTestCase
-from main.test_cases.integration.api.reset_user_password import (
+from main.test_cases.integration.api.user.create import CreateUserApiTestCase
+from main.test_cases.integration.api.user.create_token import CreateUserTokenApiTestCase
+from main.test_cases.integration.api.user.delete import DeleteUserApiTestCase
+from main.test_cases.integration.api.user.delete_token import DeleteUserTokenApiTestCase
+from main.test_cases.integration.api.user.read import ReadUserApiTestCase
+from main.test_cases.integration.api.user.reset_password import (
     ResetUserPasswordApiTestCase,
 )
-from main.test_cases.integration.api.start_reset_user_password import (
+from main.test_cases.integration.api.user.start_reset_password import (
     StartResetUserPasswordApiTestCase,
 )
-from main.test_cases.integration.api.start_verify_user_email import (
+from main.test_cases.integration.api.user.start_verify_email import (
     StartVerifyUserEmailApiTestCase,
 )
-from main.test_cases.integration.api.update_user import UpdateUserApiTestCase
-from main.test_cases.integration.api.update_user_password import (
+from main.test_cases.integration.api.user.update import UpdateUserApiTestCase
+from main.test_cases.integration.api.user.update_password import (
     UpdateUserPasswordApiTestCase,
 )
-from main.test_cases.integration.api.verify_user_email import VerifyUserEmailApiTestCase
+from main.test_cases.integration.api.user.verify_email import VerifyUserEmailApiTestCase
 from main.test_cases.integration.ssr.organizations.list import (
     ListOrganizationsSsrTestCase,
 )
