@@ -7,6 +7,7 @@ __all__ = [
     "DeleteUserTokenApiTestCase",
     "ListOrganizationsApiTestCase",
     "ListOrganizationsSsrTestCase",
+    "ReadOrganizationsApiTestCase",
     "ReadOrganizationsSsrTestCase",
     "ReadUserApiTestCase",
     "ReadUserSsrTestCase",
@@ -28,6 +29,9 @@ __all__ = [
 
 from main.test_cases.integration.api.organizations.list import (
     ListOrganizationsApiTestCase,
+)
+from main.test_cases.integration.api.organizations.read import (
+    ReadOrganizationsApiTestCase,
 )
 from main.test_cases.integration.api.user.create import CreateUserApiTestCase
 from main.test_cases.integration.api.user.create_token import CreateUserTokenApiTestCase
