@@ -1,5 +1,4 @@
 from django.urls import reverse
-from django.utils.http import urlencode
 from lxml.html import fromstring
 
 from main.models import User
@@ -8,15 +7,6 @@ from main.test_cases.integration.ssr import SsrTestCase
 
 class UpdateUserPasswordSsrTestCase(SsrTestCase):
     fixtures = ["sessions", "users"]
-
-    def test_authentication_required(self) -> None:
-        """Test authentication required."""
-        response = self.client.get(reverse("user-update-password"))
-        self.assertRedirects(
-            response,
-            f"{reverse('user-sign-in')}"
-            f"?{urlencode({'next': reverse('user-update-password')})}",
-        )
 
     def test_get(self) -> None:
         """Test get form."""

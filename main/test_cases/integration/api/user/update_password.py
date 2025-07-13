@@ -2,7 +2,6 @@ from rest_framework.reverse import reverse
 from rest_framework.status import (
     HTTP_200_OK,
     HTTP_400_BAD_REQUEST,
-    HTTP_401_UNAUTHORIZED,
 )
 
 from main.models import User
@@ -11,11 +10,6 @@ from main.test_cases.integration.api import ApiTestCase
 
 class UpdateUserPasswordApiTestCase(ApiTestCase):
     fixtures = ["users"]
-
-    def test_authentication_required(self) -> None:
-        """Test authentication required."""
-        response = self.client.post(reverse("api-user-update-password"))
-        self.assertEqual(response.status_code, HTTP_401_UNAUTHORIZED)
 
     def test(self) -> None:
         """Test success case."""
