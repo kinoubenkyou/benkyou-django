@@ -1,18 +1,15 @@
 from typing import Any, Iterable, Mapping
 
 from django.core.files.uploadedfile import UploadedFile
+from django.forms import Form as DjangoForm
 from django.forms.renderers import BaseRenderer
 from django.forms.utils import ErrorList
 from django.utils.datastructures import MultiValueDict
 
-from main.forms import Form
-from main.models import User
 
-
-class UserForm(Form):
+class Form(DjangoForm):
     def __init__(
         self,
-        user: User,
         data: Mapping[str, Any] | None = None,
         files: MultiValueDict[str, UploadedFile] | None = None,
         auto_id: bool | str = "id_%s",
@@ -25,8 +22,7 @@ class UserForm(Form):
         use_required_attribute: bool | None = None,
         renderer: BaseRenderer | None = None,
     ):
-        """Initialize form with user."""
-        self.user = user
+        """Initialize form with post-init method."""
         super().__init__(
             data,
             files,
@@ -40,3 +36,8 @@ class UserForm(Form):
             use_required_attribute,
             renderer,
         )
+        self.post_init()
+
+    def post_init(self) -> None:
+        """Post-init hook to be overridden by subclasses."""
+        pass
