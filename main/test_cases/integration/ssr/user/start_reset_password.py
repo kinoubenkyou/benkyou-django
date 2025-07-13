@@ -15,11 +15,11 @@ class StartResetUserPasswordSsrTestCase(SsrTestCase):
         response = self.client.get(reverse("user-start-reset-password"))
         xpath = """
         .//form
-        [@method='post']
-        [.//input[@name='username']]
-        [.//input[@type='submit']]
+            [@method='post']
+            [.//input[@name='username']]
+            [.//input[@type='submit']]
         """
-        self.assertEqual(len(fromstring(response.content).xpath(xpath)), 1)  # type: ignore[no-untyped-call]
+        self.assert_match_once(fromstring(response.content), xpath)  # type: ignore[no-untyped-call]
 
     def test_post(self) -> None:
         """Test submit form."""
@@ -43,9 +43,7 @@ class StartResetUserPasswordSsrTestCase(SsrTestCase):
         response = self.client.post(
             reverse("user-start-reset-password"), {"username": "username1_"}
         )
-        self.assertEqual(
-            len(
-                fromstring(response.content).xpath(".//*[text()='username not found']")  # type: ignore[no-untyped-call]
-            ),
-            1,
+        self.assert_match_once(
+            fromstring(response.content),  # type: ignore[no-untyped-call]
+            ".//*[text()='username not found']",
         )

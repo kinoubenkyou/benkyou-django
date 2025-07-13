@@ -14,13 +14,13 @@ class UpdateUserPasswordSsrTestCase(SsrTestCase):
         response = self.client.get(reverse("user-update-password"))
         xpath = """
         .//form
-        [@method='post']
-        [.//input[@name='old_password']]
-        [.//input[@name='new_password']]
-        [.//input[@name='new_password_confirmation']]
-        [.//input[@type='submit']]
+            [@method='post']
+            [.//input[@name='old_password']]
+            [.//input[@name='new_password']]
+            [.//input[@name='new_password_confirmation']]
+            [.//input[@type='submit']]
         """
-        self.assertEqual(len(fromstring(response.content).xpath(xpath)), 1)  # type: ignore[no-untyped-call]
+        self.assert_match_once(fromstring(response.content), xpath)  # type: ignore[no-untyped-call]
 
     def test_post(self) -> None:
         """Test submit form."""
@@ -49,13 +49,9 @@ class UpdateUserPasswordSsrTestCase(SsrTestCase):
                 "new_password_confirmation": password,
             },
         )
-        self.assertEqual(
-            len(
-                fromstring(response.content).xpath(  # type: ignore[no-untyped-call]
-                    ".//*[text()='incorrect old password']"
-                )
-            ),
-            1,
+        self.assert_match_once(
+            fromstring(response.content),  # type: ignore[no-untyped-call]
+            ".//*[text()='incorrect old password']",
         )
 
     def test_new_password_and_confirmation_not_match(self) -> None:
@@ -70,11 +66,7 @@ class UpdateUserPasswordSsrTestCase(SsrTestCase):
                 "new_password_confirmation": f"{password}_",
             },
         )
-        self.assertEqual(
-            len(
-                fromstring(response.content).xpath(  # type: ignore[no-untyped-call]
-                    ".//*[text()='new password and confirmation not match']"
-                )
-            ),
-            1,
+        self.assert_match_once(
+            fromstring(response.content),  # type: ignore[no-untyped-call]
+            ".//*[text()='new password and confirmation not match']",
         )

@@ -13,12 +13,12 @@ class SignUserInSsrTestCase(SsrTestCase):
         response = self.client.get(reverse("user-sign-in"))
         xpath = """
         //form
-        [@method='post']
-        [//input[@name='username']]
-        [//input[@name='password']]
-        [//input[@type='submit']]
+            [@method='post']
+            [//input[@name='username']]
+            [//input[@name='password']]
+            [//input[@type='submit']]
         """
-        self.assertEqual(len(fromstring(response.content).xpath(xpath)), 1)  # type: ignore[no-untyped-call]
+        self.assert_match_once(fromstring(response.content), xpath)  # type: ignore[no-untyped-call]
 
     def test_post(self) -> None:
         """Test submit form."""

@@ -12,12 +12,24 @@ class ListOrganizationsSsrTestCase(SsrTestCase):
         """Test get page."""
         self.add_session_cookie()
         response = self.client.get(reverse("organizations-list"))
-        table_elements = fromstring(response.content).xpath(".//table")  # type: ignore[no-untyped-call]
-        self.assertEqual(len(table_elements), 1)
-        self.assert_table_head(table_elements[0], ("code", "name"))
-        self.assert_table_body(
-            table_elements[0], (("code1", "name1"), ("code2", "name2"))
-        )
+        xpath = """
+        .//table
+            [.//thead//tr
+                [.//th[text()='code']]
+                [.//th[text()='name']]
+            ]
+            [.//tbody
+                [.//tr
+                    [.//td[text()='code1']]
+                    [.//td[text()='name1']]
+                ]
+                [.//tr
+                    [.//td[text()='code2']]
+                    [.//td[text()='name2']]
+                ]
+            ]
+        """
+        self.assert_match_once(fromstring(response.content), xpath)  # type: ignore[no-untyped-call]
 
     def test_invalid_form(self) -> None:
         """Test submit invalid form."""
@@ -25,9 +37,15 @@ class ListOrganizationsSsrTestCase(SsrTestCase):
         response = self.client.get(
             f"{reverse('organizations-list')}?{urlencode({'page_size': '_'})}"
         )
-        table_elements = fromstring(response.content).xpath(".//table")  # type: ignore[no-untyped-call]
-        self.assertEqual(len(table_elements), 1)
-        self.assert_table_body(table_elements[0], tuple())
+        xpath = """
+        .//table
+            [.//thead//tr
+                [.//th[text()='code']]
+                [.//th[text()='name']]
+            ]
+            [.//tbody[not(*)]]
+        """
+        self.assert_match_once(fromstring(response.content), xpath)  # type: ignore[no-untyped-call]
 
     def test_order(self) -> None:
         """Test paginating case."""
@@ -35,11 +53,24 @@ class ListOrganizationsSsrTestCase(SsrTestCase):
         response = self.client.get(
             f"{reverse('organizations-list')}?{urlencode({'sort_by': '-name'})}"
         )
-        table_elements = fromstring(response.content).xpath(".//table")  # type: ignore[no-untyped-call]
-        self.assertEqual(len(table_elements), 1)
-        self.assert_table_body(
-            table_elements[0], (("code2", "name2"), ("code1", "name1"))
-        )
+        xpath = """
+        .//table
+            [.//thead//tr
+                [.//th[text()='code']]
+                [.//th[text()='name']]
+            ]
+            [.//tbody
+                [.//tr
+                    [.//td[text()='code2']]
+                    [.//td[text()='name2']]
+                ]
+                [.//tr
+                    [.//td[text()='code1']]
+                    [.//td[text()='name1']]
+                ]
+            ]
+        """
+        self.assert_match_once(fromstring(response.content), xpath)  # type: ignore[no-untyped-call]
 
     def test_paginate(self) -> None:
         """Test ordering case."""
@@ -47,9 +78,20 @@ class ListOrganizationsSsrTestCase(SsrTestCase):
         response = self.client.get(
             f"{reverse('organizations-list')}?{urlencode({'page': 2, 'page_size': 1})}"
         )
-        table_elements = fromstring(response.content).xpath(".//table")  # type: ignore[no-untyped-call]
-        self.assertEqual(len(table_elements), 1)
-        self.assert_table_body(table_elements[0], (("code2", "name2"),))
+        xpath = """
+        .//table
+            [.//thead//tr
+                [.//th[text()='code']]
+                [.//th[text()='name']]
+            ]
+            [.//tbody
+                [.//tr
+                    [.//td[text()='code2']]
+                    [.//td[text()='name2']]
+                ]
+            ]
+        """
+        self.assert_match_once(fromstring(response.content), xpath)  # type: ignore[no-untyped-call]
 
     def test_filter_code_icontains(self) -> None:
         """Test filtering code-icontains case."""
@@ -57,9 +99,20 @@ class ListOrganizationsSsrTestCase(SsrTestCase):
         response = self.client.get(
             f"{reverse('organizations-list')}?{urlencode({'code__icontains': '2'})}"
         )
-        table_elements = fromstring(response.content).xpath(".//table")  # type: ignore[no-untyped-call]
-        self.assertEqual(len(table_elements), 1)
-        self.assert_table_body(table_elements[0], (("code2", "name2"),))
+        xpath = """
+        .//table
+            [.//thead//tr
+                [.//th[text()='code']]
+                [.//th[text()='name']]
+            ]
+            [.//tbody
+                [.//tr
+                    [.//td[text()='code2']]
+                    [.//td[text()='name2']]
+                ]
+            ]
+        """
+        self.assert_match_once(fromstring(response.content), xpath)  # type: ignore[no-untyped-call]
 
     def test_filter_name_icontains(self) -> None:
         """Test filtering name-icontains case."""
@@ -67,6 +120,17 @@ class ListOrganizationsSsrTestCase(SsrTestCase):
         response = self.client.get(
             f"{reverse('organizations-list')}?{urlencode({'name__icontains': '2'})}"
         )
-        table_elements = fromstring(response.content).xpath(".//table")  # type: ignore[no-untyped-call]
-        self.assertEqual(len(table_elements), 1)
-        self.assert_table_body(table_elements[0], (("code2", "name2"),))
+        xpath = """
+        .//table
+            [.//thead//tr
+                [.//th[text()='code']]
+                [.//th[text()='name']]
+            ]
+            [.//tbody
+                [.//tr
+                    [.//td[text()='code2']]
+                    [.//td[text()='name2']]
+                ]
+            ]
+        """
+        self.assert_match_once(fromstring(response.content), xpath)  # type: ignore[no-untyped-call]
