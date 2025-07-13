@@ -1,16 +1,23 @@
 from django.conf import settings
 from django.urls import include, path
 from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView
+from rest_framework.routers import SimpleRouter
 
 from main.routers.single_resource import SingleResourceRouter
 from main.views.api.user.token import UserTokenApiView
+from main.viewsets.organizations import OrganizationsViewSet
 from main.viewsets.user import UserViewSet
 
-router = SingleResourceRouter()
-router.register(r"user", UserViewSet, basename="api-user")
+simple_router = SimpleRouter()
+simple_router.register(
+    r"organizations", OrganizationsViewSet, basename="api-organizations"
+)
+single_resource_router = SingleResourceRouter()
+single_resource_router.register(r"user", UserViewSet, basename="api-user")
 
 urlpatterns = [
-    path("", include(router.urls)),
+    path("", include(single_resource_router.urls)),
+    path("", include(simple_router.urls)),
     path("user/token/", UserTokenApiView.as_view(), name="api-user-token"),
 ]
 

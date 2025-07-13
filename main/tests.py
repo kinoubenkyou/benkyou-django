@@ -5,6 +5,7 @@ __all__ = [
     "DeleteUserApiTestCase",
     "DeleteUserSsrTestCase",
     "DeleteUserTokenApiTestCase",
+    "ListOrganizationsApiTestCase",
     "ListOrganizationsSsrTestCase",
     "ReadOrganizationsSsrTestCase",
     "ReadUserApiTestCase",
@@ -25,6 +26,9 @@ __all__ = [
     "VerifyUserEmailSsrTestCase",
 ]
 
+from main.test_cases.integration.api.organizations.list import (
+    ListOrganizationsApiTestCase,
+)
 from main.test_cases.integration.api.user.create import CreateUserApiTestCase
 from main.test_cases.integration.api.user.create_token import CreateUserTokenApiTestCase
 from main.test_cases.integration.api.user.delete import DeleteUserApiTestCase
