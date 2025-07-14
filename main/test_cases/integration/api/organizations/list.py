@@ -1,6 +1,6 @@
 from django.utils.http import urlencode
 from rest_framework.reverse import reverse
-from rest_framework.status import HTTP_200_OK
+from rest_framework.status import HTTP_200_OK, HTTP_401_UNAUTHORIZED
 
 from main.models import User
 from main.test_cases.integration.api import ApiTestCase
@@ -8,6 +8,11 @@ from main.test_cases.integration.api import ApiTestCase
 
 class ListOrganizationsApiTestCase(ApiTestCase):
     fixtures = ["organizations", "users"]
+
+    def test_authentication_required(self) -> None:
+        """Test authentication required."""
+        response = self.client.get(reverse("api-organizations-list"))
+        self.assertEqual(response.status_code, HTTP_401_UNAUTHORIZED)
 
     def test(self) -> None:
         """Test success case."""

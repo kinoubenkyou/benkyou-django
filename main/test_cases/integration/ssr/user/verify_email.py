@@ -12,6 +12,15 @@ from main.test_cases.integration.ssr import SsrTestCase
 class VerifyUserEmailSsrTestCase(SsrTestCase):
     fixtures = ["sessions", "users"]
 
+    def test_authentication_required(self) -> None:
+        """Test authentication required."""
+        response = self.client.get(reverse("user-verify-email"))
+        self.assertRedirects(
+            response,
+            f"{reverse('user-sign-in')}"
+            f"?{urlencode({'next': reverse('user-verify-email')})}",
+        )
+
     def test_get(self) -> None:
         """Test get form."""
         self.add_session_cookie()

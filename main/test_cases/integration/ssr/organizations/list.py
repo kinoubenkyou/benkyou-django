@@ -8,6 +8,15 @@ from main.test_cases.integration.ssr import SsrTestCase
 class ListOrganizationsSsrTestCase(SsrTestCase):
     fixtures = ["organizations", "sessions", "users"]
 
+    def test_authentication_required(self) -> None:
+        """Test authentication required."""
+        response = self.client.get(reverse("organizations-list"))
+        self.assertRedirects(
+            response,
+            f"{reverse('user-sign-in')}"
+            f"?{urlencode({'next': reverse('organizations-list')})}",
+        )
+
     def test_get(self) -> None:
         """Test get page."""
         self.add_session_cookie()

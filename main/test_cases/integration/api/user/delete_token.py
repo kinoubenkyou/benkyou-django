@@ -1,12 +1,17 @@
 from rest_framework.authtoken.models import Token
 from rest_framework.reverse import reverse
-from rest_framework.status import HTTP_204_NO_CONTENT
+from rest_framework.status import HTTP_204_NO_CONTENT, HTTP_401_UNAUTHORIZED
 
 from main.test_cases.integration.api import ApiTestCase
 
 
 class DeleteUserTokenApiTestCase(ApiTestCase):
     fixtures = ["tokens", "users"]
+
+    def test_authentication_required(self) -> None:
+        """Test authentication required."""
+        response = self.client.delete(reverse("api-user-token"))
+        self.assertEqual(response.status_code, HTTP_401_UNAUTHORIZED)
 
     def test(self) -> None:
         """Test success case."""
