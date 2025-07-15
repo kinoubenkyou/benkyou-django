@@ -1,5 +1,5 @@
 from main.views.read import ReadView
-from main.views.user.user_object_mixin import UserObjectMixin
+from main.views.user.object_mixin import UserObjectMixin
 
 
 class UserReadView(UserObjectMixin, ReadView):

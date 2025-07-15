@@ -5,7 +5,7 @@ from django.urls import reverse_lazy
 from django.views.generic import UpdateView
 
 from main.models import User
-from main.views.user.user_object_mixin import UserObjectMixin
+from main.views.user.object_mixin import UserObjectMixin
 
 if TYPE_CHECKING:
     UpdateView_ = UpdateView[User, ModelForm[User]]  # pragma: no cover
