@@ -22,5 +22,5 @@ class ReadOrganizationsSsrTestCase(SsrTestCase):
         self.add_session_cookie()
         response = self.client.get(reverse("organizations-read", kwargs={"pk": 1}))
         html_element = fromstring(response.content)  # type: ignore[no-untyped-call]
-        self.assertEqual(len(html_element.xpath(".//*[text()='code: code1']")), 1)
-        self.assertEqual(len(html_element.xpath(".//*[text()='name: name1']")), 1)
+        self.assert_match_once(html_element, ".//*[text()='code: code1']")
+        self.assert_match_once(html_element, ".//*[text()='name: name1']")

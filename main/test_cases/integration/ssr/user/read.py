@@ -21,12 +21,6 @@ class ReadUserSsrTestCase(SsrTestCase):
         self.add_session_cookie()
         response = self.client.get(reverse("user-read"))
         html_element = fromstring(response.content)  # type: ignore[no-untyped-call]
-        self.assertEqual(
-            len(html_element.xpath(".//*[text()='username: username1']")), 1
-        )
-        self.assertEqual(
-            len(html_element.xpath(".//*[text()='email: email1@email.com']")), 1
-        )
-        self.assertEqual(
-            len(html_element.xpath(".//*[text()='email_is_verified: False']")), 1
-        )
+        self.assert_match_once(html_element, ".//*[text()='username: username1']")
+        self.assert_match_once(html_element, ".//*[text()='email: email1@email.com']")
+        self.assert_match_once(html_element, ".//*[text()='email_is_verified: False']")

@@ -22,11 +22,11 @@ class DeleteUserSsrTestCase(SsrTestCase):
         self.add_session_cookie()
         response = self.client.get(reverse("user-delete"))
         xpath = """
-        //form
-        [@method='post']
-        [//input[@type='submit']]
+        .//form
+            [@method='post']
+            [//input[@type='submit']]
         """
-        self.assertEqual(len(fromstring(response.content).xpath(xpath)), 1)  # type: ignore[no-untyped-call]
+        self.assert_match_once(fromstring(response.content), xpath)  # type: ignore[no-untyped-call]
 
     def test_post(self) -> None:
         """Test submit form."""

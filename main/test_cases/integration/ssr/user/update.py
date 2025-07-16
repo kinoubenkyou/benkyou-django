@@ -23,11 +23,11 @@ class UpdateUserSsrTestCase(SsrTestCase):
         response = self.client.get(reverse("user-update"))
         xpath = """
         //form
-        [@method='post']
-        [//input[@name='email']]
-        [//input[@type='submit']]
+            [@method='post']
+            [//input[@name='email']]
+            [//input[@type='submit']]
         """
-        self.assertEqual(len(fromstring(response.content).xpath(xpath)), 1)  # type: ignore[no-untyped-call]
+        self.assert_match_once(fromstring(response.content), xpath)  # type: ignore[no-untyped-call]
 
     def test_post(self) -> None:
         """Test submit form."""

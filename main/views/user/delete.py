@@ -5,7 +5,7 @@ from django.urls import reverse_lazy
 from django.views.generic import DeleteView
 
 from main.models import User
-from main.views.user.user_object_mixin import UserObjectMixin
+from main.views.user.object_mixin import UserObjectMixin
 
 if TYPE_CHECKING:
     DeleteView_ = DeleteView[User, ModelForm[User]]  # pragma: no cover
