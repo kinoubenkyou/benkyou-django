@@ -1,10 +1,12 @@
 from secrets import token_urlsafe
 
+from django.conf import settings
 from django.core.cache import cache
 from django.urls import reverse
 from django.utils.http import urlencode
 from lxml.html import fromstring
 
+from main.fixtures.session_id import SessionId
 from main.models import User
 from main.test_cases.integration.ssr import SsrTestCase
 
@@ -23,7 +25,7 @@ class VerifyUserEmailSsrTestCase(SsrTestCase):
 
     def test_get(self) -> None:
         """Test get form."""
-        self.add_session_cookie()
+        self.client.cookies[settings.SESSION_COOKIE_NAME] = SessionId.SIGNED_IN
         token = token_urlsafe()
         cache.set("verify_user_email.1", token)
         response = self.client.get(
@@ -42,7 +44,7 @@ class VerifyUserEmailSsrTestCase(SsrTestCase):
 
     def test_post(self) -> None:
         """Test submit form."""
-        self.add_session_cookie()
+        self.client.cookies[settings.SESSION_COOKIE_NAME] = SessionId.SIGNED_IN
         token = token_urlsafe()
         cache.set("verify_user_email.1", token)
         response = self.client.post(
@@ -54,7 +56,7 @@ class VerifyUserEmailSsrTestCase(SsrTestCase):
 
     def test_incorrect_token(self) -> None:
         """Test incorrect token case."""
-        self.add_session_cookie()
+        self.client.cookies[settings.SESSION_COOKIE_NAME] = SessionId.SIGNED_IN
         token = token_urlsafe()
         cache.set("verify_user_email.1", token)
         response = self.client.post(
@@ -68,7 +70,7 @@ class VerifyUserEmailSsrTestCase(SsrTestCase):
 
     def test_token_not_found(self) -> None:
         """Test token not found case."""
-        self.add_session_cookie()
+        self.client.cookies[settings.SESSION_COOKIE_NAME] = SessionId.SIGNED_IN
         token = token_urlsafe()
         cache.set("verify_user_email.1", token, 0)
         response = self.client.post(

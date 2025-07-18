@@ -1,9 +1,11 @@
+from django.conf import settings
 from django.core import mail
 from django.core.cache import cache
 from django.urls import reverse
 from django.utils.http import urlencode
 from lxml.html import fromstring
 
+from main.fixtures.session_id import SessionId
 from main.test_cases.integration.ssr import SsrTestCase
 
 
@@ -21,7 +23,7 @@ class StartVerifyUserEmailSsrTestCase(SsrTestCase):
 
     def test_get(self) -> None:
         """Test get form."""
-        self.add_session_cookie()
+        self.client.cookies[settings.SESSION_COOKIE_NAME] = SessionId.SIGNED_IN
         response = self.client.get(reverse("user-start-verify-email"))
         xpath = """
         //form
@@ -32,7 +34,7 @@ class StartVerifyUserEmailSsrTestCase(SsrTestCase):
 
     def test_post(self) -> None:
         """Test submit form."""
-        self.add_session_cookie()
+        self.client.cookies[settings.SESSION_COOKIE_NAME] = SessionId.SIGNED_IN
         response = self.client.post(reverse("user-start-verify-email"))
         self.assertRedirects(response, reverse("user-read"))
         sentinel = object()
