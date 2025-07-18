@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.urls import reverse
 from lxml.html import fromstring
 
@@ -19,5 +20,5 @@ class SignUserOutSsrTestCase(SsrTestCase):
         """Test submit form."""
         response = self.client.post(reverse("user-sign-out"))
         self.assertRedirects(response, reverse("user-sign-in"))
-        client_session = self.client.cookies.get("sessionid")
+        client_session = self.client.cookies.get(settings.SESSION_COOKIE_NAME)
         self.assertIsNone(client_session)
