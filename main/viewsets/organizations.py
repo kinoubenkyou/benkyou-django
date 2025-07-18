@@ -1,4 +1,4 @@
-from rest_framework.mixins import ListModelMixin
+from rest_framework.mixins import ListModelMixin, RetrieveModelMixin
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.viewsets import GenericViewSet
 
@@ -11,6 +11,7 @@ from main.viewsets.serializer_mixin import SerializerMixin
 
 class OrganizationsViewSet(
     ListModelMixin,
+    RetrieveModelMixin,
     PermissionMixin,
     SerializerMixin,
     GenericViewSet[Organization],
@@ -19,8 +20,10 @@ class OrganizationsViewSet(
     ordering_fields = ("code", "name")
     permission_dict = {
         "list": (IsAuthenticated,),
+        "retrieve": (IsAuthenticated,),
     }
     queryset = Organization.objects.all()
     serializer_dict = {
         "list": OrganizationsSerializer,
+        "retrieve": OrganizationsSerializer,
     }
