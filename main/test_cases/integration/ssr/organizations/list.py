@@ -1,7 +1,9 @@
+from django.conf import settings
 from django.urls import reverse
 from django.utils.http import urlencode
 from lxml.html import fromstring
 
+from main.fixtures.session_id import SessionId
 from main.test_cases.integration.ssr import SsrTestCase
 
 
@@ -19,7 +21,7 @@ class ListOrganizationsSsrTestCase(SsrTestCase):
 
     def test_get(self) -> None:
         """Test get page."""
-        self.add_session_cookie()
+        self.client.cookies[settings.SESSION_COOKIE_NAME] = SessionId.SIGNED_IN
         response = self.client.get(reverse("organizations-list"))
         xpath = """
         .//table
@@ -42,7 +44,7 @@ class ListOrganizationsSsrTestCase(SsrTestCase):
 
     def test_invalid_form(self) -> None:
         """Test submit invalid form."""
-        self.add_session_cookie()
+        self.client.cookies[settings.SESSION_COOKIE_NAME] = SessionId.SIGNED_IN
         response = self.client.get(
             f"{reverse('organizations-list')}?{urlencode({'page_size': '_'})}"
         )
@@ -58,7 +60,7 @@ class ListOrganizationsSsrTestCase(SsrTestCase):
 
     def test_order(self) -> None:
         """Test paginating case."""
-        self.add_session_cookie()
+        self.client.cookies[settings.SESSION_COOKIE_NAME] = SessionId.SIGNED_IN
         response = self.client.get(
             f"{reverse('organizations-list')}?{urlencode({'sort_by': '-name'})}"
         )
@@ -83,7 +85,7 @@ class ListOrganizationsSsrTestCase(SsrTestCase):
 
     def test_paginate(self) -> None:
         """Test ordering case."""
-        self.add_session_cookie()
+        self.client.cookies[settings.SESSION_COOKIE_NAME] = SessionId.SIGNED_IN
         response = self.client.get(
             f"{reverse('organizations-list')}?{urlencode({'page': 2, 'page_size': 1})}"
         )
@@ -104,7 +106,7 @@ class ListOrganizationsSsrTestCase(SsrTestCase):
 
     def test_filter_code_icontains(self) -> None:
         """Test filtering code-icontains case."""
-        self.add_session_cookie()
+        self.client.cookies[settings.SESSION_COOKIE_NAME] = SessionId.SIGNED_IN
         response = self.client.get(
             f"{reverse('organizations-list')}?{urlencode({'code__icontains': '2'})}"
         )
@@ -125,7 +127,7 @@ class ListOrganizationsSsrTestCase(SsrTestCase):
 
     def test_filter_name_icontains(self) -> None:
         """Test filtering name-icontains case."""
-        self.add_session_cookie()
+        self.client.cookies[settings.SESSION_COOKIE_NAME] = SessionId.SIGNED_IN
         response = self.client.get(
             f"{reverse('organizations-list')}?{urlencode({'name__icontains': '2'})}"
         )

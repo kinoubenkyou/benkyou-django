@@ -1,7 +1,9 @@
+from django.conf import settings
 from django.urls import reverse
 from django.utils.http import urlencode
 from lxml.html import fromstring
 
+from main.fixtures.session_id import SessionId
 from main.models import User
 from main.test_cases.integration.ssr import SsrTestCase
 
@@ -20,7 +22,7 @@ class UpdateUserPasswordSsrTestCase(SsrTestCase):
 
     def test_get(self) -> None:
         """Test get form."""
-        self.add_session_cookie()
+        self.client.cookies[settings.SESSION_COOKIE_NAME] = SessionId.SIGNED_IN
         response = self.client.get(reverse("user-update-password"))
         xpath = """
         .//form
@@ -34,7 +36,7 @@ class UpdateUserPasswordSsrTestCase(SsrTestCase):
 
     def test_post(self) -> None:
         """Test submit form."""
-        self.add_session_cookie()
+        self.client.cookies[settings.SESSION_COOKIE_NAME] = SessionId.SIGNED_IN
         password = "Dr0wss@p1_"
         response = self.client.post(
             reverse("user-update-password"),
@@ -49,7 +51,7 @@ class UpdateUserPasswordSsrTestCase(SsrTestCase):
 
     def test_incorrect_old_password(self) -> None:
         """Test incorrect old password case."""
-        self.add_session_cookie()
+        self.client.cookies[settings.SESSION_COOKIE_NAME] = SessionId.SIGNED_IN
         password = "Dr0wss@p1_"
         response = self.client.post(
             reverse("user-update-password"),
@@ -66,7 +68,7 @@ class UpdateUserPasswordSsrTestCase(SsrTestCase):
 
     def test_new_password_and_confirmation_not_match(self) -> None:
         """Test incorrect password and confirmation not match case."""
-        self.add_session_cookie()
+        self.client.cookies[settings.SESSION_COOKIE_NAME] = SessionId.SIGNED_IN
         password = "Dr0wss@p1_"
         response = self.client.post(
             reverse("user-update-password"),

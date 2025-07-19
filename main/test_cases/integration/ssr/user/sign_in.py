@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.contrib.sessions.models import Session
 from django.urls import reverse
 from lxml.html import fromstring
@@ -28,7 +29,7 @@ class SignUserInSsrTestCase(SsrTestCase):
             reverse("user-sign-in"), {"username": username, "password": password}
         )
         self.assertRedirects(response, reverse("user-read"))
-        client_session = self.client.cookies.get("sessionid")
+        client_session = self.client.cookies.get(settings.SESSION_COOKIE_NAME)
         self.assertIsNotNone(client_session)
         server_session = Session.objects.get(pk=client_session.value)  # type: ignore[union-attr]
         self.assertEqual(server_session.get_decoded()["_auth_user_id"], "1")

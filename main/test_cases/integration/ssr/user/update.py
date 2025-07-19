@@ -1,7 +1,9 @@
+from django.conf import settings
 from django.urls import reverse
 from django.utils.http import urlencode
 from lxml.html import fromstring
 
+from main.fixtures.session_id import SessionId
 from main.models import User
 from main.test_cases.integration.ssr import SsrTestCase
 
@@ -19,7 +21,7 @@ class UpdateUserSsrTestCase(SsrTestCase):
 
     def test_get(self) -> None:
         """Test get form."""
-        self.add_session_cookie()
+        self.client.cookies[settings.SESSION_COOKIE_NAME] = SessionId.SIGNED_IN
         response = self.client.get(reverse("user-update"))
         xpath = """
         //form
@@ -31,7 +33,7 @@ class UpdateUserSsrTestCase(SsrTestCase):
 
     def test_post(self) -> None:
         """Test submit form."""
-        self.add_session_cookie()
+        self.client.cookies[settings.SESSION_COOKIE_NAME] = SessionId.SIGNED_IN
         username = "username1_"
         email = "email01@email.com"
         response = self.client.post(
