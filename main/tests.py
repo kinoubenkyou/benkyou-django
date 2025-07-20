@@ -19,6 +19,7 @@ __all__ = [
     "StartResetUserPasswordSsrTestCase",
     "StartVerifyUserEmailApiTestCase",
     "StartVerifyUserEmailSsrTestCase",
+    "SwitchOrganizationSsrTestCase",
     "UpdateUserApiTestCase",
     "UpdateUserPasswordApiTestCase",
     "UpdateUserPasswordSsrTestCase",
@@ -52,6 +53,9 @@ from main.test_cases.integration.api.user.update_password import (
     UpdateUserPasswordApiTestCase,
 )
 from main.test_cases.integration.api.user.verify_email import VerifyUserEmailApiTestCase
+from main.test_cases.integration.ssr.organization.switch import (
+    SwitchOrganizationSsrTestCase,
+)
 from main.test_cases.integration.ssr.organizations.list import (
     ListOrganizationsSsrTestCase,
 )

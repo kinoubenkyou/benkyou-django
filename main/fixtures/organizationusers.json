@@ -1,0 +1,18 @@
+[
+  {
+    "model": "main.organizationuser",
+    "pk": 1,
+    "fields": {
+      "organization_id": 1,
+      "user_id": 1
+    }
+  },
+  {
+    "model": "main.organizationuser",
+    "pk": 2,
+    "fields": {
+      "organization_id": 2,
+      "user_id": 1
+    }
+  }
+]
