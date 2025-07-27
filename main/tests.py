@@ -1,17 +1,18 @@
 __all__ = [
+    "BlacklistTokenApiTestCase",
     "CreateUserApiTestCase",
     "CreateUserSsrTestCase",
-    "CreateUserTokenApiTestCase",
     "DeleteUserApiTestCase",
     "DeleteUserSsrTestCase",
-    "DeleteUserTokenApiTestCase",
     "ListOrganizationsApiTestCase",
     "ListOrganizationsSsrTestCase",
+    "ObtainTokenPairApiTestCase",
     "ReadOrganizationSsrTestCase",
     "ReadOrganizationsApiTestCase",
     "ReadOrganizationsSsrTestCase",
     "ReadUserApiTestCase",
     "ReadUserSsrTestCase",
+    "RefreshTokenApiTestCase",
     "ResetUserPasswordApiTestCase",
     "ResetUserPasswordSsrTestCase",
     "SignUserInSsrTestCase",
@@ -29,16 +30,17 @@ __all__ = [
     "VerifyUserEmailSsrTestCase",
 ]
 
+from main.test_cases.integration.api.blacklist_token import BlacklistTokenApiTestCase
+from main.test_cases.integration.api.obtain_token_pair import ObtainTokenPairApiTestCase
 from main.test_cases.integration.api.organizations.list import (
     ListOrganizationsApiTestCase,
 )
 from main.test_cases.integration.api.organizations.read import (
     ReadOrganizationsApiTestCase,
 )
+from main.test_cases.integration.api.refresh_token import RefreshTokenApiTestCase
 from main.test_cases.integration.api.user.create import CreateUserApiTestCase
-from main.test_cases.integration.api.user.create_token import CreateUserTokenApiTestCase
 from main.test_cases.integration.api.user.delete import DeleteUserApiTestCase
-from main.test_cases.integration.api.user.delete_token import DeleteUserTokenApiTestCase
 from main.test_cases.integration.api.user.read import ReadUserApiTestCase
 from main.test_cases.integration.api.user.reset_password import (
     ResetUserPasswordApiTestCase,
