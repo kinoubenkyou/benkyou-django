@@ -25,10 +25,10 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "main.apps.MainConfig",
     "rest_framework",
-    "rest_framework.authtoken",
+    "rest_framework_simplejwt.token_blacklist",
     "drf_spectacular",
+    "main.apps.MainConfig",
 ]
 
 MIDDLEWARE = [
@@ -151,7 +151,7 @@ LOGOUT_REDIRECT_URL = "user-sign-in"
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [
-        "rest_framework.authentication.TokenAuthentication",
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
     ],
     "DEFAULT_FILTER_BACKENDS": (
         "main.filter_backend.FilterBackend",

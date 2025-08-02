@@ -2,9 +2,13 @@ from django.conf import settings
 from django.urls import include, path
 from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView
 from rest_framework.routers import SimpleRouter
+from rest_framework_simplejwt.views import (
+    TokenBlacklistView,
+    TokenObtainPairView,
+    TokenRefreshView,
+)
 
 from main.routers.single_resource import SingleResourceRouter
-from main.views.api.user.token import UserTokenApiView
 from main.viewsets.organizations import OrganizationsViewSet
 from main.viewsets.user import UserViewSet
 
@@ -18,7 +22,13 @@ single_resource_router.register(r"user", UserViewSet, basename="api-user")
 urlpatterns = [
     path("", include(single_resource_router.urls)),
     path("", include(simple_router.urls)),
-    path("user/token/", UserTokenApiView.as_view(), name="api-user-token"),
+    path("blacklist_token/", TokenBlacklistView.as_view(), name="api-blacklist-token"),
+    path(
+        "obtain_token_pair/",
+        TokenObtainPairView.as_view(),
+        name="api-obtain-token-pair",
+    ),
+    path("refresh_token/", TokenRefreshView.as_view(), name="api-refresh-token"),
 ]
 
 if settings.DEBUG:  # pragma: no cover
