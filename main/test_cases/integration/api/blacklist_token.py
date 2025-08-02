@@ -18,5 +18,5 @@ class BlacklistTokenApiTestCase(ApiTestCase):
         )
         self.assertEqual(response.status_code, HTTP_200_OK)
         self.assertTrue(
-            BlacklistedToken.objects.filter(token__jti=refresh_token["jti"]).exists()  # type: ignore[attr-defined]
+            BlacklistedToken.objects.filter(token__jti=refresh_token["jti"]).exists()
         )
